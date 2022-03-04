@@ -2,7 +2,7 @@
   <img src="doc/frelatage_logo.gif" width="200" height="200" style="border-radius:4px"/>
   <br>
   <code>pip3 install frelatage</code></br>
-  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/Releases">0.0.1</a></i></br></br>
+  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.0.1</a></i></br></br>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg"></a>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
@@ -253,4 +253,4 @@ tasks, fuzzing may put strain on your hardware and on the OS. In particular:
 
 ## Contact 
 
-for any remark, suggestion, bug report or job offer, or if you found a bug using Frelatage, you can contact me at r0g3r5@protonmail.com or on twitter [@Rog3rSm1th](https://twitter.com/Rog3rSm1th)
+for any remark, suggestion, bug report, or if you found a bug using Frelatage, you can contact me at r0g3r5@protonmail.com or on twitter [@Rog3rSm1th](https://twitter.com/Rog3rSm1th)
