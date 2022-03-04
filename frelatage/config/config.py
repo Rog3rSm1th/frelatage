@@ -5,8 +5,8 @@ class Config:
     """
     We can pass configuration through environnement variables
     """
-    # Enable the use of mutations based on dictionnary elements
-    FRELATAGE_DICTIONNARY_ENABLE = True if os.getenv('FRELATAGE_DICTIONNARY_ENABLE', "1") == "1" else False
+    # Enable the use of mutations based on dictionary elements
+    FRELATAGE_DICTIONARY_ENABLE = True if os.getenv('FRELATAGE_DICTIONARY_ENABLE', "1") == "1" else False
     # Delay after which a function will return a timeoutError
     FRELATAGE_TIMEOUT_DELAY = int(os.getenv('TIMEOUT_DELAY', 2))
     # Temporary folder where input files are stored. 
@@ -18,7 +18,7 @@ class Config:
     FRELATAGE_MAX_THREADS = int(os.getenv('FRELATAGE_MAX_THREADS', 20))
     # Default directory for dictionaries
     # Relative path (to the path of the fuzzing file)
-    FRELATAGE_DICTIONNARY_DIR = str(os.path.join(
+    FRELATAGE_DICTIONARY_DIR = str(os.path.join(
                                         os.path.dirname(os.path.realpath(sys.argv[0])),
-                                        os.getenv('FRELATAGE_DICTIONNARY_DIR', "./dict")
+                                        os.getenv('FRELATAGE_DICTIONARY_DIR', "./dict")
                                 ))

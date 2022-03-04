@@ -1,4 +1,4 @@
-from frelatage.mutator.dictionnary import load_dictionnary
+from frelatage.mutator.dictionary import load_dictionary
 from frelatage.mutator.magicValues import MagicValues
 from frelatage.config.config import Config
 from typing import Any, Union, Type
@@ -8,9 +8,9 @@ import copy
 # Array containing all the mutators
 mutators = []
 
-# Load dictionnary from the dictionnary files
-dictionnary_folder = Config().FRELATAGE_DICTIONNARY_DIR
-dictionnary = load_dictionnary(dictionnary_folder)
+# Load dictionary from the dictionary files
+dictionary_folder = Config().FRELATAGE_DICTIONARY_DIR
+dictionary = load_dictionary(dictionary_folder)
 
 class Mutator(object):
     # "str", "int", "list", "dict", "NoneType", "float"
@@ -99,15 +99,15 @@ class MutatorStringInsertCharacter(Mutator):
 class MutatorStringInsertDict(Mutator):
     allowed_types = set(["str"])
     size_effect = ["increase"]
-    # Disable if the dictionnary is empty or if the dictionnary fuzzing is disabled
-    enabled = True if (dictionnary and Config.FRELATAGE_DICTIONNARY_ENABLE) else False
+    # Disable if the dictionary is empty or if the dictionary fuzzing is disabled
+    enabled = True if (dictionary and Config.FRELATAGE_DICTIONARY_ENABLE) else False
 
     @staticmethod
     def mutate(input: str) -> str:
         if len(input) == 0:
             return input
         position = Mutator.random_int(len(input))
-        character = random.choice(dictionnary)
+        character = random.choice(dictionary)
         mutation = input[0:position] + character + input[position:]
         return mutation
 
@@ -504,15 +504,15 @@ class MutatorFileDeleteSubBytes(Mutator):
 class MutatorFileInsertDict(Mutator):
     allowed_types = set(["file"])
     size_effect = ["increase"]
-    # Disable if the dictionnary is empty or if the dictionnary fuzzing is disabled
-    enabled = True if (dictionnary and Config.FRELATAGE_DICTIONNARY_ENABLE) else False
+    # Disable if the dictionary is empty or if the dictionary fuzzing is disabled
+    enabled = True if (dictionary and Config.FRELATAGE_DICTIONARY_ENABLE) else False
 
     @staticmethod
     def mutate(input: str) -> str:
         with open(input, 'rb') as f:
             file_content = f.read()
 
-            element = random.choice(dictionnary)
+            element = random.choice(dictionary)
 
             mutation = bytearray(file_content)
             if len(file_content) == 0:

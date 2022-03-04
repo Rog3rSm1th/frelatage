@@ -96,7 +96,7 @@ graph TB
   - Float
   - List
   - Tuple
-  - Dictionnary
+  - Dictionary
   
 #### File fuzzing
 Frelatage allows to fuzz a function by passing a file as input. 
@@ -141,9 +141,9 @@ f = frelatage.Fuzzer(MyFunctionFuzz, [input])
 f.fuzz()
 ```
 
-#### Fuzz with a dictionnary
+#### Fuzz with a dictionary
 
-You can copy one or more dictionaries located [here](https://github.com/Rog3rSm1th/Frelatage/tree/main/dictionnaries) in the directory dedicated to dictionaries (`./dict` by default).
+You can copy one or more dictionaries located [here](https://github.com/Rog3rSm1th/Frelatage/tree/main/dictionaries) in the directory dedicated to dictionaries (`./dict` by default).
 
 
 ## Reports
@@ -176,23 +176,23 @@ There are two ways to set up Frelatage:
 
 | ENV Variable                   | Description |
 | -------------------------------| ----------- |
-| FRELATAGE_DICTIONNARY_ENABLE   | Enable the use of mutations based on dictionnary elements. ```1``` to enable, ```0``` otherwise|
+| FRELATAGE_DICTIONARY_ENABLE   | Enable the use of mutations based on dictionary elements. ```1``` to enable, ```0``` otherwise|
 | FRELATAGE_TIMEOUT_DELAY        | Delay after which a function will return a timeoutError |
 | FRELATAGE_INPUT_FILE_TMP_DIR   | Temporary folder where input files are stored. It needs to be an absolute path |
 | FRELATAGE_INPUT_MAX_LEN        | Maximum size of an input variable in bytes |
 | FRELATAGE_MAX_THREADS          | Maximum number of simultaneous threads |
-| FRELATAGE_DICTIONNARY_DIR      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) |
+| FRELATAGE_DICTIONARY_DIR      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) |
 
 
 A configuration example :
 
 ```bash
-export FRELATAGE_DICTIONNARY_ENABLE=1 &&
+export FRELATAGE_DICTIONARY_ENABLE=1 &&
 export FRELATAGE_TIMEOUT_DELAY=2 &&
 export FRELATAGE_INPUT_FILE_TMP_DIR="/tmp/frelatage" &&
 export FRELATAGE_INPUT_MAX_LEN=4096 &&
 export FRELATAGE_MAX_THREADS=20 &&
-export FRELATAGE_DICTIONNARY_DIR="./dict" &&
+export FRELATAGE_DICTIONARY_DIR="./dict" &&
 python3 fuzzer.py
 ```
 
