@@ -174,14 +174,14 @@ There are two ways to set up Frelatage:
 
 #### Using the environment variables
 
-| ENV Variable                   | Description |
-| -------------------------------| ----------- |
-| FRELATAGE_DICTIONARY_ENABLE   | Enable the use of mutations based on dictionary elements. ```1``` to enable, ```0``` otherwise|
-| FRELATAGE_TIMEOUT_DELAY        | Delay after which a function will return a timeoutError |
-| FRELATAGE_INPUT_FILE_TMP_DIR   | Temporary folder where input files are stored. It needs to be an absolute path |
-| FRELATAGE_INPUT_MAX_LEN        | Maximum size of an input variable in bytes |
-| FRELATAGE_MAX_THREADS          | Maximum number of simultaneous threads |
-| FRELATAGE_DICTIONARY_DIR      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) |
+| ENV Variable                   | Description | Possible Values | Default Value |
+| -------------------------------| ----------- |--------|-------|
+| FRELATAGE_DICTIONARY_ENABLE   | Enable the use of mutations based on dictionary elements| ```1``` to enable, ```0``` otherwise | ```1``` |
+| FRELATAGE_TIMEOUT_DELAY        | Delay in seconds after which a function will return a TimeoutError | ```1``` - ```20``` | ```2``` |
+| FRELATAGE_INPUT_FILE_TMP_DIR   | Temporary folder where input files are stored | absolute path to a folder, e.g. ```/tmp/custom_dir```| ```/tmp/frelatage```|
+| FRELATAGE_INPUT_MAX_LEN        | Maximum size of an input variable in bytes | ```4``` - ```1000000``` |  ```4094``` |
+| FRELATAGE_MAX_THREADS          | Maximum number of simultaneous threads | ```8``` - ```50``` | ```8``` |
+| FRELATAGE_DICTIONARY_DIR      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) | relative path to a folder, e.g. ```./dict```  | ```./dict``` |  
 
 
 A configuration example :
@@ -191,7 +191,7 @@ export FRELATAGE_DICTIONARY_ENABLE=1 &&
 export FRELATAGE_TIMEOUT_DELAY=2 &&
 export FRELATAGE_INPUT_FILE_TMP_DIR="/tmp/frelatage" &&
 export FRELATAGE_INPUT_MAX_LEN=4096 &&
-export FRELATAGE_MAX_THREADS=20 &&
+export FRELATAGE_MAX_THREADS=8 &&
 export FRELATAGE_DICTIONARY_DIR="./dict" &&
 python3 fuzzer.py
 ```

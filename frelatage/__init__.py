@@ -40,7 +40,10 @@ class Fuzzer(object):
         self.version = "0.0.1"
         
         # Frelatage configuration
-        self.config = Config
+        try:
+            self.config = Config
+        except Exception as e:
+            exit(1)
 
         # Global set of reached instructions
         self.reached_instructions= set([])
