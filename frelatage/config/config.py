@@ -5,6 +5,8 @@ class Config:
     """
     We can pass configuration through environnement variables
     """
+    # Enable the use of mutations based on dictionnary elements
+    FRELATAGE_DICTIONNARY_ENABLE = True if os.getenv('FRELATAGE_DICTIONNARY_ENABLE', "1") == "1" else False
     # Delay after which a function will return a timeoutError
     FRELATAGE_TIMEOUT_DELAY = int(os.getenv('TIMEOUT_DELAY', 2))
     # Temporary folder where input files are stored. 

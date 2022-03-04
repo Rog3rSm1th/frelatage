@@ -99,8 +99,8 @@ class MutatorStringInsertCharacter(Mutator):
 class MutatorStringInsertDict(Mutator):
     allowed_types = set(["str"])
     size_effect = ["increase"]
-    # Disable if the dictionnary is empty
-    enabled = True if dictionnary else False
+    # Disable if the dictionnary is empty or if the dictionnary fuzzing is disabled
+    enabled = True if (dictionnary and Config.FRELATAGE_DICTIONNARY_ENABLE) else False
 
     @staticmethod
     def mutate(input: str) -> str:
@@ -504,8 +504,8 @@ class MutatorFileDeleteSubBytes(Mutator):
 class MutatorFileInsertDict(Mutator):
     allowed_types = set(["file"])
     size_effect = ["increase"]
-    # Disable if the dictionnary is empty
-    enabled = True if dictionnary else False
+    # Disable if the dictionnary is empty or if the dictionnary fuzzing is disabled
+    enabled = True if (dictionnary and Config.FRELATAGE_DICTIONNARY_ENABLE) else False
 
     @staticmethod
     def mutate(input: str) -> str:

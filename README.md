@@ -7,7 +7,7 @@
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
   <a target="_blank" title="Downloads"><img src="https://static.pepy.tech/badge/frelatage"></a>
-  <a target="_blank" href="https://twitter.com/Rog3rSm1th" title="Python version"><img src="https://img.shields.io/badge/-@Rog3rSm1th-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/Rog3rSm1th"></a>
+  <a target="_blank" href="https://twitter.com/Rog3rSm1th" title="Twitter"><img src="https://img.shields.io/badge/-@Rog3rSm1th-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/Rog3rSm1th"></a>
   <br>
   <span><i>The Python Fuzzer that the world deserves</i></span>
 </p>
@@ -121,11 +121,13 @@ f.fuzz()
 
 Frelatage gives you the possibility to fuzz file type input parameters. To initialize the value of these files, you must create as many files in the input folder as there are arguments of type file. These files must be named as follows: the first file argument must be named ```0```, the second ```1```, and so on.
 
+
+In case we have only one input file, we can initialize it like this: 
 ```bash
 echo "initial value" > ./in/0
 ```
 
-For example : 
+And then run the fuzzer: 
 
 ```python
 import frelatage
@@ -174,6 +176,7 @@ There are two ways to set up Frelatage:
 
 | ENV Variable                   | Description |
 | -------------------------------| ----------- |
+| FRELATAGE_DICTIONNARY_ENABLE   | Enable the use of mutations based on dictionnary elements. ```1``` to enable, ```0``` otherwise|
 | FRELATAGE_TIMEOUT_DELAY        | Delay after which a function will return a timeoutError |
 | FRELATAGE_INPUT_FILE_TMP_DIR   | Temporary folder where input files are stored. It needs to be an absolute path |
 | FRELATAGE_INPUT_MAX_LEN        | Maximum size of an input variable in bytes |
@@ -184,6 +187,7 @@ There are two ways to set up Frelatage:
 A configuration example :
 
 ```bash
+export FRELATAGE_DICTIONNARY_ENABLE=1 &&
 export FRELATAGE_TIMEOUT_DELAY=2 &&
 export FRELATAGE_INPUT_FILE_TMP_DIR="/tmp/frelatage" &&
 export FRELATAGE_INPUT_MAX_LEN=4096 &&
