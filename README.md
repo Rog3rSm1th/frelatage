@@ -2,12 +2,12 @@
   <img src="doc/frelatage_logo.gif" width="200" height="200" style="border-radius:4px"/>
   <br>
   <code>pip3 install frelatage</code></br>
-  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.0.1</a></i></br></br>
+  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.0.2</a></i></br></br>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg"></a>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
   <a target="_blank" title="Downloads"><img src="https://static.pepy.tech/badge/frelatage"></a>
-  <a target="_blank" href="https://twitter.com/Rog3rSm1th" title="Python version"><img src="https://img.shields.io/badge/-@Rog3rSm1th-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/Rog3rSm1th"></a>
+  <a target="_blank" href="https://twitter.com/Rog3rSm1th" title="Twitter"><img src="https://img.shields.io/badge/-@Rog3rSm1th-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/Rog3rSm1th"></a>
   <br>
   <span><i>The Python Fuzzer that the world deserves</i></span>
 </p>
@@ -26,11 +26,10 @@
 
 ![](doc/frelatage_demo.gif)
 
-**DISCLAIMER** : This project is at the alpha stage and can still cause many unexpected behaviors. Frelatage should not be used in a production environment at this time.
-
-
 
 Frelatage is a coverage-based Python fuzzing library which can be used to fuzz python code. The development of Frelatage was inspired by various other fuzzers, including [AFL](https://github.com/google/AFL)/[AFL++](https://github.com/AFLplusplus/AFLplusplus), [Atheris](https://github.com/google/atheris) and [PyFuzzer](https://github.com/eerimoq/pyfuzzer).The main purpose of the project is to take advantage of the best features of these fuzzers and gather them together into a new tool in order to efficiently fuzz python applications.
+
+**DISCLAIMER** : This project is at the alpha stage and can still cause many unexpected behaviors. Frelatage should not be used in a production environment at this time.
 
 ## Requirements
 [Python 3](https://www.python.org/)
@@ -96,7 +95,7 @@ graph TB
   - Float
   - List
   - Tuple
-  - Dictionnary
+  - Dictionary
   
 #### File fuzzing
 Frelatage allows to fuzz a function by passing a file as input. 
@@ -121,11 +120,13 @@ f.fuzz()
 
 Frelatage gives you the possibility to fuzz file type input parameters. To initialize the value of these files, you must create as many files in the input folder as there are arguments of type file. These files must be named as follows: the first file argument must be named ```0```, the second ```1```, and so on.
 
+
+In case we have only one input file, we can initialize it like this: 
 ```bash
 echo "initial value" > ./in/0
 ```
 
-For example : 
+And then run the fuzzer: 
 
 ```python
 import frelatage
@@ -139,9 +140,9 @@ f = frelatage.Fuzzer(MyFunctionFuzz, [input])
 f.fuzz()
 ```
 
-#### Fuzz with a dictionnary
+#### Fuzz with a dictionary
 
-You can copy one or more dictionaries located [here](https://github.com/Rog3rSm1th/Frelatage/tree/main/dictionnaries) in the directory dedicated to dictionaries (`./dict` by default).
+You can copy one or more dictionaries located [here](https://github.com/Rog3rSm1th/Frelatage/tree/main/dictionaries) in the directory dedicated to dictionaries (`./dict` by default).
 
 
 ## Reports
@@ -172,23 +173,25 @@ There are two ways to set up Frelatage:
 
 #### Using the environment variables
 
-| ENV Variable                   | Description |
-| -------------------------------| ----------- |
-| FRELATAGE_TIMEOUT_DELAY        | Delay after which a function will return a timeoutError |
-| FRELATAGE_INPUT_FILE_TMP_DIR   | Temporary folder where input files are stored. It needs to be an absolute path |
-| FRELATAGE_INPUT_MAX_LEN        | Maximum size of an input variable in bytes |
-| FRELATAGE_MAX_THREADS          | Maximum number of simultaneous threads |
-| FRELATAGE_DICTIONNARY_DIR      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) |
+| ENV Variable                   | Description | Possible Values | Default Value |
+| -------------------------------| ----------- |--------|-------|
+| FRELATAGE_DICTIONARY_ENABLE   | Enable the use of mutations based on dictionary elements| ```1``` to enable, ```0``` otherwise | ```1``` |
+| FRELATAGE_TIMEOUT_DELAY        | Delay in seconds after which a function will return a TimeoutError | ```1``` - ```20``` | ```2``` |
+| FRELATAGE_INPUT_FILE_TMP_DIR   | Temporary folder where input files are stored | absolute path to a folder, e.g. ```/tmp/custom_dir```| ```/tmp/frelatage```|
+| FRELATAGE_INPUT_MAX_LEN        | Maximum size of an input variable in bytes | ```4``` - ```1000000``` |  ```4094``` |
+| FRELATAGE_MAX_THREADS          | Maximum number of simultaneous threads | ```8``` - ```50``` | ```8``` |
+| FRELATAGE_DICTIONARY_DIR      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) | relative path to a folder, e.g. ```./dict```  | ```./dict``` |  
 
 
 A configuration example :
 
 ```bash
+export FRELATAGE_DICTIONARY_ENABLE=1 &&
 export FRELATAGE_TIMEOUT_DELAY=2 &&
 export FRELATAGE_INPUT_FILE_TMP_DIR="/tmp/frelatage" &&
 export FRELATAGE_INPUT_MAX_LEN=4096 &&
-export FRELATAGE_MAX_THREADS=20 &&
-export FRELATAGE_DICTIONNARY_DIR="./dict" &&
+export FRELATAGE_MAX_THREADS=8 &&
+export FRELATAGE_DICTIONARY_DIR="./dict" &&
 python3 fuzzer.py
 ```
 
@@ -217,7 +220,9 @@ f = frelatage.Fuzzer(
     # Directory where the error reports will be stored
     output_directory="./out",
     # Directory containing the initial input files
-    input_directory="./in"
+    input_directory="./in",
+    # Enable or disable silent mode
+    silent=False
 )
 f.fuzz()
 ```

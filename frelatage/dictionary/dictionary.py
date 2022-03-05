@@ -1,19 +1,19 @@
 import re
 
-class Dictionnary:
+class Dictionary:
     """
     Stores the elements of an Frelatage dictionary. 
     """
     def __init__(self) -> None:
-        self.dictionnary = []
+        self.dictionary = []
         # dict_element="myelement" -> "myelement"
-        self.DICTIONNARY_ELEMENT_REGEXP = r'".+"'
+        self.DICTIONARY_ELEMENT_REGEXP = r'".+"'
 
-    def load_dictionnary_from_file(self, filename) -> list:
+    def load_dictionary_from_file(self, filename) -> list:
         """
-        Read a Frelatage dictionnary file and extract dictionnary elements from it
+        Read a Frelatage dictionary file and extract dictionary elements from it
         """
-        file_dictionnary = []
+        file_dictionary = []
 
         with open(filename, "r") as f:
             lines = [line.replace("\n", "").strip() for line in f.readlines()]
@@ -23,9 +23,9 @@ class Dictionnary:
                 if not line or line[0] == "#":
                     continue
                 # Parse line
-                dictionnary_element = re.findall(self.DICTIONNARY_ELEMENT_REGEXP, line)
-                if dictionnary_element:
+                dictionary_element = re.findall(self.DICTIONARY_ELEMENT_REGEXP, line)
+                if dictionary_element:
                     # Remove the quote from both the beginning and the end
-                    dictionnary_element = dictionnary_element[0][1:-1]
-                    file_dictionnary.append(dictionnary_element)
-        return file_dictionnary
+                    dictionary_element = dictionary_element[0][1:-1]
+                    file_dictionary.append(dictionary_element)
+        return file_dictionary

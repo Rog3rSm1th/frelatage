@@ -1,3 +1,4 @@
+from frelatage.colors import Colors
 from datetime import datetime
 from string import Formatter
 from curses import wrapper
@@ -5,7 +6,7 @@ import curses
 import time
 import os
 
-# Refresh the interval 10 times/second
+# Refresh the interface 10 times/second
 REFRESH_INTERVAL = 0.1
 
 def format_delta(time_delta:datetime, format: str) -> str:
@@ -41,6 +42,8 @@ def init_interface(self, stdscr) -> bool:
     """
     Initialize the Frelatage CLI
     """
+    # Hide cursor
+    curses.curs_set(0)
     # Colors
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
     stdscr.bkgd(' ', curses.color_pair(1) | curses.A_BOLD)
@@ -80,7 +83,7 @@ def refresh_interface(self):
 
     # Interface
     self.screen.addstr(0, 0, """
-    Frelatage - Version {version}
+    Frelatage {version} ({function_name})
 
     [>] Process timing                                           [>] Finding in depth
     +--------------------------------------------------------+   +--------------------------------------------+
@@ -97,6 +100,7 @@ def refresh_interface(self):
     +--------------------------------------------------------+   +--------------------------------------------+
     """.format(
             version=self.version,
+            function_name=self.method.__name__,
             run_time=run_time,
             last_new_path_time=last_new_path_time,
             last_unique_crash_time=last_unique_crash_time,
@@ -113,7 +117,50 @@ def refresh_interface(self):
     )
     self.screen.refresh()
 
+def exit_message(self, aborted_by_user: bool) -> bool:
+    """
+    Message displayed when exiting the program
+    """
+    run_time = format_time_elapsed(self.fuzz_start_time)
+    uniques_crashes_count = str(self.unique_crashes)
+    uniques_timeouts_count = str(self.unique_timeout)
+    total_crashes = "{crashes} ({uniques} uniques)".format(crashes=str(self.total_crashes), uniques=str(self.unique_crashes))
+    total_timeouts = "{total_timeouts}".format(total_timeouts=self.total_timeouts)
+    total_paths_count = str(len(self.reached_instructions))
+    cycles_count = str(self.cycles_count)
+    total_executions = str(self.inputs_count)
+
+    # End the curse window 
+    if not self.silent:
+        curses.endwin()
+
+    # Keyboard interrupt
+    if aborted_by_user:
+        print(Colors.FAIL + "+++ Fuzzing aborted by user +++" + "\r\n")
+    # Error in the program
+    else:
+        print(Colors.FAIL + "+++ Fuzzing was interrupted by an error in Frelatage +++" + "\r\n")
+    
+    # Message displayed at the end of the program 
+    print(Colors.OKGREEN + "[+] " + Colors.ENDC + "Error reports are located in: " + Colors.BOLD + self.output_directory + Colors.ENDC + "\r\n"
+          + "\r\n"
+          + Colors.BOLD + "Fuzzing statistics: " + Colors.ENDC + "\r\n"
+          + "\r\n"
+          + "Total run time: " + run_time + "\r\n"
+          + "Uniques crashes: " + Colors.FAIL + uniques_crashes_count + Colors.ENDC + "\r\n"
+          + "Uniques timeouts: " + uniques_timeouts_count + "\r\n"
+          + "Crashes: " + str(self.total_crashes) + "\r\n"
+          + "Timeouts: " + total_timeouts + "\r\n"
+          + "Reached paths: " + total_paths_count + "\r\n"
+          + "Cycles: " + cycles_count + "\r\n"
+          + "Executions: " + total_executions
+          )
+    return True
+
 def start_interface(self):
+    """
+    Display the curse interface
+    """
     wrapper(self.init_interface)
     while True:
         self.refresh_interface()
