@@ -18,7 +18,7 @@ class Fuzzer(object):
     of these fuzzers and gather them together into a new tool in order to efficiently fuzz python applications.
     """
     from ._mutation import valid_mutators, get_mutation, generate_cycle_mutations
-    from ._interface import init_interface, refresh_interface, start_interface
+    from ._interface import init_interface, refresh_interface, start_interface, exit_message
     from ._evaluate import evaluate_mutations
     from ._cycle import run_function, run_cycle  
     from ._fuzz import fuzz
@@ -40,10 +40,7 @@ class Fuzzer(object):
         self.version = "0.0.1"
         
         # Frelatage configuration
-        try:
-            self.config = Config
-        except Exception as e:
-            exit(1)
+        self.config = Config
 
         # Global set of reached instructions
         self.reached_instructions= set([])
@@ -61,7 +58,7 @@ class Fuzzer(object):
         # List of all avalaibles mutators
         self.mutators = mutators
         # Number of concurrently launched threads
-        self.threads_count = min(threads_count, Config.FRELATAGE_MAX_THREADS)
+        self.threads_count = max(min(threads_count, Config.FRELATAGE_MAX_THREADS), 8)
         # List of cycle mutations
         self.cycle = []
 
