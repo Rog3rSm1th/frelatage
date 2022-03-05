@@ -152,4 +152,4 @@ cython_debug/
 #.idea/
 
 # examples output folders
-examples/*/out
+examples/**/out
