@@ -32,7 +32,8 @@ class Fuzzer(object):
                  exceptions_whitelist: list = (),
                  exceptions_blacklist: list = (),
                  output_directory: str = "./out",
-                 input_directory: str = "./in"
+                 input_directory: str = "./in",
+                 silent: bool = False
         ) -> None:
         """
         Initialize the fuzzer
@@ -79,6 +80,9 @@ class Fuzzer(object):
             os.path.dirname(os.path.realpath(sys.argv[0])),
             output_directory
         )
+        
+        # Silent output
+        self.silent = silent
 
         # Fuzzer statistics
         self.cycles_count = 0

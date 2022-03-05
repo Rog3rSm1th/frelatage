@@ -131,7 +131,8 @@ def exit_message(self, aborted_by_user: bool) -> bool:
     total_executions = str(self.inputs_count)
 
     # End the curse window 
-    curses.endwin()
+    if not self.silent:
+        curses.endwin()
 
     # Keyboard interrupt
     if aborted_by_user:

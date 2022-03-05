@@ -6,9 +6,10 @@ def fuzz(self) -> None:
     """
     try:
         # Interface
-        p = Thread(target=self.start_interface)
-        p.daemon = True
-        p.start()
+        if not self.silent:
+            p = Thread(target=self.start_interface)
+            p.daemon = True
+            p.start()
 
         # Fuzzing
         parents = [self.arguments]
