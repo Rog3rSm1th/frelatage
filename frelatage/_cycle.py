@@ -40,5 +40,6 @@ def run_cycle(self) -> list[Report]:
     for mutation in self.cycle:
         self.run_function(mutation, cycle_reports)
         self.inputs_count += 1
+        self.stage_inputs_count += 1
     self.cycles_count += 1
     return cycle_reports
