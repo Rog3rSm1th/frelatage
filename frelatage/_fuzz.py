@@ -1,4 +1,6 @@
+from frelatage.config.config import Config
 from threading import Thread
+import os
 
 def fuzz(self) -> None:
     """
@@ -16,7 +18,24 @@ def fuzz(self) -> None:
         while True: 
             self.generate_cycle_mutations(parents)
             reports = self.run_cycle()
-            parents = self.evaluate_mutations(reports)
+            # If no new paths have been found for a while, we go to the next stage
+            if self.cycles_without_new_path >= Config.FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS:
+                # Next stage
+                self.queue.position += 1
+                if not self.queue.end:
+                    # Initialize the new stage
+                    self.arguments = self.queue.current_arguments()
+                    parents = [self.arguments]
+                    self.cycles_without_new_path = 0
+                    self.stage_inputs_count = 0
+                    self.init_file_inputs()
+                # End of the fuzzing process
+                # Exit the program
+                else:
+                    self.exit_message(normal_ending=True)
+                    exit(1)
+            else:
+                parents = self.evaluate_mutations(reports)
     # Exit the program
     # Keyboard interrupt
     except KeyboardInterrupt:

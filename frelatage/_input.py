@@ -29,28 +29,40 @@ def init_input_folder(self) -> bool:
     for thread in range(self.threads_count):
         thread_directory = os.path.join(tmp_input_directory, str(thread))
         os.makedirs(thread_directory)
-        # Copy the input folder content into the subdirectory
-        copy_tree(start_input_directory, thread_directory)
+
+        # Files located in the input folder that are used in this stage
+        filenames = [file_argument.value for file_argument in filter(lambda a: a.file, self.queue.current_arguments())]
+        # Copy the useful files into the subdirectory
+        for i in range(len(filenames)):
+            # /tmp/frelatage/<thread>/<argument position>
+            argument_directory = os.path.join(thread_directory, str(i))
+            os.makedirs(argument_directory)
+            # ./in/<filename>
+            input_file = os.path.join(start_input_directory, filenames[i])
+            # /tmp/frelatage/<thread>/<argument position>/<filename>
+            output_file = os.path.join(argument_directory, filenames[i])
+            shutil.copyfile(input_file, output_file)
     return True
 
 def init_file_input_arguments(self) -> bool:
     """
-    Initialization of the file arguments value.
+    Initialization of the file arguments values.
 
     Input {
         type: File
-        value: <input_file_tmp_dir>/<thread 0>/<filename>
+        value: <input_file_tmp_dir>/<thread 0>/<argument position>/<filename>
     }
     """
     file_input_arguments_count = 0
     # We initialize the value of each argument of type "file".
-    for argument in self.arguments:
-        if argument.file:
-            # <input_file_tmp_dir>/<thread 0>/<filename>
-            argument.value = "{base_directory}/{thread}/{file_input_arguments_count}".format(
+    for i in range(len(self.arguments)):
+        if self.arguments[i].file:
+            # <input_file_tmp_dir>/<thread 0>/<argument position>/<filename>
+            self.arguments[i].value = "{base_directory}/{thread}/{position}/{filename}".format(
                 base_directory=self.config.FRELATAGE_INPUT_FILE_TMP_DIR,
                 thread="0",
-                file_input_arguments_count=file_input_arguments_count, 
+                position=str(i), 
+                filename=self.arguments[i].value
             )
             file_input_arguments_count+= 1
     return True
@@ -59,6 +71,6 @@ def init_file_inputs(self) -> bool:
     """
     Set up the tree structure to fuzz a function with "file" type arguments
     """
-    if all([argument.file for argument in self.arguments]):
+    if any([argument.file for argument in self.arguments]):
         self.init_input_folder()
         self.init_file_input_arguments()

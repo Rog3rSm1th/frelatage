@@ -113,12 +113,12 @@ def generate_cycle_mutations(self, parents: list) -> list:
                 
                 mutation = copy.deepcopy(argument)
                 mutation.value = self.get_mutation(mutation.value, mutation.file)
-                # print(mutation.value)
                 # Mutation of "file" type inputs
                 if mutation.file:
-                    argument = os.path.split(mutation.value)[1]
-                    base = Path(mutation.value).parents[1]
-                    new_argument = os.path.join(base, str(thread), argument)
+                    filename = os.path.split(mutation.value)[1]
+                    file_argument_id = os.path.split(os.path.split(mutation.value)[0])[1]
+                    base = Path(mutation.value).parents[2]
+                    new_argument = os.path.join(base, str(thread), file_argument_id, filename)
                     mutation.value = new_argument
 
                 thread_arguments.append(mutation)        
