@@ -64,8 +64,8 @@ def refresh_interface(self):
     last_unique_timeout_time = format_time_elapsed(self.last_unique_timeout_time).ljust(32)
     
     # Overall results
-    uniques_crashes_count = str(self.unique_crashes).ljust(32)
-    uniques_timeouts_count = str(self.unique_timeout).ljust(32)
+    uniques_crashes_count = str(self.unique_crashes).ljust(9)
+    uniques_timeouts_count = str(self.unique_timeout).ljust(9)
 
     # Finding in depth 
     total_paths_count = str(len(self.reached_instructions)).ljust(20)
@@ -78,26 +78,28 @@ def refresh_interface(self):
     total_timeouts = "{total_timeouts}".format(total_timeouts=self.total_timeouts).ljust(20)
 
     # Progress
-    cycles_count = str(self.cycles_count).ljust(20)
-    total_executions = str(self.inputs_count).ljust(20)
+    cycles_count = str(self.cycles_count).ljust(12)
+    total_executions = str(self.inputs_count).ljust(12)
+
+    # Stage progress
+    current_argument = self.queue.position + 1
+    total_arguments_count = len(self.queue.arguments)
+    current_stage = "{current_argument}/{total_arguments_count}".format(current_argument=current_argument, total_arguments_count=total_arguments_count).ljust(20)
+    stage_executions = str(self.stage_inputs_count).ljust(14)
 
     # Interface
     self.screen.addstr(0, 0, """
     Frelatage {version} ({function_name})
-
-    [>] Process timing                                           [>] Finding in depth
-    +--------------------------------------------------------+   +--------------------------------------------+
-    | Run time            :: {run_time}|   | Favored paths       :: {favored_paths}|
-    | Last new path       :: {last_new_path_time}|   | Total paths         :: {total_paths_count}|
-    | Last unique crash   :: {last_unique_crash_time}|   | Total timeouts      :: {total_timeouts}|
-    | Last unique timeout :: {last_unique_timeout_time}|   | Total crashes       :: {total_crashes}|
-    +--------------------------------------------------------+   +--------------------------------------------+
-
-    [>] Overall result                                           [>] Progress
-    +--------------------------------------------------------+   +--------------------------------------------+
-    | Uniques crashes     :: {uniques_crashes_count}|   | Cycles done         :: {cycles_count}|
-    | Unique timeouts     :: {uniques_timeouts_count}|   | Total executions    :: {total_executions}|
-    +--------------------------------------------------------+   +--------------------------------------------+
+                                        
+    +---- Process timing ------------------------------------+--- Finding in depth -----------------------+
+    | Run time            :: {run_time}| Favored paths       :: {favored_paths}|
+    | Last new path       :: {last_new_path_time}| Total paths         :: {total_paths_count}|
+    | Last unique crash   :: {last_unique_crash_time}| Total timeouts      :: {total_timeouts}|
+    | Last unique timeout :: {last_unique_timeout_time}| Total crashes       :: {total_crashes}|
+    +---- Overall result -------------+---- Global progress -+-------------+---- Stage progress-----------+
+    | Uniques crashes     :: {uniques_crashes_count}| Cycles done         :: {cycles_count}| Stage :: {current_stage}|
+    | Unique timeouts     :: {uniques_timeouts_count}| Total executions    :: {total_executions}| Stage execs :: {stage_executions}|
+    +---------------------------------+------------------------------------+------------------------------+
     """.format(
             version=self.version,
             function_name=self.method.__name__,
@@ -112,12 +114,14 @@ def refresh_interface(self):
             total_timeouts=total_timeouts,
             total_crashes=total_crashes,
             cycles_count=cycles_count,
-            total_executions=total_executions
+            total_executions=total_executions,
+            current_stage=current_stage,
+            stage_executions=stage_executions
         )
     )
     self.screen.refresh()
 
-def exit_message(self, aborted_by_user: bool) -> bool:
+def exit_message(self, normal_ending: bool = False, aborted_by_user: bool = False) -> bool:
     """
     Message displayed when exiting the program
     """
@@ -137,6 +141,9 @@ def exit_message(self, aborted_by_user: bool) -> bool:
     # Keyboard interrupt
     if aborted_by_user:
         print(Colors.FAIL + "+++ Fuzzing aborted by user +++" + "\r\n")
+    # Normal ending
+    elif normal_ending:
+        print(Colors.OKGREEN + "+++ Fuzzing completed +++" + "\r\n")
     # Error in the program
     else:
         print(Colors.FAIL + "+++ Fuzzing was interrupted by an error in Frelatage +++" + "\r\n")
@@ -153,7 +160,7 @@ def exit_message(self, aborted_by_user: bool) -> bool:
           + "Timeouts: " + total_timeouts + "\r\n"
           + "Reached paths: " + total_paths_count + "\r\n"
           + "Cycles: " + cycles_count + "\r\n"
-          + "Executions: " + total_executions
+          + "Executions: " + total_executions + "\r"
           )
     return True
 

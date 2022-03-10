@@ -50,6 +50,9 @@ def evaluate_mutations(self, reports: list) -> list:
     # If we found a new path
     if len(self.reached_instructions) > start_reached_instructions_count:
         self.last_new_path_time = datetime.now()
+        self.cycles_without_new_path = 0
+    else:
+        self.cycles_without_new_path += 1
 
     # Rank reports
     ranked_reports = sorted(reports, reverse=True)

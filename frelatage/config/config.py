@@ -35,6 +35,12 @@ class Config:
         raise FrelatageConfigError("FRELATAGE_MAX_THREADS must be in range 8~50")
     FRELATAGE_MAX_THREADS = int(os.getenv('FRELATAGE_MAX_THREADS', 20))
 
+    # Maximum number of successives cycle without a new path
+    # Must be in range 10~50000
+    if not 10 <= int(os.getenv('FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS', 5000)) <= 50000:
+        raise FrelatageConfigError("FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS must be in range 10~10000")
+    FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS = int(os.getenv('FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS', 5000))
+
     # Default directory for dictionaries
     # Relative path (to the path of the fuzzing file)
     FRELATAGE_DICTIONARY_DIR = str(os.path.join(

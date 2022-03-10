@@ -2,6 +2,7 @@ from frelatage.config.config import Config
 from frelatage.tracer.tracer import Tracer
 from frelatage.mutator.mutator import *
 from frelatage.input.input import Input 
+from frelatage.queue.queue import Queue
 from typing import Type, Iterable, Callable, List
 from datetime import datetime
 import time
@@ -27,7 +28,7 @@ class Fuzzer(object):
 
     def __init__(self,
                  method: Callable,
-                 arguments: list[object],
+                 corpus: list[object],
                  threads_count: int = 8,
                  exceptions_whitelist: list = (),
                  exceptions_blacklist: list = (),
@@ -38,7 +39,7 @@ class Fuzzer(object):
         """
         Initialize the fuzzer
         """
-        self.version = "0.0.2"
+        self.version = "0.0.3"
         
         # Frelatage configuration
         self.config = Config
@@ -54,8 +55,10 @@ class Fuzzer(object):
         # Fuzzed method
         self.method = method
 
-        # Initials function arguments
-        self.arguments = arguments
+        # Remove duplicates in coprus
+        corpus = [list(set(argument)) for argument in corpus]
+        # Frelatage corpus
+        self.corpus = corpus
         # List of all avalaibles mutators
         self.mutators = mutators
         # Number of concurrently launched threads
@@ -87,6 +90,7 @@ class Fuzzer(object):
         # Fuzzer statistics
         self.cycles_count = 0
         self.inputs_count = 0
+        self.stage_inputs_count = 0
         self.unique_crashes = 0
         self.total_crashes = 0
         self.unique_timeout = 0
@@ -101,6 +105,13 @@ class Fuzzer(object):
         # Genetic algorithm parameters
         self.survival_probability = 0.5
         self.mutation_probability = 0.3
+
+         # Number of Frelatage cycles without finding new paths
+        self.cycles_without_new_path = 0
+        # Corpus entries that are still in the queue
+        self.queue= Queue(self.corpus)
+        # Current arguments
+        self.arguments = self.queue.current_arguments()
 
         # Initialize file input folders in /tmp/frelatage (default value)
         # Can be modified using the FRELATAGE_INPUT_FILE_TMP_DIR env variable
