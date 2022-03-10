@@ -39,7 +39,7 @@ class Fuzzer(object):
         """
         Initialize the fuzzer
         """
-        self.version = "0.0.2"
+        self.version = "0.0.3"
         
         # Frelatage configuration
         self.config = Config

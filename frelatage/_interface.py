@@ -91,15 +91,15 @@ def refresh_interface(self):
     self.screen.addstr(0, 0, """
     Frelatage {version} ({function_name})
                                         
-    +---- Process timing ---------------------------------------- Finding in depth -----------------------+
+    +---- Process timing ------------------------------------+--- Finding in depth -----------------------+
     | Run time            :: {run_time}| Favored paths       :: {favored_paths}|
     | Last new path       :: {last_new_path_time}| Total paths         :: {total_paths_count}|
     | Last unique crash   :: {last_unique_crash_time}| Total timeouts      :: {total_timeouts}|
     | Last unique timeout :: {last_unique_timeout_time}| Total crashes       :: {total_crashes}|                                  
-    +---- Overall result -------------+---- Global progress ---------------+---- Stage progress-----------+
+    +---- Overall result -------------+---- Global progress -+-------------+---- Stage progress-----------+
     | Uniques crashes     :: {uniques_crashes_count}| Cycles done         :: {cycles_count}| Stage :: {current_stage}|
     | Unique timeouts     :: {uniques_timeouts_count}| Total executions    :: {total_executions}| Stage execs :: {stage_executions}|
-    +-----------------------------------------------------------------------------------------------------+
+    +---------------------------------+------------------------------------+------------------------------+
     """.format(
             version=self.version,
             function_name=self.method.__name__,
@@ -115,7 +115,7 @@ def refresh_interface(self):
             total_crashes=total_crashes,
             cycles_count=cycles_count,
             total_executions=total_executions,
-            current_stage=stage,
+            current_stage=current_stage,
             stage_executions=stage_executions
         )
     )
