@@ -10,5 +10,5 @@ gif_file = frelatage.Input(file=True, value="image.gif")
 jpeg_file = frelatage.Input(file=True, value="image.gif")
 png_file = frelatage.Input(file=True, value="image.gif")
 
-f = frelatage.Fuzzer(fuzz_gif, [[gif_file, jpeg_file, png_file]])
+f = frelatage.Fuzzer(fuzz_gif, [[gif_file, jpeg_file, png_file, png_file]])
 f.fuzz()

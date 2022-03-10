@@ -55,6 +55,8 @@ class Fuzzer(object):
         # Fuzzed method
         self.method = method
 
+        # Remove duplicates in coprus
+        corpus = [list(set(argument)) for argument in corpus]
         # Frelatage corpus
         self.corpus = corpus
         # List of all avalaibles mutators
