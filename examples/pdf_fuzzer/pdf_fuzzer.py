@@ -8,6 +8,9 @@ def fuzz_pdf(input_file):
     pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
     pdfFileObj.close()
 
-pdf_file = frelatage.Input(file=True)
-f = frelatage.Fuzzer(fuzz_pdf, [pdf_file])
+# Corpus
+# Small PDF file
+pdf_file = frelatage.Input(file=True, value="file.pdf")
+
+f = frelatage.Fuzzer(fuzz_pdf, [[pdf_file]])
 f.fuzz()
