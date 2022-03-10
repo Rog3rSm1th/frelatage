@@ -2,7 +2,7 @@
   <img src="doc/frelatage_logo.gif" width="200" height="200" style="border-radius:4px"/>
   <br>
   <code>pip3 install frelatage</code></br>
-  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.0.2</a></i></br></br>
+  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.0.3</a></i></br></br>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg"></a>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
@@ -24,8 +24,9 @@
   <a href="#configuration">Configuration</a>
 </p>
 
-![](doc/frelatage_demo.gif)
-
+<p align="center">
+  <img src="https://github.com/Rog3rSm1th/Frelatage/blob/main/doc/frelatage_demo.gif?raw=true" alt="Frelatage demonstration"/>
+</p>
 
 Frelatage is a coverage-based Python fuzzing library which can be used to fuzz python code. The development of Frelatage was inspired by various other fuzzers, including [AFL](https://github.com/google/AFL)/[AFL++](https://github.com/AFLplusplus/AFLplusplus), [Atheris](https://github.com/google/atheris) and [PyFuzzer](https://github.com/eerimoq/pyfuzzer).The main purpose of the project is to take advantage of the best features of these fuzzers and gather them together into a new tool in order to efficiently fuzz python applications.
 
@@ -100,6 +101,10 @@ graph TB
 #### File fuzzing
 Frelatage allows to fuzz a function by passing a file as input. 
 
+#### Fuzzer efficiency
+- Corpus
+- Dictionnary
+
 ## Use Frelatage
 
 #### Fuzz a classical parameter
@@ -112,18 +117,17 @@ def MyFunctionFuzz(data):
   my_vulnerable_library.parse(data)
 
 input = frelatage.Input(value="initial_value")
-f = frelatage.Fuzzer(MyFunctionFuzz, [input])
+f = frelatage.Fuzzer(MyFunctionFuzz, [[input]])
 f.fuzz()
 ```
 
 #### Fuzz a file parameter
 
-Frelatage gives you the possibility to fuzz file type input parameters. To initialize the value of these files, you must create as many files in the input folder as there are arguments of type file. These files must be named as follows: the first file argument must be named ```0```, the second ```1```, and so on.
+Frelatage gives you the possibility to fuzz file type input parameters. To initialize the value of these files, you must create files in the input folder (```./in``` by default).
 
-
-In case we have only one input file, we can initialize it like this: 
+If we want to initialize the value of a file used to fuzz, we can do it like this:
 ```bash
-echo "initial value" > ./in/0
+echo "initial value" > ./in/input.txt
 ```
 
 And then run the fuzzer: 
@@ -135,8 +139,8 @@ import my_vulnerable_library
 def MyFunctionFuzz(data):
   my_vulnerable_library.load_file(data)
 
-input = frelatage.Input(file=True)
-f = frelatage.Fuzzer(MyFunctionFuzz, [input])
+input = frelatage.Input(file=True, value="input.txt")
+f = frelatage.Fuzzer(MyFunctionFuzz, [[input]])
 f.fuzz()
 ```
 
@@ -144,6 +148,9 @@ f.fuzz()
 
 You can copy one or more dictionaries located [here](https://github.com/Rog3rSm1th/Frelatage/tree/main/dictionaries) in the directory dedicated to dictionaries (`./dict` by default).
 
+#### Examples
+
+You can find more examples of fuzzers and corpus in the [examples directory](https://github.com/Rog3rSm1th/Frelatage/tree/main/examples).
 
 ## Reports
 
@@ -181,6 +188,7 @@ There are two ways to set up Frelatage:
 | FRELATAGE_INPUT_MAX_LEN        | Maximum size of an input variable in bytes | ```4``` - ```1000000``` |  ```4094``` |
 | FRELATAGE_MAX_THREADS          | Maximum number of simultaneous threads | ```8``` - ```50``` | ```8``` |
 | FRELATAGE_DICTIONARY_DIR      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) | relative path to a folder, e.g. ```./dict```  | ```./dict``` |  
+| FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS      | Number of cycles without new paths found after which we go to the next stage | ```10``` - ```50000``` | ```5000``` | 
 
 
 A configuration example :
@@ -192,6 +200,7 @@ export FRELATAGE_INPUT_FILE_TMP_DIR="/tmp/frelatage" &&
 export FRELATAGE_INPUT_MAX_LEN=4096 &&
 export FRELATAGE_MAX_THREADS=8 &&
 export FRELATAGE_DICTIONARY_DIR="./dict" &&
+export FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS=5000 &&
 python3 fuzzer.py
 ```
 
@@ -209,8 +218,8 @@ input2 = frelatage.Input(value=2)
 f = frelatage.Fuzzer(
     # The method you want to fuzz
     method=myfunction,
-    # The initial arguments
-    arguments=[input1, input2],
+    # Corpus
+    corpus=[[input1], [input2]],
     # Number of threads
     threads_count=8,
     # Exceptions that will be taken into account
