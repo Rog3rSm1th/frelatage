@@ -27,7 +27,7 @@ def save_report(self, report) -> bool:
     ├── out
     │   ├── id<crash ID>,err<error type>
     │       ├── input
-    │       ├── 0
+    │       ├── <inputfile1>
     │       └── ...
     │   ├── ...
     """
@@ -57,7 +57,8 @@ def save_report(self, report) -> bool:
         file_arguments_count = 0
         if argument.file:
             file_argument_content = open(argument.value, "rb").read()
-            # Save file in /out/<report name>/<file id>
-            with open("{report_directory}/{file_arguments_count}".format(report_directory=report_directory, file_arguments_count=str(file_arguments_count)), "wb+") as f:
+            # Save file in /out/<report name>/<file name>
+            filename = os.path.basename(argument.value)
+            with open("{report_directory}/{filename}".format(report_directory=report_directory, filename=filename), "wb+") as f:
                 f.write(file_argument_content)
     return True
