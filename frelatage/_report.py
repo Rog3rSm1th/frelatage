@@ -34,8 +34,9 @@ def save_report(self, report) -> bool:
     ├── out
     │   ├── id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>,err_pos:<err_pos>
     │       ├── input
-    │       ├── <inputfile1>
-    │       └── ...
+    │       ├── 0
+    │           ├── <inputfile1>
+    │       ├── ...
     │   ├── ...
     """
 
@@ -60,12 +61,22 @@ def save_report(self, report) -> bool:
         pickle.dump(custom_report, f)
 
     # Save input files
-    for argument in report.input:
-        file_arguments_count = 0
+    for i in range(len(report.input)):
+        argument = report.input[i]
+        argument_number = i
+
         if argument.file:
             file_argument_content = open(argument.value, "rb").read()
-            # Save file in /out/<report name>/<file name>
+            # Save file in /out/<report name>/<argument number>/<file name>
+            argument_directory = "{report_directory}/{argument_number}".format(
+                report_directory=report_directory,
+                argument_number=argument_number
+            )
+            # create /out/<report name>/<argument number> folder if not exists
+            if not os.path.exists(argument_directory):
+                os.makedirs(argument_directory)
+            
             filename = os.path.basename(argument.value)
-            with open("{report_directory}/{filename}".format(report_directory=report_directory, filename=filename), "wb+") as f:
+            with open("{argument_directory}/{filename}".format(argument_directory=argument_directory, filename=filename), "wb+") as f:
                 f.write(file_argument_content)
     return True

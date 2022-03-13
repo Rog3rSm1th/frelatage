@@ -161,8 +161,9 @@ The report directory is in the following form:
     ├── out
     │   ├── id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>,err_pos:<err_pos>
     │       ├── input
-    │       ├── <inputfile1>
-    │       └── ...
+    │       ├── 0
+    │            ├── <inputfile1>
+    │       ├── ...
     │   ├── ...
 ```
 
