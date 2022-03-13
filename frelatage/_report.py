@@ -15,7 +15,7 @@ def get_report_name(self, report: Report) -> str:
     # Line of the file where the error occured
     error_position = str(report.trace.error_position[0][1]) if report.trace.error_position is not None else str(None)
     # File where the error occured
-    error_file = os.path.splitext(os.path.basename(report.trace.error_position[0][0]))[0]
+    error_file = os.path.splitext(os.path.basename(report.trace.error_position[0][0]))[0].lower()
 
     report_name = "id:{error_id},err:{error_type},err_file:{error_file},err_pos:{error_position}".format(
         error_id=error_id,
