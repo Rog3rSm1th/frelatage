@@ -154,14 +154,14 @@ You can find more examples of fuzzers and corpus in the [examples directory](htt
 
 ## Reports
 
-Each crash is saved in the output folder (```./out``` by default), in a folder named : ```id<crash ID>,err<error type>```.
+Each crash is saved in the output folder (```./out``` by default), in a folder named : ```id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>,err_pos:<err_pos>```.
 
 The report directory is in the following form: 
 ```
     ├── out
-    │   ├── id<crash ID>,err<error type>
+    │   ├── id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>,err_pos:<err_pos>
     │       ├── input
-    │       ├── 0
+    │       ├── <inputfile1>
     │       └── ...
     │   ├── ...
 ```

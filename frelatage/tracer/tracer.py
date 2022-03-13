@@ -83,17 +83,16 @@ class Tracer:
 
         # List of the executed instructions
         instructions = list(self.tracer.results().counter.items())
-        reached_instructions = [(instruction[0][1], instruction[1]) for instruction in instructions]
+        reached_instructions = [(instruction[0][0], instruction[0][1]) for instruction in instructions]
         # List of the instructions pairs :
-        # e.g : reached instructions : [1, 3, 5, 4, 6]
-        #       instructions pairs -> [(1, 3), (3, 5), (5, 4), (4, 6)] 
+        # e.g : reached instructions : [('library.py', 1), ('library.py', 3), ('library.py', 2), ('library.py', 4)]
+        #       instructions pairs -> [(('library.py', 3), ('library.py', 3)), (('library.py', 3), ('library.py', 2)), ...] 
         instructions_pairs = []
-        for i in range(len(instructions)):
-            instructions_pairs.append((instructions[i-1], instructions[i]))
-
+        for i in range(len(reached_instructions)):
+            instructions_pairs.append((reached_instructions[i-1], reached_instructions[i]))
         # Position of the instruction where the error occured, None if no error
         if error or timeout:
-            error_position = (reached_instructions[-1][1], error_type)
+            error_position = (reached_instructions[-1], error_type)
         else:
             error_position = None
 
