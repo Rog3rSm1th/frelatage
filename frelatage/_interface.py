@@ -1,4 +1,5 @@
 from frelatage.colors import Colors
+from frelatage import __version__
 from datetime import datetime
 from string import Formatter
 from curses import wrapper
@@ -57,6 +58,12 @@ def refresh_interface(self):
     """
     Refresh the Frelatage CLI
     """
+    # Title
+    title = "Frelatage {version} ({function_name})".format(
+        version=__version__,
+        function_name=self.method.__name__
+    ).center(105)
+
     # Process timing
     run_time = format_time_elapsed(self.fuzz_start_time).ljust(32)
     last_new_path_time = format_time_elapsed(self.last_new_path_time).ljust(32)
@@ -68,14 +75,14 @@ def refresh_interface(self):
     uniques_timeouts_count = str(self.unique_timeout).ljust(9)
 
     # Finding in depth 
-    total_paths_count = str(len(self.reached_instructions)).ljust(20)
+    total_paths_count = str(len(self.reached_instructions)).ljust(22)
     favored_paths_count = len(self.favored_pairs)
     favored_paths_rate = round(int(favored_paths_count)/int(total_paths_count) * 100, 2) if int(total_paths_count) else 0.00
-    favored_paths = "{favored_paths} ({rate}%)".format(favored_paths=favored_paths_count, rate=favored_paths_rate).ljust(20)
+    favored_paths = "{favored_paths} ({rate}%)".format(favored_paths=favored_paths_count, rate=favored_paths_rate).ljust(22)
     
     # Crashes
-    total_crashes = "{crashes} ({uniques} uniques)".format(crashes=str(self.total_crashes), uniques=str(self.unique_crashes)).ljust(20)
-    total_timeouts = "{total_timeouts}".format(total_timeouts=self.total_timeouts).ljust(20)
+    total_crashes = "{crashes} ({uniques} uniques)".format(crashes=str(self.total_crashes), uniques=str(self.unique_crashes)).ljust(22)
+    total_timeouts = "{total_timeouts}".format(total_timeouts=self.total_timeouts).ljust(22)
 
     # Progress
     cycles_count = str(self.cycles_count).ljust(12)
@@ -84,25 +91,24 @@ def refresh_interface(self):
     # Stage progress
     current_argument = self.queue.position + 1
     total_arguments_count = len(self.queue.arguments)
-    current_stage = "{current_argument}/{total_arguments_count}".format(current_argument=current_argument, total_arguments_count=total_arguments_count).ljust(20)
-    stage_executions = str(self.stage_inputs_count).ljust(14)
+    current_stage = "{current_argument}/{total_arguments_count}".format(current_argument=current_argument, total_arguments_count=total_arguments_count).ljust(16)
+    stage_executions = str(self.stage_inputs_count).ljust(16)
 
     # Interface
     self.screen.addstr(0, 0, """
-    Frelatage {version} ({function_name})
+    {title}
                                         
-    +---- Process timing ------------------------------------+--- Finding in depth -----------------------+
+    +---- Process timing ------------------------------------+--- Finding in depth -------------------------+
     | Run time            :: {run_time}| Favored paths       :: {favored_paths}|
     | Last new path       :: {last_new_path_time}| Total paths         :: {total_paths_count}|
     | Last unique crash   :: {last_unique_crash_time}| Total timeouts      :: {total_timeouts}|
     | Last unique timeout :: {last_unique_timeout_time}| Total crashes       :: {total_crashes}|
-    +---- Overall result -------------+---- Global progress -+-------------+---- Stage progress-----------+
-    | Uniques crashes     :: {uniques_crashes_count}| Cycles done         :: {cycles_count}| Stage :: {current_stage}|
+    +---- Overall result -------------+---- Global progress -+-------------+---- Stage progress-------------+
+    | Uniques crashes     :: {uniques_crashes_count}| Cycles done         :: {cycles_count}| Stage       :: {current_stage}|
     | Unique timeouts     :: {uniques_timeouts_count}| Total executions    :: {total_executions}| Stage execs :: {stage_executions}|
-    +---------------------------------+------------------------------------+------------------------------+
+    +---------------------------------+------------------------------------+--------------------------------+
     """.format(
-            version=self.version,
-            function_name=self.method.__name__,
+            title=title,
             run_time=run_time,
             last_new_path_time=last_new_path_time,
             last_unique_crash_time=last_unique_crash_time,

@@ -75,7 +75,7 @@ class Tracer:
             pass
         # Default exceptions
         except Exception as e:
-            if self.exceptions_whitelist is ():
+            if self.exceptions_whitelist == ():
                 error = True
                 error_type = str(e.__class__.__name__)
             else:

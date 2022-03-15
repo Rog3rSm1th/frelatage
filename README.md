@@ -144,6 +144,31 @@ f = frelatage.Fuzzer(MyFunctionFuzz, [[input]])
 f.fuzz()
 ```
 
+#### Load several files to a corpus at one
+
+If you need to load several files into a corpus at once (useful if you use a large corpus) You can use the built-in function of Frelatage `load_function`. This function returns a list of inputs.
+
+```load_corpus(directory: str, file_extensions: list) -> list[Input]```
+- directory: Subdirectory of the input directory (relative path), e.g `./`, `./images`
+- file_extensions: List of file extensions to include in the corpus entries, e.g. `["jpeg", "gif"]`, `["pdf"]`
+
+```python
+import frelatage
+import my_vulnerable_library
+
+def MyFunctionFuzz(data):
+  my_vulnerable_library.load_file(data)
+  my_vulnerable_library.load_file(data2)
+
+# Load every every file in the ./in directory
+corpus_1 = frelatage.load_corpus(directory="./")
+# Load every .gif/.jpeg file in the ./in/images subdirectory
+corpus_2 = frelatage.load_corpus(directory="./images", file_extension=["gif", "jpeg"])
+
+f = frelatage.Fuzzer(MyFunctionFuzz, [corpus_1, corpus_2])
+f.fuzz()
+```
+
 #### Fuzz with a dictionary
 
 You can copy one or more dictionaries located [here](https://github.com/Rog3rSm1th/Frelatage/tree/main/dictionaries) in the directory dedicated to dictionaries (`./dict` by default).
@@ -183,14 +208,14 @@ There are two ways to set up Frelatage:
 
 | ENV Variable                   | Description | Possible Values | Default Value |
 | -------------------------------| ----------- |--------|-------|
-| FRELATAGE_DICTIONARY_ENABLE   | Enable the use of mutations based on dictionary elements| ```1``` to enable, ```0``` otherwise | ```1``` |
-| FRELATAGE_TIMEOUT_DELAY        | Delay in seconds after which a function will return a TimeoutError | ```1``` - ```20``` | ```2``` |
-| FRELATAGE_INPUT_FILE_TMP_DIR   | Temporary folder where input files are stored | absolute path to a folder, e.g. ```/tmp/custom_dir```| ```/tmp/frelatage```|
-| FRELATAGE_INPUT_MAX_LEN        | Maximum size of an input variable in bytes | ```4``` - ```1000000``` |  ```4094``` |
-| FRELATAGE_MAX_THREADS          | Maximum number of simultaneous threads | ```8``` - ```50``` | ```8``` |
-| FRELATAGE_DICTIONARY_DIR      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) | relative path to a folder, e.g. ```./dict```  | ```./dict``` |  
-| FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS      | Number of cycles without new paths found after which we go to the next stage | ```10``` - ```50000``` | ```5000``` | 
-
+| **FRELATAGE_DICTIONARY_ENABLE**   | Enable the use of mutations based on dictionary elements| ```1``` to enable, ```0``` otherwise | ```1``` |
+| **FRELATAGE_TIMEOUT_DELAY**        | Delay in seconds after which a function will return a TimeoutError | ```1``` - ```20``` | ```2``` |
+| **FRELATAGE_INPUT_FILE_TMP_DIR**   | Temporary folder where input files are stored | absolute path to a folder, e.g. ```/tmp/custom_dir```| ```/tmp/frelatage```|
+| **FRELATAGE_INPUT_MAX_LEN**        | Maximum size of an input variable in bytes | ```4``` - ```1000000``` |  ```4094``` |
+| **FRELATAGE_MAX_THREADS**          | Maximum number of simultaneous threads | ```8``` - ```50``` | ```8``` |
+| **FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS**      | Number of cycles without new paths found after which we go to the next stage | ```10``` - ```50000``` | ```5000``` | 
+| **FRELATAGE_INPUT_DIR**           | Directory containing the initial input files. It needs to be a relative path (to the path of the fuzzing file) |relative path to a folder, e.g. ```./in```  | ```./in``` |
+| **FRELATAGE_DICTIONARY_DIR**      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) | relative path to a folder, e.g. ```./dict```  | ```./dict``` |  
 
 A configuration example :
 
@@ -200,8 +225,9 @@ export FRELATAGE_TIMEOUT_DELAY=2 &&
 export FRELATAGE_INPUT_FILE_TMP_DIR="/tmp/frelatage" &&
 export FRELATAGE_INPUT_MAX_LEN=4096 &&
 export FRELATAGE_MAX_THREADS=8 &&
-export FRELATAGE_DICTIONARY_DIR="./dict" &&
 export FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS=5000 &&
+export FRELATAGE_INPUT_DIR="./in" &&
+export FRELATAGE_DICTIONARY_DIR="./dict" &&
 python3 fuzzer.py
 ```
 
@@ -229,8 +255,6 @@ f = frelatage.Fuzzer(
     exceptions_blacklist=(),
     # Directory where the error reports will be stored
     output_directory="./out",
-    # Directory containing the initial input files
-    input_directory="./in",
     # Enable or disable silent mode
     silent=False
 )

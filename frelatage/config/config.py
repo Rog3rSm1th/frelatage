@@ -47,3 +47,10 @@ class Config:
                                         os.path.dirname(os.path.realpath(sys.argv[0])),
                                         os.getenv('FRELATAGE_DICTIONARY_DIR', "./dict")
                                 ))
+    
+    # Default directory for input files
+    # Relative path (to the path of the fuzzing file)
+    FRELATAGE_INPUT_DIR = str(os.path.join(
+                                        os.path.dirname(os.path.realpath(sys.argv[0])),
+                                        os.getenv('FRELATAGE_INPUT_DIR', "./in")
+                          ))

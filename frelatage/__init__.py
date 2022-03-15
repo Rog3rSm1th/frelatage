@@ -1,13 +1,18 @@
+from frelatage.corpus.corpus import load_corpus
 from frelatage.config.config import Config
 from frelatage.tracer.tracer import Tracer
 from frelatage.mutator.mutator import *
 from frelatage.input.input import Input 
 from frelatage.queue.queue import Queue
 from typing import Type, Iterable, Callable, List
+from importlib.metadata import version
 from datetime import datetime
 import time
 import sys
 import os
+
+# Automatically retrieves the current version number
+__version__ = version('frelatage')
 
 class Fuzzer(object):
     """
@@ -33,14 +38,11 @@ class Fuzzer(object):
                  exceptions_whitelist: list = (),
                  exceptions_blacklist: list = (),
                  output_directory: str = "./out",
-                 input_directory: str = "./in",
                  silent: bool = False
         ) -> None:
         """
         Initialize the fuzzer
-        """
-        self.version = "0.0.3"
-        
+        """        
         # Frelatage configuration
         self.config = Config
 
@@ -77,7 +79,7 @@ class Fuzzer(object):
         # The working directory is the same as the fuzz file
         self.input_directory = os.path.join(
             os.path.dirname(os.path.realpath(sys.argv[0])),
-            input_directory
+            Config.FRELATAGE_INPUT_DIR
         )
         self.output_directory = os.path.join(
             os.path.dirname(os.path.realpath(sys.argv[0])),
