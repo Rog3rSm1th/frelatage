@@ -1,3 +1,4 @@
+from frelatage.corpus.corpus import load_corpus
 from frelatage.config.config import Config
 from frelatage.tracer.tracer import Tracer
 from frelatage.mutator.mutator import *
