@@ -37,7 +37,6 @@ class Fuzzer(object):
                  exceptions_whitelist: list = (),
                  exceptions_blacklist: list = (),
                  output_directory: str = "./out",
-                 input_directory: str = "./in",
                  silent: bool = False
         ) -> None:
         """
@@ -79,7 +78,7 @@ class Fuzzer(object):
         # The working directory is the same as the fuzz file
         self.input_directory = os.path.join(
             os.path.dirname(os.path.realpath(sys.argv[0])),
-            input_directory
+            Config.FRELATAGE_INPUT_DIR
         )
         self.output_directory = os.path.join(
             os.path.dirname(os.path.realpath(sys.argv[0])),
