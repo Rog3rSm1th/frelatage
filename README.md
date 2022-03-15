@@ -2,7 +2,7 @@
   <img src="doc/frelatage_logo.gif" width="200" height="200" style="border-radius:4px"/>
   <br>
   <code>pip3 install frelatage</code></br>
-  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.0.4</a></i></br></br>
+  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.0.5</a></i></br></br>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg"></a>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
@@ -144,9 +144,9 @@ f = frelatage.Fuzzer(MyFunctionFuzz, [[input]])
 f.fuzz()
 ```
 
-#### Load several files to a corpus at one
+#### Load several files to a corpus at once
 
-If you need to load several files into a corpus at once (useful if you use a large corpus) You can use the built-in function of Frelatage `load_function`. This function returns a list of inputs.
+If you need to load several files into a corpus at once (useful if you use a large corpus) You can use the built-in function of Frelatage `load_corpus`. This function returns a list of inputs.
 
 ```load_corpus(directory: str, file_extensions: list) -> list[Input]```
 - directory: Subdirectory of the input directory (relative path), e.g `./`, `./images`
