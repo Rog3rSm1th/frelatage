@@ -144,6 +144,31 @@ f = frelatage.Fuzzer(MyFunctionFuzz, [[input]])
 f.fuzz()
 ```
 
+#### Load several files to a corpus at one
+
+If you need to load several files into a corpus at once (useful if you use a large corpus) You can use the built-in function of Frelatage `load_function`. This function returns a list of inputs.
+
+```load_corpus(directory: str, file_extensions: list) -> list[Input]```
+- directory: Subdirectory of the input directory (relative path), e.g `./`, `./images`
+- file_extensions: List of file extensions to include in the corpus entries, e.g. `["jpeg", "gif"]`, `["pdf"]`
+
+```python
+import frelatage
+import my_vulnerable_library
+
+def MyFunctionFuzz(data):
+  my_vulnerable_library.load_file(data)
+  my_vulnerable_library.load_file(data2)
+
+# Load every every file in the ./in directory
+corpus_1 = frelatage.load_corpus(directory="./")
+# Load every .gif/.jpeg file in the ./in/images subdirectory
+corpus_2 = frelatage.load_corpus(directory="./images", file_extension=["gif", "jpeg"])
+
+f = frelatage.Fuzzer(MyFunctionFuzz, [corpus_1, corpus_2])
+f.fuzz()
+```
+
 #### Fuzz with a dictionary
 
 You can copy one or more dictionaries located [here](https://github.com/Rog3rSm1th/Frelatage/tree/main/dictionaries) in the directory dedicated to dictionaries (`./dict` by default).
