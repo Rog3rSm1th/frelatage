@@ -177,14 +177,16 @@ You can copy one or more dictionaries located [here](https://github.com/Rog3rSm1
 
 You can find more examples of fuzzers and corpus in the [examples directory](https://github.com/Rog3rSm1th/Frelatage/tree/main/examples).
 
+- [Fuzzing Pillow with Frelatage to find bugs and vulnerabilities](https://rog3rsm1th.github.io/posts/fuzzing-python-libraries-frelatage/)
+
 ## Reports
 
-Each crash is saved in the output folder (```./out``` by default), in a folder named : ```id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>,err_pos:<err_pos>```.
+Each crash is saved in the output folder (```./out``` by default), in a folder named : ```id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>```.
 
 The report directory is in the following form: 
 ```
     ├── out
-    │   ├── id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>,err_pos:<err_pos>
+    │   ├── id:<crash ID>,err:<error type>,err_file:<error file>,err_pos:<err_pos>
     │       ├── input
     │       ├── 0
     │            ├── <inputfile1>
@@ -289,6 +291,12 @@ tasks, fuzzing may put strain on your hardware and on the OS. In particular:
 ```shell
     $ iostat -d 3 -x -k [...optional disk ID...]
 ```
+
+## 🔴 About Me/Hire me 🖥️
+
+I am Rog3rSm1th, I am 21 years old and I'm a French computer and cybersecurity enthusiast. I like developing tools (OSINT, Fuzzing...) and playing CTFs/Wargames. To learn more about me and my projects, juste click [here](https://github.com/Rog3rSm1th/Rog3rSm1th).
+
+➜ If you want to hire me for one of your projects (Programming, cybersecurity...), just contact me at [r0g3r5@protonmail.com](mailto:r0g3r5@protonmail.com) and we will assess your needs together.
 
 ## Contact 
 
