@@ -7,6 +7,7 @@ from frelatage.queue.queue import Queue
 from typing import Type, Iterable, Callable, List
 from importlib.metadata import version
 from datetime import datetime
+import warnings
 import time
 import sys
 import os
@@ -43,6 +44,8 @@ class Fuzzer(object):
         """
         Initialize the fuzzer
         """        
+        warnings.filterwarnings("ignore")
+        
         # Frelatage configuration
         self.config = Config
 
