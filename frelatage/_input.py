@@ -37,10 +37,10 @@ def init_input_folder(self) -> bool:
             # /tmp/frelatage/<thread>/<argument position>
             argument_directory = os.path.join(thread_directory, str(i))
             os.makedirs(argument_directory)
-            # ./in/<filename>
+            # ./in/<any subfolder>/<filename>
             input_file = os.path.join(start_input_directory, filenames[i])
             # /tmp/frelatage/<thread>/<argument position>/<filename>
-            output_file = os.path.join(argument_directory, filenames[i])
+            output_file = os.path.join(argument_directory, os.path.basename(filenames[i]))
             shutil.copyfile(input_file, output_file)
     return True
 
@@ -62,7 +62,7 @@ def init_file_input_arguments(self) -> bool:
                 base_directory=self.config.FRELATAGE_INPUT_FILE_TMP_DIR,
                 thread="0",
                 position=str(i), 
-                filename=self.arguments[i].value
+                filename=os.path.basename(self.arguments[i].value)
             )
             file_input_arguments_count+= 1
     return True
