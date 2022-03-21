@@ -28,7 +28,7 @@
   <img src="https://github.com/Rog3rSm1th/Frelatage/blob/main/doc/frelatage_demo.gif?raw=true" alt="Frelatage demonstration"/>
 </p>
 
-Frelatage is a coverage-based Python fuzzing library which can be used to fuzz python code. The development of Frelatage was inspired by various other fuzzers, including [AFL](https://github.com/google/AFL)/[AFL++](https://github.com/AFLplusplus/AFLplusplus), [Atheris](https://github.com/google/atheris) and [PyFuzzer](https://github.com/eerimoq/pyfuzzer).The main purpose of the project is to take advantage of the best features of these fuzzers and gather them together into a new tool in order to efficiently fuzz python applications.
+Frelatage is a coverage-based Python fuzzing library which can be used to fuzz python code. The development of Frelatage was inspired by various other fuzzers, including [AFL](https://github.com/google/AFL)/[AFL++](https://github.com/AFLplusplus/AFLplusplus), [Atheris](https://github.com/google/atheris) and [PythonFuzz](https://github.com/fuzzitdev/pythonfuzz). The main purpose of the project is to take advantage of the best features of these fuzzers and gather them together into a new tool in order to efficiently fuzz python applications.
 
 **DISCLAIMER** : This project is at the alpha stage and can still cause many unexpected behaviors. Frelatage should not be used in a production environment at this time.
 
@@ -172,6 +172,10 @@ f.fuzz()
 #### Fuzz with a dictionary
 
 You can copy one or more dictionaries located [here](https://github.com/Rog3rSm1th/Frelatage/tree/main/dictionaries) in the directory dedicated to dictionaries (`./dict` by default).
+
+#### Differential fuzzing
+
+[Differental fuzzing](https://en.wikipedia.org/wiki/Differential_testing) is a popular software testing technique that attempts to detect bugs by providing the same input to multiple libraries/programs and observing differences in their behaviors. You will find an example [here](https://github.com/Rog3rSm1th/Frelatage/blob/main/examples/json_fuzzer/json_differential_fuzzer.py) of a use of differential fuzzing with Frelatage with the `json` and `ujson` libraries. 
 
 #### Examples
 
