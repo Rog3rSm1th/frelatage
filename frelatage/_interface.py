@@ -1,5 +1,5 @@
+from frelatage import __version__, Config
 from frelatage.colors import Colors
-from frelatage import __version__
 from datetime import datetime
 from string import Formatter
 from curses import wrapper
@@ -82,7 +82,10 @@ def refresh_interface(self):
     
     # Crashes
     total_crashes = "{crashes} ({uniques} uniques)".format(crashes=str(self.total_crashes), uniques=str(self.unique_crashes)).ljust(22)
-    total_timeouts = "{total_timeouts}".format(total_timeouts=self.total_timeouts).ljust(22)
+    total_timeouts = "{total_timeouts} [{timeout_delay} sec]".format(
+        total_timeouts=self.total_timeouts,
+        timeout_delay=Config.FRELATAGE_TIMEOUT_DELAY
+    ).ljust(22)
 
     # Progress
     cycles_count = str(self.cycles_count).ljust(12)

@@ -9,7 +9,6 @@ export FRELATAGE_MAX_THREADS=8 &&
 export FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS=5000 &&
 export FRELATAGE_INPUT_DIR="./in" &&
 export FRELATAGE_DICTIONARY_DIR="./dict" &&
-export PYTHONWARNINGS="ignore"
 
 if [ $# -eq 0 ]
   then
