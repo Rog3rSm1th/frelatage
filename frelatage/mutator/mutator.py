@@ -338,7 +338,7 @@ class MutatorNone(Mutator):
 
     @staticmethod
     def mutate(input: None) -> Any:
-        types = ["a", 0, [], {}, 1.0]
+        types = ["a", 0, [], {}, 1.0, ()]
         mutation = random.choice(types)
         return mutation
 

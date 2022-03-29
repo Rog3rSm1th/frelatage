@@ -7,6 +7,7 @@ from frelatage.queue.queue import Queue
 from typing import Type, Iterable, Callable, List
 from importlib.metadata import version
 from datetime import datetime
+from pathlib import Path
 import warnings
 import time
 import sys
@@ -88,10 +89,10 @@ class Fuzzer(object):
             os.path.dirname(os.path.realpath(sys.argv[0])),
             Config.FRELATAGE_INPUT_DIR
         )
-        self.output_directory = os.path.join(
+        self.output_directory = Path(os.path.join(
             os.path.dirname(os.path.realpath(sys.argv[0])),
             output_directory
-        )
+        )).as_posix()
         
         # Silent output
         self.silent = silent
