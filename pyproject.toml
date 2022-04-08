@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "frelatage"
-version = "0.0.6"
+version = "0.0.7"
 description = "Frelatage is a coverage-based Python fuzzing library which can be used to fuzz python code."
 authors = ["Rog3rSm1th <r0g3r5@protonmail.com>"]
 license = "MIT"

@@ -13,6 +13,11 @@ class Config:
         raise FrelatageConfigError("FRELATAGE_DICTIONARY_ENABLE must '1' or '0'")
     FRELATAGE_DICTIONARY_ENABLE = True if os.getenv('FRELATAGE_DICTIONARY_ENABLE', "1") == "1" else False
 
+    # Enable the debug mode
+    if os.getenv('FRELATAGE_DEBUG_MODE', "1") not in ("1", "0"):
+        raise FrelatageConfigError("FRELATAGE_DEBUG_MODE must '1' or '0'")
+    FRELATAGE_DEBUG_MODE = True if os.getenv('FRELATAGE_DEBUG_MODE', "1") == "1" else False
+
     # Delay in seconds after which a function will return a timeoutError
     # Must be in range 1~20
     if not 1 <= int(os.getenv('FRELATAGE_TIMEOUT_DELAY', 2)) <= 20: 

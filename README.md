@@ -222,6 +222,7 @@ There are two ways to set up Frelatage:
 | **FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS**      | Number of cycles without new paths found after which we go to the next stage | ```10``` - ```50000``` | ```5000``` | 
 | **FRELATAGE_INPUT_DIR**           | Directory containing the initial input files. It needs to be a relative path (to the path of the fuzzing file) |relative path to a folder, e.g. ```./in```  | ```./in``` |
 | **FRELATAGE_DICTIONARY_DIR**      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) | relative path to a folder, e.g. ```./dict```  | ```./dict``` |  
+| **FRELATAGE_DEBUG_MODE**      | Enable the debug mode (show the error when Frelatage crash) | ```1``` to enable, ```0``` otherwise | ```1``` | 
 
 A configuration example :
 

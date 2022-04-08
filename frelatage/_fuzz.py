@@ -42,6 +42,8 @@ def fuzz(self) -> None:
         self.exit_message(aborted_by_user=True)
         exit(0)
     # Error in Frelatage
-    except Exception:
+    except Exception as e:
         self.exit_message(aborted_by_user=False)
+        if Config.FRELATAGE_DEBUG_MODE:
+            print(e)
         exit(1)
