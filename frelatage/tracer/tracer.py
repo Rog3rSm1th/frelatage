@@ -52,7 +52,7 @@ class Tracer:
 
         # Initialize the tracer
         self.tracer = trace.Trace(
-            ignoredirs=[sys.prefix, sys.exec_prefix],
+            ignoredirs=[],
             trace=0,
             count=1
         )
