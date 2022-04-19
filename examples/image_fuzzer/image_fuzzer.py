@@ -4,11 +4,13 @@ from PIL import Image
 def fuzz_gif(input_file):
     Image.open(input_file)
 
-# Corpus
-# We use 1px*1px GIF, JPEG and PNG files
-gif_file = frelatage.Input(file=True, value="image.gif")
-jpeg_file = frelatage.Input(file=True, value="image.png")
-png_file = frelatage.Input(file=True, value="image.jpeg")
+# Load corpus
+gif_file = frelatage.load_corpus("./gif")
+jpeg_file = frelatage.load_corpus("./jpg")
+png_file = frelatage.load_corpus("./png")
+image_file = gif_file + jpeg_file + png_file
 
-f = frelatage.Fuzzer(fuzz_gif, [[gif_file, jpeg_file, png_file]])
+# Initialize the fuzzer
+f = frelatage.Fuzzer(fuzz_gif, [image_file])
+# Fuzz
 f.fuzz()
