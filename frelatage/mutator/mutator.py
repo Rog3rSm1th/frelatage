@@ -1,9 +1,9 @@
+import copy
+import random
+from typing import Any, Type
+from frelatage.config.config import Config
 from frelatage.mutator.dictionary import load_dictionary
 from frelatage.mutator.magicValues import MagicValues
-from frelatage.config.config import Config
-from typing import Any, Union, Type
-import random
-import copy
 
 # Array containing all the mutators
 mutators = []

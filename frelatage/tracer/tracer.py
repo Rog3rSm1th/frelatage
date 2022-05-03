@@ -1,12 +1,10 @@
-from frelatage.tracer.trace_result import Result
-from frelatage.config.config import Config
-from typing import Callable, Iterable
+import contextlib
+import os
 import timeout_decorator
-import os, contextlib
-import functools
 import trace
-import time
-import sys
+from typing import Callable, Iterable
+from frelatage.config.config import Config
+from frelatage.tracer.trace_result import Result
 
 def supress_stdout(func: Callable):
     """

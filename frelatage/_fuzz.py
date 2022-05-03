@@ -1,6 +1,5 @@
-from frelatage.config.config import Config
 from threading import Thread
-import os
+from frelatage.config.config import Config
 
 def fuzz(self) -> None:
     """

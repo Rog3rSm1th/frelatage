@@ -1,5 +1,5 @@
-import sys
 import os 
+import sys
 
 class FrelatageConfigError(Exception):
     pass

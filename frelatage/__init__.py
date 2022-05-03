@@ -1,17 +1,15 @@
+import os
+import sys
+import warnings
+from datetime import datetime
+from importlib.metadata import version
+from pathlib import Path
+from typing import Callable, List
 from frelatage.corpus.corpus import load_corpus
 from frelatage.config.config import Config
-from frelatage.tracer.tracer import Tracer
 from frelatage.mutator.mutator import *
-from frelatage.input.input import Input 
 from frelatage.queue.queue import Queue
-from typing import Type, Iterable, Callable, List
-from importlib.metadata import version
-from datetime import datetime
-from pathlib import Path
-import warnings
-import time
-import sys
-import os
+from frelatage.tracer.tracer import Tracer
 
 # Automatically retrieves the current version number
 __version__ = version('frelatage')

@@ -1,7 +1,5 @@
-from distutils.dir_util import copy_tree
-import shutil
-import glob
 import os
+import shutil
 
 def init_input_folder(self) -> bool:
     """

@@ -1,8 +1,8 @@
-from frelatage.config.config import Config
-from frelatage.input.input import Input 
+import os
 import glob
 import sys
-import os
+from frelatage.config.config import Config
+from frelatage.input.input import Input 
 
 def load_corpus(directory: str, file_extensions: list = []) -> list[Input]:
     """

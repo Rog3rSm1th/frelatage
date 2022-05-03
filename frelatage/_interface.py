@@ -1,11 +1,10 @@
-from frelatage import __version__, Config
-from frelatage.colors import Colors
-from datetime import datetime
-from string import Formatter
-from curses import wrapper
 import curses
 import time
-import os
+from curses import wrapper
+from datetime import datetime
+from string import Formatter
+from frelatage import __version__, Config
+from frelatage.colors import Colors
 
 # Refresh the interface 10 times/second
 REFRESH_INTERVAL = 0.1

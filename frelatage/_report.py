@@ -1,6 +1,6 @@
-from frelatage.report.report import Report
-import pickle
 import os
+import pickle
+from frelatage.report.report import Report
 
 def get_report_name(self, report: Report) -> str:
     """

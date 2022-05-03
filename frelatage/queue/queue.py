@@ -1,6 +1,6 @@
-from frelatage.input.input import Input 
-import numpy as np
 import copy
+import numpy as np
+from frelatage.input.input import Input 
 class Queue:
     """
     The queue contains the list of possible combinations of the corpus entries.

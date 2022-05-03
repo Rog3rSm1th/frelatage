@@ -1,10 +1,10 @@
-from frelatage.mutator.mutator import Mutator
-from typing import Type, Any
-from pathlib import Path
-import random
 import copy
-import sys
 import os
+import sys
+import random
+from pathlib import Path
+from typing import Type, Any
+from frelatage.mutator.mutator import Mutator
 
 def get_argument_size(argument, file: bool) -> int:
     """
