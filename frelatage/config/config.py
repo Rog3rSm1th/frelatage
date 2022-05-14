@@ -1,3 +1,4 @@
+import math
 import os 
 import sys
 
@@ -20,7 +21,7 @@ class Config:
 
     # Delay in seconds after which a function will return a timeoutError
     # Must be in range 1~20
-    if not 1 <= int(os.getenv('FRELATAGE_TIMEOUT_DELAY', 2)) <= 20: 
+    if not 1 <= int(os.getenv('FRELATAGE_TIMEOUT_DELAY', 2)) <= math.inf: 
         raise FrelatageConfigError("FRELATAGE_TIMEOUT_DELAY must be in range 1~20")
     FRELATAGE_TIMEOUT_DELAY = int(os.getenv('FRELATAGE_TIMEOUT_DELAY', 2))
 
@@ -30,19 +31,19 @@ class Config:
 
     # Maximum size of an input variable in bytes
     # Must be in range 4~1000000
-    if not 4 <= int(os.getenv('FRELATAGE_INPUT_MAX_LEN', 4096)) <= 1000000:
+    if not 4 <= int(os.getenv('FRELATAGE_INPUT_MAX_LEN', 4096)) <= math.inf:
         raise FrelatageConfigError("FRELATAGE_INPUT_MAX_LEN must be in range 4~1000000")
     FRELATAGE_INPUT_MAX_LEN = int(os.getenv('FRELATAGE_INPUT_MAX_LEN', 4096))
 
     # Maximum number of simultaneous threads
     # Must be in range 8~50
-    if not 8 <= int(os.getenv('FRELATAGE_MAX_THREADS', 20)) <= 50:
+    if not 8 <= int(os.getenv('FRELATAGE_MAX_THREADS', 20)) <= math.inf:
         raise FrelatageConfigError("FRELATAGE_MAX_THREADS must be in range 8~50")
     FRELATAGE_MAX_THREADS = int(os.getenv('FRELATAGE_MAX_THREADS', 20))
 
     # Maximum number of successives cycle without a new path
     # Must be in range 10~50000
-    if not 10 <= int(os.getenv('FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS', 5000)) <= 50000:
+    if not 10 <= int(os.getenv('FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS', 5000)) <= math.inf:
         raise FrelatageConfigError("FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS must be in range 10~10000")
     FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS = int(os.getenv('FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS', 5000))
 
