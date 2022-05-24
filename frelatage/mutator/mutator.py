@@ -1,9 +1,9 @@
+import copy
+import random
+from typing import Any, Type
+from frelatage.config.config import Config
 from frelatage.mutator.dictionary import load_dictionary
 from frelatage.mutator.magicValues import MagicValues
-from frelatage.config.config import Config
-from typing import Any, Union, Type
-import random
-import copy
 
 # Array containing all the mutators
 mutators = []
@@ -12,11 +12,12 @@ mutators = []
 dictionary_folder = Config().FRELATAGE_DICTIONARY_DIR
 dictionary = load_dictionary(dictionary_folder)
 
+
 class Mutator(object):
     # "str", "int", "list", "dict", "NoneType", "float"
     allowed_types = set([])
     # "none", "increase", "decrease"
-    size_effect = [] 
+    size_effect = []
     # Is the mutator used by the fuzzer
     # True by default
     enabled = True
@@ -28,7 +29,7 @@ class Mutator(object):
         """
         if max == 1 or max == 0:
             return 0
-        return random.randint(0, max-1)
+        return random.randint(0, max - 1)
 
     @staticmethod
     def random_magic_value(magic_values_set: list) -> Any:
@@ -42,7 +43,10 @@ class Mutator(object):
         Function to mutate a given resource into another one.
         @return: new resource, or None if this mutator is not appropriate.
         """
-        raise NotImplementedError('mutate not implemented in {}'.format(self.__class__.__name__))
+        raise NotImplementedError(
+            "mutate not implemented in {}".format(self.__class__.__name__)
+        )
+
 
 def register_mutator(mutator: Type[Mutator]) -> bool:
     """
@@ -50,6 +54,7 @@ def register_mutator(mutator: Type[Mutator]) -> bool:
     """
     mutators.append(mutator)
     return True
+
 
 # String mutators
 @register_mutator
@@ -63,8 +68,9 @@ class MutatorStringBitFlip(Mutator):
             return input
         position = Mutator.random_int(len(input))
         replacement_character = chr(ord(input[position]) ^ (1 << Mutator.random_int(8)))
-        mutation = input[0: position] + replacement_character + input[position + 1:]
+        mutation = input[0:position] + replacement_character + input[position + 1 :]
         return mutation
+
 
 @register_mutator
 class MutatorStringAddSubByte(Mutator):
@@ -77,9 +83,10 @@ class MutatorStringAddSubByte(Mutator):
             return input
         position = Mutator.random_int(len(input))
         delta = Mutator.random_int(256)
-        replacement_character =  chr((ord(input[position]) + delta) % 256)
-        mutation = input[0: position] + replacement_character + input[position + 1:]
+        replacement_character = chr((ord(input[position]) + delta) % 256)
+        mutation = input[0:position] + replacement_character + input[position + 1 :]
         return mutation
+
 
 @register_mutator
 class MutatorStringInsertCharacter(Mutator):
@@ -94,6 +101,7 @@ class MutatorStringInsertCharacter(Mutator):
         character = chr(Mutator.random_int(256))
         mutation = input[0:position] + character + input[position:]
         return mutation
+
 
 @register_mutator
 class MutatorStringInsertDict(Mutator):
@@ -111,6 +119,7 @@ class MutatorStringInsertDict(Mutator):
         mutation = input[0:position] + character + input[position:]
         return mutation
 
+
 @register_mutator
 class MutatorStringDeleteCharacter(Mutator):
     allowed_types = set(["str"])
@@ -121,8 +130,9 @@ class MutatorStringDeleteCharacter(Mutator):
         if len(input) == 0:
             return input
         position = Mutator.random_int(len(input))
-        mutation = input[:position-1] + input[position]
+        mutation = input[: position - 1] + input[position]
         return mutation
+
 
 @register_mutator
 class MutatorStringSwapTwoChars(Mutator):
@@ -140,9 +150,13 @@ class MutatorStringSwapTwoChars(Mutator):
             second_character_position = Mutator.random_int(len(input))
 
         mutation = list(input)
-        mutation[first_character_position], mutation[second_character_position] = mutation[second_character_position], mutation[first_character_position]
-        mutation = ''.join(mutation)
+        mutation[first_character_position], mutation[second_character_position] = (
+            mutation[second_character_position],
+            mutation[first_character_position],
+        )
+        mutation = "".join(mutation)
         return mutation
+
 
 @register_mutator
 class MutatorStringDuplicateSubString(Mutator):
@@ -158,8 +172,9 @@ class MutatorStringDuplicateSubString(Mutator):
         substring = input[first_character_position:second_character_position]
 
         substring_position = Mutator.random_int(len(input))
-        mutation = input[:substring_position ] + substring + input[substring_position:]
+        mutation = input[:substring_position] + substring + input[substring_position:]
         return mutation
+
 
 @register_mutator
 class MutatorStringRepeatSubString(Mutator):
@@ -173,8 +188,13 @@ class MutatorStringRepeatSubString(Mutator):
         first_character_position = Mutator.random_int(len(input))
         second_character_position = random.randint(first_character_position, len(input))
         substring = input[first_character_position:second_character_position]
-        mutation = input[:second_character_position] + substring + input[second_character_position:]
+        mutation = (
+            input[:second_character_position]
+            + substring
+            + input[second_character_position:]
+        )
         return mutation
+
 
 @register_mutator
 class MutatorStringDeleteSubString(Mutator):
@@ -191,6 +211,7 @@ class MutatorStringDeleteSubString(Mutator):
         mutation = input[:first_character_position] + input[second_character_position:]
         return mutation
 
+
 @register_mutator
 class MutatorIntMagicValue(Mutator):
     allowed_types = set(["int"])
@@ -200,6 +221,7 @@ class MutatorIntMagicValue(Mutator):
     def mutate(input: int) -> int:
         mutation = random.choice(MagicValues.UINT)
         return mutation
+
 
 @register_mutator
 class MutatorIntAddSub(Mutator):
@@ -212,6 +234,7 @@ class MutatorIntAddSub(Mutator):
         mutation += random.randint(-1000, 1000)
         return mutation
 
+
 # List mutators
 @register_mutator
 class MutatorListDuplicateElement(Mutator):
@@ -222,12 +245,13 @@ class MutatorListDuplicateElement(Mutator):
     def mutate(input: list) -> list:
         if len(input) == 0:
             return input
-        
+
         mutation = input.copy()
         position = Mutator.random_int(len(mutation))
         element = random.choice(mutation)
         mutation.insert(position, element)
         return mutation
+
 
 @register_mutator
 class MutatorListInsertNone(Mutator):
@@ -240,6 +264,7 @@ class MutatorListInsertNone(Mutator):
         mutation.append(None)
         return mutation
 
+
 @register_mutator
 class MutatorListRemoveElement(Mutator):
     allowed_types = set(["list"])
@@ -249,11 +274,12 @@ class MutatorListRemoveElement(Mutator):
     def mutate(input: list) -> list:
         if len(input) == 0:
             return input
-        
+
         mutation = input.copy()
         element_position = Mutator.random_int(len(mutation))
         mutation.pop(element_position)
         return mutation
+
 
 @register_mutator
 class MutatorListShuffle(Mutator):
@@ -264,10 +290,11 @@ class MutatorListShuffle(Mutator):
     def mutate(input: list) -> list:
         if len(input) == 0:
             return input
-        
+
         mutation = input.copy()
         random.shuffle(mutation)
         return mutation
+
 
 # Tuple mutators
 @register_mutator
@@ -279,13 +306,14 @@ class MutatorTupleDuplicateElement(Mutator):
     def mutate(input: tuple) -> tuple:
         if len(input) == 0:
             return input
-        
+
         mutation = list(input)
         position = Mutator.random_int(len(mutation))
         element = random.choice(mutation)
         mutation.insert(position, element)
         mutation = tuple(mutation)
         return mutation
+
 
 @register_mutator
 class MutatorTupleInsertNone(Mutator):
@@ -299,6 +327,7 @@ class MutatorTupleInsertNone(Mutator):
         mutation = tuple(mutation)
         return mutation
 
+
 @register_mutator
 class MutatorTupleRemoveElement(Mutator):
     allowed_types = set(["tuple"])
@@ -308,12 +337,13 @@ class MutatorTupleRemoveElement(Mutator):
     def mutate(input: tuple) -> tuple:
         if len(input) == 0:
             return input
-        
+
         mutation = list(input)
         element_position = Mutator.random_int(len(mutation))
         mutation.pop(element_position)
         mutation = tuple(mutation)
         return mutation
+
 
 @register_mutator
 class MutatorTupleShuffle(Mutator):
@@ -324,11 +354,12 @@ class MutatorTupleShuffle(Mutator):
     def mutate(input: tuple) -> tuple:
         if len(input) == 0:
             return input
-        
+
         mutation = list(input)
         random.shuffle(mutation)
         mutation = tuple(mutation)
         return mutation
+
 
 # None mutators
 @register_mutator
@@ -342,6 +373,7 @@ class MutatorNone(Mutator):
         mutation = random.choice(types)
         return mutation
 
+
 # File mutators
 @register_mutator
 class MutatorFileFlipBit(Mutator):
@@ -350,7 +382,7 @@ class MutatorFileFlipBit(Mutator):
 
     @staticmethod
     def mutate(input: str) -> str:
-        with open(input, 'rb') as f:
+        with open(input, "rb") as f:
             file_content = f.read()
             if len(file_content) == 0:
                 return input
@@ -364,6 +396,7 @@ class MutatorFileFlipBit(Mutator):
             f.write(mutation)
         return input
 
+
 @register_mutator
 class MutatorFileInsertByte(Mutator):
     allowed_types = set(["file"])
@@ -371,7 +404,7 @@ class MutatorFileInsertByte(Mutator):
 
     @staticmethod
     def mutate(input: str) -> str:
-        with open(input, 'rb') as f:
+        with open(input, "rb") as f:
             file_content = f.read()
 
             mutation = bytearray(file_content)
@@ -379,11 +412,16 @@ class MutatorFileInsertByte(Mutator):
                 mutation = chr(Mutator.random_int(256)).encode()
             else:
                 position = Mutator.random_int(len(file_content))
-                mutation = mutation[0:position] + chr(Mutator.random_int(256)).encode() + mutation[position:]
+                mutation = (
+                    mutation[0:position]
+                    + chr(Mutator.random_int(256)).encode()
+                    + mutation[position:]
+                )
             mutation = bytes(mutation)
         with open(input, "wb") as f:
             f.write(mutation)
         return input
+
 
 @register_mutator
 class MutatorFileDeleteByte(Mutator):
@@ -392,7 +430,7 @@ class MutatorFileDeleteByte(Mutator):
 
     @staticmethod
     def mutate(input: str) -> str:
-        with open(input, 'rb') as f:
+        with open(input, "rb") as f:
             file_content = f.read()
             if len(file_content) <= 2:
                 return input
@@ -400,11 +438,12 @@ class MutatorFileDeleteByte(Mutator):
                 position = Mutator.random_int(len(file_content))
 
                 mutation = bytearray(file_content)
-                mutation = mutation[0:position] + mutation[position + 1:]
+                mutation = mutation[0:position] + mutation[position + 1 :]
                 mutation = bytes(mutation)
         with open(input, "wb") as f:
             f.write(mutation)
         return input
+
 
 @register_mutator
 class MutatorFileSwapTwoBytes(Mutator):
@@ -413,7 +452,7 @@ class MutatorFileSwapTwoBytes(Mutator):
 
     @staticmethod
     def mutate(input: str) -> str:
-        with open(input, 'rb') as f:
+        with open(input, "rb") as f:
             file_content = f.read()
             if len(file_content) <= 2:
                 return input
@@ -425,11 +464,15 @@ class MutatorFileSwapTwoBytes(Mutator):
                     second_byte_position = Mutator.random_int(len(file_content))
 
                 mutation = bytearray(file_content)
-                mutation[first_byte_position], mutation[second_byte_position] = mutation[second_byte_position], mutation[first_byte_position]
+                mutation[first_byte_position], mutation[second_byte_position] = (
+                    mutation[second_byte_position],
+                    mutation[first_byte_position],
+                )
                 mutation = bytes(mutation)
         with open(input, "wb") as f:
             f.write(mutation)
         return input
+
 
 @register_mutator
 class MutatorFileDuplicateSubBytes(Mutator):
@@ -438,18 +481,24 @@ class MutatorFileDuplicateSubBytes(Mutator):
 
     @staticmethod
     def mutate(input: str) -> str:
-        with open(input, 'rb') as f:
+        with open(input, "rb") as f:
             file_content = f.read()
             if len(file_content) == 0:
                 return input
             else:
                 first_byte_position = Mutator.random_int(len(file_content))
-                second_byte_position = random.randint(first_byte_position, len(file_content))
+                second_byte_position = random.randint(
+                    first_byte_position, len(file_content)
+                )
                 mutation = bytearray(file_content)
 
                 subbytes = mutation[first_byte_position:second_byte_position]
                 subbytes_position = Mutator.random_int(len(file_content))
-                mutation = mutation[:subbytes_position] + subbytes + mutation[subbytes_position:]
+                mutation = (
+                    mutation[:subbytes_position]
+                    + subbytes
+                    + mutation[subbytes_position:]
+                )
                 mutation = bytes(mutation)
         with open(input, "wb") as f:
             f.write(mutation)
@@ -463,21 +512,28 @@ class MutatorFileRepeatSubBytes(Mutator):
 
     @staticmethod
     def mutate(input: str) -> str:
-        with open(input, 'rb') as f:
+        with open(input, "rb") as f:
             file_content = f.read()
             if len(file_content) == 0:
                 return input
             else:
                 first_byte_position = Mutator.random_int(len(file_content))
-                second_byte_position = random.randint(first_byte_position, len(file_content))
+                second_byte_position = random.randint(
+                    first_byte_position, len(file_content)
+                )
                 mutation = bytearray(file_content)
 
                 subbytes = mutation[first_byte_position:second_byte_position]
-                mutation = mutation[:second_byte_position] + subbytes + mutation[second_byte_position:]
+                mutation = (
+                    mutation[:second_byte_position]
+                    + subbytes
+                    + mutation[second_byte_position:]
+                )
                 mutation = bytes(mutation)
         with open(input, "wb") as f:
             f.write(mutation)
         return input
+
 
 @register_mutator
 class MutatorFileDeleteSubBytes(Mutator):
@@ -486,19 +542,24 @@ class MutatorFileDeleteSubBytes(Mutator):
 
     @staticmethod
     def mutate(input: str) -> str:
-        with open(input, 'rb') as f:
+        with open(input, "rb") as f:
             file_content = f.read()
             if len(file_content) <= 2:
                 return input
             else:
                 first_byte_position = Mutator.random_int(len(file_content))
-                second_byte_position = random.randint(first_byte_position, len(file_content))
+                second_byte_position = random.randint(
+                    first_byte_position, len(file_content)
+                )
                 mutation = bytearray(file_content)
-                mutation = mutation[:first_byte_position] + mutation[second_byte_position:]
+                mutation = (
+                    mutation[:first_byte_position] + mutation[second_byte_position:]
+                )
                 mutation = bytes(mutation)
         with open(input, "wb") as f:
             f.write(mutation)
         return input
+
 
 @register_mutator
 class MutatorFileInsertDict(Mutator):
@@ -509,7 +570,7 @@ class MutatorFileInsertDict(Mutator):
 
     @staticmethod
     def mutate(input: str) -> str:
-        with open(input, 'rb') as f:
+        with open(input, "rb") as f:
             file_content = f.read()
 
             element = random.choice(dictionary)
@@ -525,6 +586,7 @@ class MutatorFileInsertDict(Mutator):
             f.write(mutation)
         return input
 
+
 # Dictionnary mutators
 @register_mutator
 class MutatorDictAddEntryInt(Mutator):
@@ -532,11 +594,12 @@ class MutatorDictAddEntryInt(Mutator):
     size_effect = ["increase"]
 
     @staticmethod
-    def mutate(input: dict) -> dict:  
+    def mutate(input: dict) -> dict:
         mutation = copy.deepcopy(input)
         integer = random.choice(MagicValues.UINT)
         mutation[integer] = None
         return mutation
+
 
 @register_mutator
 class MutatorDictAddEntryString(Mutator):
@@ -544,11 +607,12 @@ class MutatorDictAddEntryString(Mutator):
     size_effect = ["increase"]
 
     @staticmethod
-    def mutate(input: dict) -> dict:        
+    def mutate(input: dict) -> dict:
         mutation = input.copy()
         string = chr(Mutator.random_int(256))
         mutation[string] = None
         return mutation
+
 
 @register_mutator
 class MutatorDictDeleteEntry(Mutator):
@@ -556,12 +620,13 @@ class MutatorDictDeleteEntry(Mutator):
     size_effect = ["decrease"]
 
     @staticmethod
-    def mutate(input: dict) -> dict:   
+    def mutate(input: dict) -> dict:
         if len(input) == 0:
             return input
         mutation = input.copy()
         del mutation[random.choice(list(mutation.keys()))]
         return mutation
+
 
 # Float mutators
 @register_mutator
@@ -572,6 +637,6 @@ class MutatorFloatAddSub(Mutator):
     @staticmethod
     def mutate(input: float) -> float:
         digits = Mutator.random_int(10)
-        delta = random.uniform(-1000, 1000)	
-        mutation = round(input + delta, digits) 
+        delta = random.uniform(-1000, 1000)
+        mutation = round(input + delta, digits)
         return mutation

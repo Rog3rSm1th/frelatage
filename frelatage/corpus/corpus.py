@@ -1,8 +1,9 @@
-from frelatage.config.config import Config
-from frelatage.input.input import Input 
+import os
 import glob
 import sys
-import os
+from frelatage.config.config import Config
+from frelatage.input.input import Input
+
 
 def load_corpus(directory: str, file_extensions: list = []) -> list[Input]:
     """
@@ -14,15 +15,11 @@ def load_corpus(directory: str, file_extensions: list = []) -> list[Input]:
     # ./<input directory>
     # ./in by default
     input_root_directory = os.path.join(
-            os.path.dirname(os.path.realpath(sys.argv[0])),
-            Config.FRELATAGE_INPUT_DIR
+        os.path.dirname(os.path.realpath(sys.argv[0])), Config.FRELATAGE_INPUT_DIR
     )
 
     # ./<input directory>/<subdirectory>
-    input_directory = os.path.join(
-            input_root_directory,
-            directory
-    )
+    input_directory = os.path.join(input_root_directory, directory)
 
     # Search for file inputs in the subdirectory
     if not file_extensions:
@@ -31,10 +28,16 @@ def load_corpus(directory: str, file_extensions: list = []) -> list[Input]:
     else:
         file_inputs = []
         for file_extension in file_extensions:
-            file_inputs += glob.glob(os.path.join(input_directory, "*.{extension}".format(extension=file_extension)))
+            file_inputs += glob.glob(
+                os.path.join(
+                    input_directory, "*.{extension}".format(extension=file_extension)
+                )
+            )
 
     # Relative path
-    file_inputs = [os.path.relpath(file_input, input_root_directory) for file_input in file_inputs]
+    file_inputs = [
+        os.path.relpath(file_input, input_root_directory) for file_input in file_inputs
+    ]
 
     # Create an Input object for every file in the subdirectory
     for file_input in file_inputs:

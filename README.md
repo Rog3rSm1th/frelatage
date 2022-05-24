@@ -215,11 +215,11 @@ There are two ways to set up Frelatage:
 | ENV Variable                   | Description | Possible Values | Default Value |
 | -------------------------------| ----------- |--------|-------|
 | **FRELATAGE_DICTIONARY_ENABLE**   | Enable the use of mutations based on dictionary elements| ```1``` to enable, ```0``` otherwise | ```1``` |
-| **FRELATAGE_TIMEOUT_DELAY**        | Delay in seconds after which a function will return a TimeoutError | ```1``` - ```20``` | ```2``` |
+| **FRELATAGE_TIMEOUT_DELAY**        | Delay in seconds after which a function will return a TimeoutError | ```1``` - ```infinity``` | ```2``` |
 | **FRELATAGE_INPUT_FILE_TMP_DIR**   | Temporary folder where input files are stored | absolute path to a folder, e.g. ```/tmp/custom_dir```| ```/tmp/frelatage```|
-| **FRELATAGE_INPUT_MAX_LEN**        | Maximum size of an input variable in bytes | ```4``` - ```1000000``` |  ```4094``` |
-| **FRELATAGE_MAX_THREADS**          | Maximum number of simultaneous threads | ```8``` - ```50``` | ```8``` |
-| **FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS**      | Number of cycles without new paths found after which we go to the next stage | ```10``` - ```50000``` | ```5000``` | 
+| **FRELATAGE_INPUT_MAX_LEN**        | Maximum size of an input variable in bytes | ```4``` - ```infinity``` |  ```4094``` |
+| **FRELATAGE_MAX_THREADS**          | Maximum number of simultaneous threads | ```8``` - ```infinity``` | ```8``` |
+| **FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS**      | Number of cycles without new paths found after which we go to the next stage | ```10``` - ```infinity``` | ```5000``` | 
 | **FRELATAGE_INPUT_DIR**           | Directory containing the initial input files. It needs to be a relative path (to the path of the fuzzing file) |relative path to a folder, e.g. ```./in```  | ```./in``` |
 | **FRELATAGE_DICTIONARY_DIR**      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) | relative path to a folder, e.g. ```./dict```  | ```./dict``` |  
 | **FRELATAGE_DEBUG_MODE**      | Enable the debug mode (show the error when Frelatage crash) | ```1``` to enable, ```0``` otherwise | ```1``` | 
