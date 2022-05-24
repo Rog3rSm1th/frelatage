@@ -1,4 +1,5 @@
 import os
+import time
 import sys
 import warnings
 from datetime import datetime
@@ -63,7 +64,7 @@ class Fuzzer(object):
         # Fuzzed method
         self.method = method
 
-        # Remove duplicates in coprus
+        # Remove duplicates in corpus
         corpus = [list(set(argument)) for argument in corpus]
         # Frelatage corpus
         self.corpus = corpus
@@ -114,12 +115,17 @@ class Fuzzer(object):
         self.survival_probability = 0.5
         self.mutation_probability = 0.3
 
-         # Number of Frelatage cycles without finding new paths
+        # Number of Frelatage cycles without finding new paths
         self.cycles_without_new_path = 0
         # Corpus entries that are still in the queue
         self.queue= Queue(self.corpus)
         # Current arguments
         self.arguments = self.queue.current_arguments()
+
+        # Executions per second
+        self.last_seconds_executions = 0
+        self.executions_per_second = 0
+        self.current_second = int(time.time())
 
         # Initialize file input folders in /tmp/frelatage (default value)
         # Can be modified using the FRELATAGE_INPUT_FILE_TMP_DIR env variable

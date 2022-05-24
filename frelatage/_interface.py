@@ -63,6 +63,14 @@ def refresh_interface(self):
         function_name=self.method.__name__
     ).center(105)
 
+    # Execs per second
+    current_second = int(time.time())
+    if current_second != self.current_second:
+        self.executions_per_second = self.last_seconds_executions
+        self.last_seconds_executions = 0
+        self.current_second = int(time.time())
+    execs_per_second = str(self.executions_per_second).rjust(6)
+
     # Process timing
     run_time = format_time_elapsed(self.fuzz_start_time).ljust(32)
     last_new_path_time = format_time_elapsed(self.last_new_path_time).ljust(32)
@@ -99,7 +107,7 @@ def refresh_interface(self):
     # Interface
     self.screen.addstr(0, 0, """
     {title}
-                                        
+
     +---- Process timing ------------------------------------+--- Finding in depth -------------------------+
     | Run time            :: {run_time}| Favored paths       :: {favored_paths}|
     | Last new path       :: {last_new_path_time}| Total paths         :: {total_paths_count}|
@@ -109,8 +117,10 @@ def refresh_interface(self):
     | Uniques crashes     :: {uniques_crashes_count}| Cycles done         :: {cycles_count}| Stage       :: {current_stage}|
     | Unique timeouts     :: {uniques_timeouts_count}| Total executions    :: {total_executions}| Stage execs :: {stage_executions}|
     +---------------------------------+------------------------------------+--------------------------------+
+    [ {execs_per_second} exec/s ]                                    
     """.format(
             title=title,
+            execs_per_second=execs_per_second,
             run_time=run_time,
             last_new_path_time=last_new_path_time,
             last_unique_crash_time=last_unique_crash_time,
