@@ -9,34 +9,39 @@ from frelatage.colors import Colors
 # Refresh the interface 10 times/second
 REFRESH_INTERVAL = 0.1
 
-def format_delta(time_delta:datetime, format: str) -> str:
+
+def format_delta(time_delta: datetime, format: str) -> str:
     """
     Format a time delta.
     """
     formatter = Formatter()
     digits = {}
-    constants = {'D': 86400, 'H': 3600, 'M': 60, 'S': 1}
+    constants = {"D": 86400, "H": 3600, "M": 60, "S": 1}
     k = map(lambda x: x[1], list(formatter.parse(format)))
     remaining = int(time_delta.total_seconds())
 
-    for i in ('D', 'H', 'M', 'S'):
+    for i in ("D", "H", "M", "S"):
         if i in k and i in constants.keys():
             digits[i], remaining = divmod(remaining, constants[i])
 
     return formatter.format(format, **digits)
 
+
 def format_time_elapsed(datetime: datetime) -> str:
     """
-    Format the time elapsed since a datetime in the format : 
+    Format the time elapsed since a datetime in the format :
     {D} days, {H} hrs, {M} min, {S} sec
     """
     if datetime is not None:
         format_time_delta = datetime.now() - datetime
-        format_time = format_delta(format_time_delta, "{D} days, {H} hrs, {M} min, {S} sec")
+        format_time = format_delta(
+            format_time_delta, "{D} days, {H} hrs, {M} min, {S} sec"
+        )
     # If the event has not yet occurred
     else:
-        format_time = "none seen yet" 
+        format_time = "none seen yet"
     return format_time
+
 
 def init_interface(self, stdscr) -> bool:
     """
@@ -46,12 +51,13 @@ def init_interface(self, stdscr) -> bool:
     curses.curs_set(0)
     # Colors
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
-    stdscr.bkgd(' ', curses.color_pair(1) | curses.A_BOLD)
+    stdscr.bkgd(" ", curses.color_pair(1) | curses.A_BOLD)
 
     self.screen = stdscr
     self.screen.clear()
     self.screen.refresh()
     return True
+
 
 def refresh_interface(self):
     """
@@ -59,8 +65,7 @@ def refresh_interface(self):
     """
     # Title
     title = "Frelatage {version} ({function_name})".format(
-        version=__version__,
-        function_name=self.method.__name__
+        version=__version__, function_name=self.method.__name__
     ).center(105)
 
     # Execs per second
@@ -75,23 +80,32 @@ def refresh_interface(self):
     run_time = format_time_elapsed(self.fuzz_start_time).ljust(32)
     last_new_path_time = format_time_elapsed(self.last_new_path_time).ljust(32)
     last_unique_crash_time = format_time_elapsed(self.last_unique_crash_time).ljust(32)
-    last_unique_timeout_time = format_time_elapsed(self.last_unique_timeout_time).ljust(32)
-    
+    last_unique_timeout_time = format_time_elapsed(self.last_unique_timeout_time).ljust(
+        32
+    )
+
     # Overall results
     uniques_crashes_count = str(self.unique_crashes).ljust(9)
     uniques_timeouts_count = str(self.unique_timeout).ljust(9)
 
-    # Finding in depth 
+    # Finding in depth
     total_paths_count = str(len(self.reached_instructions)).ljust(22)
     favored_paths_count = len(self.favored_pairs)
-    favored_paths_rate = round(int(favored_paths_count)/int(total_paths_count) * 100, 2) if int(total_paths_count) else 0.00
-    favored_paths = "{favored_paths} ({rate}%)".format(favored_paths=favored_paths_count, rate=favored_paths_rate).ljust(22)
-    
+    favored_paths_rate = (
+        round(int(favored_paths_count) / int(total_paths_count) * 100, 2)
+        if int(total_paths_count)
+        else 0.00
+    )
+    favored_paths = "{favored_paths} ({rate}%)".format(
+        favored_paths=favored_paths_count, rate=favored_paths_rate
+    ).ljust(22)
+
     # Crashes
-    total_crashes = "{crashes} ({uniques} uniques)".format(crashes=str(self.total_crashes), uniques=str(self.unique_crashes)).ljust(22)
+    total_crashes = "{crashes} ({uniques} uniques)".format(
+        crashes=str(self.total_crashes), uniques=str(self.unique_crashes)
+    ).ljust(22)
     total_timeouts = "{total_timeouts} [{timeout_delay} sec]".format(
-        total_timeouts=self.total_timeouts,
-        timeout_delay=Config.FRELATAGE_TIMEOUT_DELAY
+        total_timeouts=self.total_timeouts, timeout_delay=Config.FRELATAGE_TIMEOUT_DELAY
     ).ljust(22)
 
     # Progress
@@ -101,11 +115,16 @@ def refresh_interface(self):
     # Stage progress
     current_argument = self.queue.position + 1
     total_arguments_count = len(self.queue.arguments)
-    current_stage = "{current_argument}/{total_arguments_count}".format(current_argument=current_argument, total_arguments_count=total_arguments_count).ljust(16)
+    current_stage = "{current_argument}/{total_arguments_count}".format(
+        current_argument=current_argument, total_arguments_count=total_arguments_count
+    ).ljust(16)
     stage_executions = str(self.stage_inputs_count).ljust(16)
 
     # Interface
-    self.screen.addstr(0, 0, """
+    self.screen.addstr(
+        0,
+        0,
+        """
     {title}
 
     ┌──── Process timing ────────────────────────────────────┬─────── Finding in depth ─────────────────────┐
@@ -134,25 +153,30 @@ def refresh_interface(self):
             cycles_count=cycles_count,
             total_executions=total_executions,
             current_stage=current_stage,
-            stage_executions=stage_executions
-        )
+            stage_executions=stage_executions,
+        ),
     )
     self.screen.refresh()
 
-def exit_message(self, normal_ending: bool = False, aborted_by_user: bool = False) -> bool:
+
+def exit_message(
+    self, normal_ending: bool = False, aborted_by_user: bool = False
+) -> bool:
     """
     Message displayed when exiting the program
     """
     run_time = format_time_elapsed(self.fuzz_start_time)
     uniques_crashes_count = str(self.unique_crashes)
     uniques_timeouts_count = str(self.unique_timeout)
-    total_crashes = "{crashes} ({uniques} uniques)".format(crashes=str(self.total_crashes), uniques=str(self.unique_crashes))
+    total_crashes = "{crashes} ({uniques} uniques)".format(
+        crashes=str(self.total_crashes), uniques=str(self.unique_crashes)
+    )
     total_timeouts = "{total_timeouts}".format(total_timeouts=self.total_timeouts)
     total_paths_count = str(len(self.reached_instructions))
     cycles_count = str(self.cycles_count)
     total_executions = str(self.inputs_count)
 
-    # End the curse window 
+    # End the curse window
     if not self.silent:
         curses.endwin()
 
@@ -164,23 +188,57 @@ def exit_message(self, normal_ending: bool = False, aborted_by_user: bool = Fals
         print(Colors.OKGREEN + "+++ Fuzzing completed +++" + "\r\n")
     # Error in the program
     else:
-        print(Colors.FAIL + "+++ Fuzzing was interrupted by an error in Frelatage +++" + "\r\n")
-    
-    # Message displayed at the end of the program 
-    print(Colors.OKGREEN + "[+] " + Colors.ENDC + "Error reports are located in: " + Colors.BOLD + self.output_directory + Colors.ENDC + "\r\n"
-          + "\r\n"
-          + Colors.BOLD + "Fuzzing statistics: " + Colors.ENDC + "\r\n"
-          + "\r\n"
-          + "Total run time: " + run_time + "\r\n"
-          + "Uniques crashes: " + Colors.FAIL + uniques_crashes_count + Colors.ENDC + "\r\n"
-          + "Uniques timeouts: " + uniques_timeouts_count + "\r\n"
-          + "Crashes: " + str(self.total_crashes) + "\r\n"
-          + "Timeouts: " + total_timeouts + "\r\n"
-          + "Reached paths: " + total_paths_count + "\r\n"
-          + "Cycles: " + cycles_count + "\r\n"
-          + "Executions: " + total_executions + "\r"
-          )
+        print(
+            Colors.FAIL
+            + "+++ Fuzzing was interrupted by an error in Frelatage +++"
+            + "\r\n"
+        )
+
+    # Message displayed at the end of the program
+    print(
+        Colors.OKGREEN
+        + "[+] "
+        + Colors.ENDC
+        + "Error reports are located in: "
+        + Colors.BOLD
+        + self.output_directory
+        + Colors.ENDC
+        + "\r\n"
+        + "\r\n"
+        + Colors.BOLD
+        + "Fuzzing statistics: "
+        + Colors.ENDC
+        + "\r\n"
+        + "\r\n"
+        + "Total run time: "
+        + run_time
+        + "\r\n"
+        + "Uniques crashes: "
+        + Colors.FAIL
+        + uniques_crashes_count
+        + Colors.ENDC
+        + "\r\n"
+        + "Uniques timeouts: "
+        + uniques_timeouts_count
+        + "\r\n"
+        + "Crashes: "
+        + str(self.total_crashes)
+        + "\r\n"
+        + "Timeouts: "
+        + total_timeouts
+        + "\r\n"
+        + "Reached paths: "
+        + total_paths_count
+        + "\r\n"
+        + "Cycles: "
+        + cycles_count
+        + "\r\n"
+        + "Executions: "
+        + total_executions
+        + "\r"
+    )
     return True
+
 
 def start_interface(self):
     """

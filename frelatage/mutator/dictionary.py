@@ -2,6 +2,7 @@ import glob
 import os
 from frelatage.dictionary.dictionary import Dictionary
 
+
 def load_dictionary(dictionary_folder: str) -> bool:
     """
     Load all the dictionaries from the dictionary folder

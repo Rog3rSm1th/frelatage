@@ -1,17 +1,19 @@
 from typing import Any
 
-class Report:
 
-    def __init__(self,
-                 trace: Any, 
-                 input: list,
-                 error: bool,
-                 timeout: bool,
-                 new_error_instruction: bool,
-                 reached_instructions_count: int,
-                 new_reached_instructions_count: int,
-                 instructions_pairs_count: int,
-                 new_instructions_pairs_count: int) -> None:
+class Report:
+    def __init__(
+        self,
+        trace: Any,
+        input: list,
+        error: bool,
+        timeout: bool,
+        new_error_instruction: bool,
+        reached_instructions_count: int,
+        new_reached_instructions_count: int,
+        instructions_pairs_count: int,
+        new_instructions_pairs_count: int,
+    ) -> None:
         """
         Report of the behavior of a function with given input
         """
@@ -24,7 +26,7 @@ class Report:
         self.new_reached_instructions_count = new_reached_instructions_count
         self.instructions_pairs_count = instructions_pairs_count
         self.new_instructions_pairs_count = new_instructions_pairs_count
-        
+
         self.score = self.compute_score()
 
     def compute_score(self) -> int:
@@ -33,8 +35,13 @@ class Report:
         The parameters are : the number of instructions reached, the number of new instructions reached, the number of
         pairs of instructions reached, the occurrence of an error/timeout.
         """
-        
-        result = self.reached_instructions_count + self.new_reached_instructions_count + self.instructions_pairs_count + self.new_instructions_pairs_count
+
+        result = (
+            self.reached_instructions_count
+            + self.new_reached_instructions_count
+            + self.instructions_pairs_count
+            + self.new_instructions_pairs_count
+        )
         return result
 
     def __eq__(self, other):

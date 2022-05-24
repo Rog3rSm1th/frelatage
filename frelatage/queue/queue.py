@@ -1,10 +1,13 @@
 import copy
 import numpy as np
-from frelatage.input.input import Input 
+from frelatage.input.input import Input
+
+
 class Queue:
     """
     The queue contains the list of possible combinations of the corpus entries.
     """
+
     def __init__(self, corpus: list[list[Input]]):
         self.position = 0
         self.corpus = corpus
@@ -15,14 +18,16 @@ class Queue:
         """
         Return all possible combinations of inputs.
         Corpus : [  [Input_1, Input_2],  [Input_3, Input_4]  ]
-        Arguments : [ 
+        Arguments : [
                       [Input_1, Input_3],
                       [Input_1, Input_4],
                       [Input_2, Input_3],
                       [Input_2, Input_4],
                     ]
         """
-        arguments_list = np.array(np.meshgrid(*self.corpus)).T.reshape(-1, len(self.corpus))
+        arguments_list = np.array(np.meshgrid(*self.corpus)).T.reshape(
+            -1, len(self.corpus)
+        )
         # Deepcopy each Input instance to avoid collisions
         for i in range(len(arguments_list)):
             arguments = arguments_list[i]
@@ -31,7 +36,7 @@ class Queue:
 
         arguments = [list(arguments) for arguments in arguments_list]
         return arguments
-        
+
     def current_arguments(self) -> list[Input]:
         """
         Return the current arguments

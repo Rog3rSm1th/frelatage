@@ -1,9 +1,11 @@
 import re
 
+
 class Dictionary:
     """
-    Stores the elements of an Frelatage dictionary. 
+    Stores the elements of an Frelatage dictionary.
     """
+
     def __init__(self) -> None:
         self.dictionary = []
         # dict_element="myelement" -> "myelement"
