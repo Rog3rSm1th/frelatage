@@ -263,7 +263,9 @@ f = frelatage.Fuzzer(
     # Directory where the error reports will be stored
     output_directory="./out",
     # Enable or disable silent mode
-    silent=False
+    silent=False,
+    # Enable or disable infinite fuzzing
+    infinite_fuzz=False
 )
 f.fuzz()
 ```

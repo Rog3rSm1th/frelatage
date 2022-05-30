@@ -6,6 +6,11 @@ def fuzz(self) -> None:
     """
     Run the fuzzer
     """
+    # Infinite fuzzing is allowed if we have one input combination 
+    if self.infinite_fuzz and len(self.queue.arguments) > 1:
+        print("Error: infinite fuzzing is only possible with a corpus of size 1")
+        exit(1)
+
     try:
         # Interface
         if not self.silent:
@@ -19,10 +24,7 @@ def fuzz(self) -> None:
             self.generate_cycle_mutations(parents)
             reports = self.run_cycle()
             # If no new paths have been found for a while, we go to the next stage
-            if (
-                self.cycles_without_new_path
-                >= Config.FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS
-            ):
+            if (self.cycles_without_new_path >= Config.FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS):
                 # Next stage
                 self.queue.position += 1
                 if not self.queue.end:

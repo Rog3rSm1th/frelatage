@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Callable, List
 from frelatage.corpus.corpus import load_corpus
 from frelatage.config.config import Config
+from frelatage.input.input import Input 
 from frelatage.mutator.mutator import *
 from frelatage.queue.queue import Queue
 from frelatage.tracer.tracer import Tracer
@@ -52,6 +53,7 @@ class Fuzzer(object):
         exceptions_blacklist: list = (),
         output_directory: str = "./out",
         silent: bool = False,
+        infinite_fuzz = False
     ) -> None:
         """
         Initialize the fuzzer
@@ -106,6 +108,9 @@ class Fuzzer(object):
 
         # Silent output
         self.silent = silent
+
+        # Infinite fuzzing
+        self.infinite_fuzz = infinite_fuzz
 
         # Fuzzer statistics
         self.cycles_count = 0
