@@ -30,7 +30,8 @@ def valid_mutators(self, input_type: Type, input_size: int) -> list[Mutator]:
     # Filtering mutators using the "allowed types" property of each mutator
     valid_mutators_type = list(
         filter(
-            lambda mutator: type_str in mutator.allowed_types and mutator.enabled,
+            lambda mutator: type_str in mutator.allowed_types
+            and mutator.enabled,
             self.mutators,
         )
     )
@@ -40,7 +41,10 @@ def valid_mutators(self, input_type: Type, input_size: int) -> list[Mutator]:
     if max_input_size_reached:
         # Filtering mutators using the "size_effect" property of each mutator
         valid_mutators_size = list(
-            filter(lambda mutator: "decrease" in mutator.size_effect, self.mutators)
+            filter(
+                lambda mutator: "decrease" in mutator.size_effect,
+                self.mutators,
+            )
         )
     else:
         valid_mutators_size = self.mutators
@@ -127,7 +131,9 @@ def generate_cycle_mutations(self, parents: list) -> None:
             # Mutation of "file" type inputs
             if mutation.file:
                 filename = os.path.split(mutation.value)[1]
-                file_argument_id = os.path.split(os.path.split(mutation.value)[0])[1]
+                file_argument_id = os.path.split(
+                    os.path.split(mutation.value)[0]
+                )[1]
                 base = Path(mutation.value).parents[2]
                 new_argument = os.path.join(
                     base, str(thread), file_argument_id, filename

@@ -67,8 +67,12 @@ class MutatorStringBitFlip(Mutator):
         if len(input) == 0:
             return input
         position = Mutator.random_int(len(input))
-        replacement_character = chr(ord(input[position]) ^ (1 << Mutator.random_int(8)))
-        mutation = input[0:position] + replacement_character + input[position + 1 :]
+        replacement_character = chr(
+            ord(input[position]) ^ (1 << Mutator.random_int(8))
+        )
+        mutation = (
+            input[0:position] + replacement_character + input[position + 1 :]
+        )
         return mutation
 
 
@@ -84,7 +88,9 @@ class MutatorStringAddSubByte(Mutator):
         position = Mutator.random_int(len(input))
         delta = Mutator.random_int(256)
         replacement_character = chr((ord(input[position]) + delta) % 256)
-        mutation = input[0:position] + replacement_character + input[position + 1 :]
+        mutation = (
+            input[0:position] + replacement_character + input[position + 1 :]
+        )
         return mutation
 
 
@@ -108,7 +114,9 @@ class MutatorStringInsertDict(Mutator):
     allowed_types = set(["str"])
     size_effect = ["increase"]
     # Disable if the dictionary is empty or if the dictionary fuzzing is disabled
-    enabled = True if (dictionary and Config.FRELATAGE_DICTIONARY_ENABLE) else False
+    enabled = (
+        True if (dictionary and Config.FRELATAGE_DICTIONARY_ENABLE) else False
+    )
 
     @staticmethod
     def mutate(input: str) -> str:
@@ -150,7 +158,10 @@ class MutatorStringSwapTwoChars(Mutator):
             second_character_position = Mutator.random_int(len(input))
 
         mutation = list(input)
-        mutation[first_character_position], mutation[second_character_position] = (
+        (
+            mutation[first_character_position],
+            mutation[second_character_position],
+        ) = (
             mutation[second_character_position],
             mutation[first_character_position],
         )
@@ -168,11 +179,15 @@ class MutatorStringDuplicateSubString(Mutator):
         if len(input) < 2:
             return input
         first_character_position = Mutator.random_int(len(input))
-        second_character_position = random.randint(first_character_position, len(input))
+        second_character_position = random.randint(
+            first_character_position, len(input)
+        )
         substring = input[first_character_position:second_character_position]
 
         substring_position = Mutator.random_int(len(input))
-        mutation = input[:substring_position] + substring + input[substring_position:]
+        mutation = (
+            input[:substring_position] + substring + input[substring_position:]
+        )
         return mutation
 
 
@@ -186,7 +201,9 @@ class MutatorStringRepeatSubString(Mutator):
         if len(input) < 2:
             return input
         first_character_position = Mutator.random_int(len(input))
-        second_character_position = random.randint(first_character_position, len(input))
+        second_character_position = random.randint(
+            first_character_position, len(input)
+        )
         substring = input[first_character_position:second_character_position]
         mutation = (
             input[:second_character_position]
@@ -206,9 +223,14 @@ class MutatorStringDeleteSubString(Mutator):
         if len(input) < 2:
             return input
         first_character_position = Mutator.random_int(len(input))
-        second_character_position = random.randint(first_character_position, len(input))
+        second_character_position = random.randint(
+            first_character_position, len(input)
+        )
 
-        mutation = input[:first_character_position] + input[second_character_position:]
+        mutation = (
+            input[:first_character_position]
+            + input[second_character_position:]
+        )
         return mutation
 
 
@@ -390,7 +412,9 @@ class MutatorFileFlipBit(Mutator):
                 position = Mutator.random_int(len(file_content))
 
                 mutation = bytearray(file_content)
-                mutation[position] = mutation[position] ^ (1 << Mutator.random_int(8))
+                mutation[position] = mutation[position] ^ (
+                    1 << Mutator.random_int(8)
+                )
                 mutation_bytes = bytes(mutation)
         with open(input, "wb") as f:
             f.write(mutation_bytes)
@@ -461,10 +485,15 @@ class MutatorFileSwapTwoBytes(Mutator):
                 second_byte_position = Mutator.random_int(len(file_content))
                 # The position of the second character must be different from the first
                 while first_byte_position == second_byte_position:
-                    second_byte_position = Mutator.random_int(len(file_content))
+                    second_byte_position = Mutator.random_int(
+                        len(file_content)
+                    )
 
                 mutation = bytearray(file_content)
-                mutation[first_byte_position], mutation[second_byte_position] = (
+                (
+                    mutation[first_byte_position],
+                    mutation[second_byte_position],
+                ) = (
                     mutation[second_byte_position],
                     mutation[first_byte_position],
                 )
@@ -553,7 +582,8 @@ class MutatorFileDeleteSubBytes(Mutator):
                 )
                 mutation = bytearray(file_content)
                 mutation = (
-                    mutation[:first_byte_position] + mutation[second_byte_position:]
+                    mutation[:first_byte_position]
+                    + mutation[second_byte_position:]
                 )
                 mutation_bytes = bytes(mutation)
         with open(input, "wb") as f:
@@ -566,7 +596,9 @@ class MutatorFileInsertDict(Mutator):
     allowed_types = set(["file"])
     size_effect = ["increase"]
     # Disable if the dictionary is empty or if the dictionary fuzzing is disabled
-    enabled = True if (dictionary and Config.FRELATAGE_DICTIONARY_ENABLE) else False
+    enabled = (
+        True if (dictionary and Config.FRELATAGE_DICTIONARY_ENABLE) else False
+    )
 
     @staticmethod
     def mutate(input: str) -> str:
@@ -580,7 +612,11 @@ class MutatorFileInsertDict(Mutator):
                 mutation = element.encode()
             else:
                 position = Mutator.random_int(len(file_content))
-                mutation = mutation[0:position] + element.encode() + mutation[position:]
+                mutation = (
+                    mutation[0:position]
+                    + element.encode()
+                    + mutation[position:]
+                )
             mutation_bytes = bytes(mutation)
         with open(input, "wb") as f:
             f.write(mutation_bytes)

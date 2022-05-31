@@ -15,7 +15,8 @@ def load_corpus(directory: str, file_extensions: list = []) -> list[Input]:
     # ./<input directory>
     # ./in by default
     input_root_directory = os.path.join(
-        os.path.dirname(os.path.realpath(sys.argv[0])), Config.FRELATAGE_INPUT_DIR
+        os.path.dirname(os.path.realpath(sys.argv[0])),
+        Config.FRELATAGE_INPUT_DIR,
     )
 
     # ./<input directory>/<subdirectory>
@@ -30,13 +31,15 @@ def load_corpus(directory: str, file_extensions: list = []) -> list[Input]:
         for file_extension in file_extensions:
             file_inputs += glob.glob(
                 os.path.join(
-                    input_directory, "*.{extension}".format(extension=file_extension)
+                    input_directory,
+                    "*.{extension}".format(extension=file_extension),
                 )
             )
 
     # Relative path
     file_inputs = [
-        os.path.relpath(file_input, input_root_directory) for file_input in file_inputs
+        os.path.relpath(file_input, input_root_directory)
+        for file_input in file_inputs
     ]
 
     # Create an Input object for every file in the subdirectory

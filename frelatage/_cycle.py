@@ -15,8 +15,12 @@ def run_function(self, arguments: list, result: list) -> bool:
     trace_instructions_count = len(trace_instructions)
     trace_instruction_pairs_count = len(trace_instruction_pairs)
 
-    new_instructions_count = len(trace_instructions - self.reached_instructions)
-    new_sequences_count = len(trace_instruction_pairs - self.instructions_pairs)
+    new_instructions_count = len(
+        trace_instructions - self.reached_instructions
+    )
+    new_sequences_count = len(
+        trace_instruction_pairs - self.instructions_pairs
+    )
 
     new_instruction_error = trace.error_position not in self.error_positions
 

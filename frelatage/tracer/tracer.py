@@ -38,7 +38,9 @@ class Tracer:
         self.exceptions_blacklist = exceptions_blacklist
 
     @timeout_decorator.timeout(
-        Config.FRELATAGE_TIMEOUT_DELAY, use_signals=True, timeout_exception=TimeoutError
+        Config.FRELATAGE_TIMEOUT_DELAY,
+        use_signals=True,
+        timeout_exception=TimeoutError,
     )
     def runfunc(self, function: Callable, arguments):
         """
@@ -73,7 +75,7 @@ class Tracer:
             timeout = True
             error_type = str(e.__class__.__name__)
         # Blacklisted exceptions
-        except self.exceptions_blacklist as e:
+        except self.exceptions_blacklist:
             pass
         # Default exceptions
         except Exception as e:
@@ -86,7 +88,8 @@ class Tracer:
         # List of the executed instructions
         instructions = list(self.tracer.results().counter.items())  # type: ignore
         reached_instructions = [
-            (instruction[0][0], instruction[0][1]) for instruction in instructions
+            (instruction[0][0], instruction[0][1])
+            for instruction in instructions
         ]
         # List of the instructions pairs :
         # e.g : reached instructions : [('library.py', 1), ('library.py', 3), ('library.py', 2), ('library.py', 4)]

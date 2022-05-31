@@ -81,7 +81,9 @@ class Fuzzer(object):
         # List of all avalaibles mutators
         self.mutators = mutators
         # Number of concurrently launched threads
-        self.threads_count = max(min(threads_count, Config.FRELATAGE_MAX_THREADS), 8)
+        self.threads_count = max(
+            min(threads_count, Config.FRELATAGE_MAX_THREADS), 8
+        )
         # List of cycle mutations
         self.cycle: list = []
 
@@ -98,11 +100,13 @@ class Fuzzer(object):
         # Input and output directories
         # The working directory is the same as the fuzz file
         self.input_directory = os.path.join(
-            os.path.dirname(os.path.realpath(sys.argv[0])), Config.FRELATAGE_INPUT_DIR
+            os.path.dirname(os.path.realpath(sys.argv[0])),
+            Config.FRELATAGE_INPUT_DIR,
         )
         self.output_directory = Path(
             os.path.join(
-                os.path.dirname(os.path.realpath(sys.argv[0])), output_directory
+                os.path.dirname(os.path.realpath(sys.argv[0])),
+                output_directory,
             )
         ).as_posix()
 

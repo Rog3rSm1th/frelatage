@@ -26,7 +26,9 @@ class Dictionary:
                 if not line or line[0] == "#":
                     continue
                 # Parse line
-                dictionary_element = re.findall(self.DICTIONARY_ELEMENT_REGEXP, line)
+                dictionary_element = re.findall(
+                    self.DICTIONARY_ELEMENT_REGEXP, line
+                )
                 if dictionary_element:
                     # Remove the quote from both the beginning and the end
                     dictionary_element = dictionary_element[0][1:-1]
