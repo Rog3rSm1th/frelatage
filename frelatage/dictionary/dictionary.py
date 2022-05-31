@@ -1,4 +1,5 @@
 import re
+from typing import List
 
 
 class Dictionary:
@@ -7,7 +8,7 @@ class Dictionary:
     """
 
     def __init__(self) -> None:
-        self.dictionary = []
+        self.dictionary: List[str] = []
         # dict_element="myelement" -> "myelement"
         self.DICTIONARY_ELEMENT_REGEXP = r'".+"'
 

@@ -1,7 +1,7 @@
 import copy
 import os
-import sys
 import random
+import sys
 from pathlib import Path
 from typing import Type, Any
 from frelatage.mutator.mutator import Mutator
@@ -105,7 +105,7 @@ def get_mutation(self, input: Any, file: bool) -> Any:
     return mutation
 
 
-def generate_cycle_mutations(self, parents: list) -> list:
+def generate_cycle_mutations(self, parents: list) -> None:
     """
     Generate a list of mutations with a list of parent mutations as an input
     """

@@ -77,7 +77,7 @@ def init_file_input_arguments(self) -> bool:
     return True
 
 
-def init_file_inputs(self) -> bool:
+def init_file_inputs(self) -> None:
     """
     Set up the tree structure to fuzz a function with "file" type arguments
     """

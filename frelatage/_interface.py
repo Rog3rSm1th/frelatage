@@ -1,7 +1,7 @@
 import curses
 import time
 from curses import wrapper
-from datetime import datetime
+from datetime import datetime, timedelta
 from string import Formatter
 from frelatage import __version__, Config
 from frelatage.colors import Colors
@@ -10,7 +10,7 @@ from frelatage.colors import Colors
 REFRESH_INTERVAL = 0.1
 
 
-def format_delta(time_delta: datetime, format: str) -> str:
+def format_delta(time_delta: timedelta, format: str) -> str:
     """
     Format a time delta.
     """
@@ -240,7 +240,7 @@ def exit_message(
     return True
 
 
-def start_interface(self):
+def start_interface(self) -> None:
     """
     Display the curse interface
     """

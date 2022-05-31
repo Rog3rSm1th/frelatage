@@ -2,12 +2,12 @@ import contextlib
 import os
 import timeout_decorator
 import trace
-from typing import Callable, Iterable
+from typing import Callable
 from frelatage.config.config import Config
 from frelatage.tracer.trace_result import Result
 
 
-def supress_stdout(func: Callable):
+def supress_stdout(func: Callable) -> Callable:
     """
     redirect the output of a function to /dev/null
     """
@@ -28,8 +28,8 @@ class Tracer:
 
     def __init__(
         self,
-        exceptions_whitelist: Iterable[Exception] = [],
-        exceptions_blacklist: Iterable[Exception] = [],
+        exceptions_whitelist: tuple = (),
+        exceptions_blacklist: tuple = (),
     ) -> None:
         """
         Initialize the tracer with an exception whitelist and an exception blacklist.
@@ -84,7 +84,7 @@ class Tracer:
                 pass
 
         # List of the executed instructions
-        instructions = list(self.tracer.results().counter.items())
+        instructions = list(self.tracer.results().counter.items())  # type: ignore
         reached_instructions = [
             (instruction[0][0], instruction[0][1]) for instruction in instructions
         ]

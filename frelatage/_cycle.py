@@ -40,7 +40,7 @@ def run_cycle(self) -> list[Report]:
     run the function with each mutation of the cycle as argument.
     Return the execution reports.
     """
-    cycle_reports = []
+    cycle_reports: list = []
 
     # TODO: Implement multithreading
     for mutation in self.cycle:

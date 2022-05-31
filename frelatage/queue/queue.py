@@ -8,7 +8,7 @@ class Queue:
     The queue contains the list of possible combinations of the corpus entries.
     """
 
-    def __init__(self, corpus: list[list[Input]]):
+    def __init__(self, corpus: list[object]):
         self.position = 0
         self.corpus = corpus
         self.arguments = self.generate_arguments()

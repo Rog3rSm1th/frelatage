@@ -5,10 +5,10 @@ import warnings
 from datetime import datetime
 from importlib.metadata import version
 from pathlib import Path
-from typing import Callable, List
+from typing import Callable
 from frelatage.corpus.corpus import load_corpus
 from frelatage.config.config import Config
-from frelatage.input.input import Input 
+from frelatage.input.input import Input
 from frelatage.mutator.mutator import *
 from frelatage.queue.queue import Queue
 from frelatage.tracer.tracer import Tracer
@@ -31,29 +31,29 @@ class Fuzzer(object):
     of these fuzzers and gather them together into a new tool in order to efficiently fuzz python applications.
     """
 
-    from ._mutation import valid_mutators, get_mutation, generate_cycle_mutations
-    from ._interface import (
+    from ._mutation import valid_mutators, get_mutation, generate_cycle_mutations  # type: ignore
+    from ._interface import (  # type: ignore
         init_interface,
         refresh_interface,
         start_interface,
         exit_message,
     )
-    from ._evaluate import evaluate_mutations
-    from ._cycle import run_function, run_cycle
-    from ._fuzz import fuzz
-    from ._report import get_report_name, save_report
-    from ._input import init_input_folder, init_file_input_arguments, init_file_inputs
+    from ._evaluate import evaluate_mutations  # type: ignore
+    from ._cycle import run_function, run_cycle  # type: ignore
+    from ._fuzz import fuzz  # type: ignore
+    from ._report import get_report_name, save_report  # type: ignore
+    from ._input import init_input_folder, init_file_input_arguments, init_file_inputs  # type: ignore
 
     def __init__(
         self,
         method: Callable,
-        corpus: list[object],
+        corpus: list,
         threads_count: int = 8,
-        exceptions_whitelist: list = (),
-        exceptions_blacklist: list = (),
+        exceptions_whitelist: tuple = (),
+        exceptions_blacklist: tuple = (),
         output_directory: str = "./out",
         silent: bool = False,
-        infinite_fuzz = False
+        infinite_fuzz: bool = False,
     ) -> None:
         """
         Initialize the fuzzer
@@ -64,13 +64,13 @@ class Fuzzer(object):
         self.config = Config
 
         # Global set of reached instructions
-        self.reached_instructions = set([])
+        self.reached_instructions: set = set([])
         # Global set of instructions pairs
-        self.instructions_pairs = set([])
+        self.instructions_pairs: set = set([])
         # Global set of instruction pairs executed during a crash
-        self.favored_pairs = set([])
+        self.favored_pairs: set = set([])
         # Global Set of positions where a crash occurred
-        self.error_positions = set([])
+        self.error_positions: set = set([])
         # Fuzzed method
         self.method = method
 
@@ -83,7 +83,7 @@ class Fuzzer(object):
         # Number of concurrently launched threads
         self.threads_count = max(min(threads_count, Config.FRELATAGE_MAX_THREADS), 8)
         # List of cycle mutations
-        self.cycle = []
+        self.cycle: list = []
 
         # Exceptions that will be taken into account or not when fuzzing
         self.exceptions_whitelist = exceptions_whitelist

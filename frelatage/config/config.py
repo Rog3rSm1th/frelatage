@@ -53,7 +53,9 @@ class Config:
     # Maximum number of successives cycle without a new path
     # Must be in range 10~50000
     if (
-        not 10 <= int(os.getenv("FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS", 5000)) <= math.inf
+        not 10
+        <= int(os.getenv("FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS", 5000))
+        <= math.inf
     ):
         raise FrelatageConfigError(
             "FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS must be in range 10~10000"
