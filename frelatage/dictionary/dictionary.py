@@ -1,4 +1,5 @@
 import re
+from typing import List
 
 
 class Dictionary:
@@ -7,7 +8,7 @@ class Dictionary:
     """
 
     def __init__(self) -> None:
-        self.dictionary = []
+        self.dictionary: List[str] = []
         # dict_element="myelement" -> "myelement"
         self.DICTIONARY_ELEMENT_REGEXP = r'".+"'
 
@@ -25,7 +26,9 @@ class Dictionary:
                 if not line or line[0] == "#":
                     continue
                 # Parse line
-                dictionary_element = re.findall(self.DICTIONARY_ELEMENT_REGEXP, line)
+                dictionary_element = re.findall(
+                    self.DICTIONARY_ELEMENT_REGEXP, line
+                )
                 if dictionary_element:
                     # Remove the quote from both the beginning and the end
                     dictionary_element = dictionary_element[0][1:-1]

@@ -1,9 +1,10 @@
 import glob
 import os
+from typing import List, Any
 from frelatage.dictionary.dictionary import Dictionary
 
 
-def load_dictionary(dictionary_folder: str) -> bool:
+def load_dictionary(dictionary_folder: str) -> List[Any]:
     """
     Load all the dictionaries from the dictionary folder
     """

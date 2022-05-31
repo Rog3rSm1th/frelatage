@@ -16,6 +16,6 @@ dictionary = frelatage.Input(value={
 })
 
 # Initialize the fuzzer
-f = frelatage.Fuzzer(fuzz_yaml_dump, [[dictionary]])
+f = frelatage.Fuzzer(fuzz_yaml_dump, [[dictionary]], infinite_fuzz=True)
 # Fuzz
 f.fuzz()

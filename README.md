@@ -2,7 +2,7 @@
   <img src="https://github.com/Rog3rSm1th/Frelatage/blob/main/doc/frelatage_logo.gif?raw=true" width="200" height="200" style="border-radius:4px"/>
   <br>
   <code>pip3 install frelatage</code></br>
-  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.0.8</a></i></br></br>
+  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.1.0</a></i></br></br>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg"></a>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
@@ -263,7 +263,9 @@ f = frelatage.Fuzzer(
     # Directory where the error reports will be stored
     output_directory="./out",
     # Enable or disable silent mode
-    silent=False
+    silent=False,
+    # Enable or disable infinite fuzzing
+    infinite_fuzz=False
 )
 f.fuzz()
 ```

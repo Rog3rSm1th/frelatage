@@ -1,3 +1,6 @@
+from collections.abc import Generator
+
+
 class Input:
     """
     Input can be either a file or any other type
@@ -7,6 +10,6 @@ class Input:
         self.value = value
         self.file = file
 
-    def __iter__(self) -> None:
+    def __iter__(self) -> Generator[tuple, tuple, None]:
         yield "value", self.value
         yield "file", self.file

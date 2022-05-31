@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "frelatage"
-version = "0.0.8"
+version = "0.1.0"
 description = "Frelatage is a coverage-based Python fuzzing library which can be used to fuzz python code."
 authors = ["Rog3rSm1th <r0g3r5@protonmail.com>"]
 license = "MIT"
@@ -26,3 +26,20 @@ pytest = "^5.2"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 90
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''

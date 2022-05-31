@@ -20,9 +20,9 @@ def get_report_name(self, report: Report) -> str:
         else str(None)
     )
     # File where the error occured
-    error_file = os.path.splitext(os.path.basename(report.trace.error_position[0][0]))[
-        0
-    ].lower()
+    error_file = os.path.splitext(
+        os.path.basename(report.trace.error_position[0][0])
+    )[0].lower()
 
     report_name = "id:{error_id},err:{error_type},err_file:{error_file},err_pos:{error_position}".format(
         error_id=error_id,
@@ -65,7 +65,8 @@ def save_report(self, report) -> bool:
 
     # Save report file
     with open(
-        "{report_directory}/input".format(report_directory=report_directory), "wb+"
+        "{report_directory}/input".format(report_directory=report_directory),
+        "wb+",
     ) as f:
         # We use pickle to store the report object
         pickle.dump(custom_report, f)
@@ -79,7 +80,8 @@ def save_report(self, report) -> bool:
             file_argument_content = open(argument.value, "rb").read()
             # Save file in /out/<report name>/<argument number>/<file name>
             argument_directory = "{report_directory}/{argument_number}".format(
-                report_directory=report_directory, argument_number=argument_number
+                report_directory=report_directory,
+                argument_number=argument_number,
             )
             # create /out/<report name>/<argument number> folder if not exists
             if not os.path.exists(argument_directory):

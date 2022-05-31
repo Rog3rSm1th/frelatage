@@ -1,7 +1,7 @@
 import curses
 import time
 from curses import wrapper
-from datetime import datetime
+from datetime import datetime, timedelta
 from string import Formatter
 from frelatage import __version__, Config
 from frelatage.colors import Colors
@@ -10,7 +10,7 @@ from frelatage.colors import Colors
 REFRESH_INTERVAL = 0.1
 
 
-def format_delta(time_delta: datetime, format: str) -> str:
+def format_delta(time_delta: timedelta, format: str) -> str:
     """
     Format a time delta.
     """
@@ -79,10 +79,12 @@ def refresh_interface(self):
     # Process timing
     run_time = format_time_elapsed(self.fuzz_start_time).ljust(32)
     last_new_path_time = format_time_elapsed(self.last_new_path_time).ljust(32)
-    last_unique_crash_time = format_time_elapsed(self.last_unique_crash_time).ljust(32)
-    last_unique_timeout_time = format_time_elapsed(self.last_unique_timeout_time).ljust(
-        32
-    )
+    last_unique_crash_time = format_time_elapsed(
+        self.last_unique_crash_time
+    ).ljust(32)
+    last_unique_timeout_time = format_time_elapsed(
+        self.last_unique_timeout_time
+    ).ljust(32)
 
     # Overall results
     uniques_crashes_count = str(self.unique_crashes).ljust(9)
@@ -105,7 +107,8 @@ def refresh_interface(self):
         crashes=str(self.total_crashes), uniques=str(self.unique_crashes)
     ).ljust(22)
     total_timeouts = "{total_timeouts} [{timeout_delay} sec]".format(
-        total_timeouts=self.total_timeouts, timeout_delay=Config.FRELATAGE_TIMEOUT_DELAY
+        total_timeouts=self.total_timeouts,
+        timeout_delay=Config.FRELATAGE_TIMEOUT_DELAY,
     ).ljust(22)
 
     # Progress
@@ -116,7 +119,8 @@ def refresh_interface(self):
     current_argument = self.queue.position + 1
     total_arguments_count = len(self.queue.arguments)
     current_stage = "{current_argument}/{total_arguments_count}".format(
-        current_argument=current_argument, total_arguments_count=total_arguments_count
+        current_argument=current_argument,
+        total_arguments_count=total_arguments_count,
     ).ljust(16)
     stage_executions = str(self.stage_inputs_count).ljust(16)
 
@@ -136,7 +140,7 @@ def refresh_interface(self):
     │ Uniques crashes     :: {uniques_crashes_count}│ Cycles done         :: {cycles_count}│ Stage       :: {current_stage}│
     │ Unique timeouts     :: {uniques_timeouts_count}│ Total executions    :: {total_executions}│ Stage execs :: {stage_executions}│
     └─────────────────────────────────┴────────────────────────────────────┴────────────────────────────────┘
-    [ {execs_per_second} exec/s ]                                    
+    [ {execs_per_second} exec/s ]                             
     """.format(
             title=title,
             execs_per_second=execs_per_second,
@@ -168,10 +172,9 @@ def exit_message(
     run_time = format_time_elapsed(self.fuzz_start_time)
     uniques_crashes_count = str(self.unique_crashes)
     uniques_timeouts_count = str(self.unique_timeout)
-    total_crashes = "{crashes} ({uniques} uniques)".format(
-        crashes=str(self.total_crashes), uniques=str(self.unique_crashes)
+    total_timeouts = "{total_timeouts}".format(
+        total_timeouts=self.total_timeouts
     )
-    total_timeouts = "{total_timeouts}".format(total_timeouts=self.total_timeouts)
     total_paths_count = str(len(self.reached_instructions))
     cycles_count = str(self.cycles_count)
     total_executions = str(self.inputs_count)
@@ -240,7 +243,7 @@ def exit_message(
     return True
 
 
-def start_interface(self):
+def start_interface(self) -> None:
     """
     Display the curse interface
     """
