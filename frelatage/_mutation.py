@@ -1,7 +1,6 @@
 import copy
 import os
 import random
-import sys
 from pathlib import Path
 from typing import Type, Any
 from frelatage.mutator.mutator import Mutator
@@ -31,8 +30,7 @@ def valid_mutators(self, input_type: Type, input_size: int) -> list[Mutator]:
     # Filtering mutators using the "allowed types" property of each mutator
     valid_mutators_type = list(
         filter(
-            lambda mutator: type_str in mutator.allowed_types
-            and mutator.enabled,
+            lambda mutator: type_str in mutator.allowed_types and mutator.enabled,
             self.mutators,
         )
     )
@@ -69,7 +67,9 @@ def get_mutation(self, input: Any, file: bool) -> Any:
     # If we mutate the input
     if mutate:
         input_type = type(input) if not file else "file"
-        argument_size = get_argument_size(input, input_type == True if input_type == "file" else False)
+        is_file = True if input_type == "file" else False
+
+        argument_size = get_argument_size(input, is_file)
         valid_mutators = self.valid_mutators(input_type, argument_size)
         # # We use a random mutator among the valid ones
         mutator = random.choice(valid_mutators)
@@ -130,13 +130,9 @@ def generate_cycle_mutations(self, parents: list) -> None:
             # Mutation of "file" type inputs
             if mutation.file:
                 filename = os.path.split(mutation.value)[1]
-                file_argument_id = os.path.split(
-                    os.path.split(mutation.value)[0]
-                )[1]
+                file_argument_id = os.path.split(os.path.split(mutation.value)[0])[1]
                 base = Path(mutation.value).parents[2]
-                new_argument = os.path.join(
-                    base, str(thread), file_argument_id, filename
-                )
+                new_argument = os.path.join(base, str(thread), file_argument_id, filename)
                 mutation.value = new_argument
 
             thread_arguments.append(mutation)

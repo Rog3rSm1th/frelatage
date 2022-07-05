@@ -8,9 +8,7 @@ def fuzz(self) -> None:
     """
     # Infinite fuzzing is allowed if we have one input combination
     if self.infinite_fuzz and len(self.queue.arguments) > 1:
-        print(
-            "Error: infinite fuzzing is only possible with a corpus of size 1"
-        )
+        print("Error: infinite fuzzing is only possible with a corpus of size 1")
         exit(1)
 
     try:

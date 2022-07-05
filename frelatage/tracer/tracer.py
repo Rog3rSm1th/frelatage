@@ -88,8 +88,7 @@ class Tracer:
         # List of the executed instructions
         instructions = list(self.tracer.results().counter.items())  # type: ignore
         reached_instructions = [
-            (instruction[0][0], instruction[0][1])
-            for instruction in instructions
+            (instruction[0][0], instruction[0][1]) for instruction in instructions
         ]
         # List of the instructions pairs :
         # e.g : reached instructions : [('library.py', 1), ('library.py', 3), ('library.py', 2), ('library.py', 4)]

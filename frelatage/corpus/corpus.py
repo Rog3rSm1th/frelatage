@@ -38,8 +38,7 @@ def load_corpus(directory: str, file_extensions: list = []) -> list[Input]:
 
     # Relative path
     file_inputs = [
-        os.path.relpath(file_input, input_root_directory)
-        for file_input in file_inputs
+        os.path.relpath(file_input, input_root_directory) for file_input in file_inputs
     ]
 
     # Create an Input object for every file in the subdirectory

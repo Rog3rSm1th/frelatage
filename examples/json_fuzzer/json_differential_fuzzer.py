@@ -5,8 +5,10 @@ import frelatage
 import json
 import ujson
 
+
 class JsonParsingException(Exception):
     pass
+
 
 def ClearAllIntegers(data):
     """
@@ -19,8 +21,9 @@ def ClearAllIntegers(data):
             data[i] = ClearAllIntegers(data[i])
     if type(data) == dict:
         for k, v in data:
-             data[k] = ClearAllIntegers(v)
-    return data   
+            data[k] = ClearAllIntegers(v)
+    return data
+
 
 def fuzz_json(json_file):
     with open(json_file, "rb") as f:
@@ -34,13 +37,14 @@ def fuzz_json(json_file):
 
     json_data = ClearAllIntegers(json_data)
     ujson_data = ClearAllIntegers(ujson_data)
-   
+
     json_dumped = json.dumps(json_data)
     ujson_dumped = ujson.dumps(ujson_data)
 
     if json_dumped != ujson_dumped:
         raise JsonParsingException
     return
+
 
 # Load corpus
 json_files = frelatage.load_corpus(directory="./")

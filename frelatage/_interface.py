@@ -79,12 +79,10 @@ def refresh_interface(self):
     # Process timing
     run_time = format_time_elapsed(self.fuzz_start_time).ljust(32)
     last_new_path_time = format_time_elapsed(self.last_new_path_time).ljust(32)
-    last_unique_crash_time = format_time_elapsed(
-        self.last_unique_crash_time
-    ).ljust(32)
-    last_unique_timeout_time = format_time_elapsed(
-        self.last_unique_timeout_time
-    ).ljust(32)
+    last_unique_crash_time = format_time_elapsed(self.last_unique_crash_time).ljust(32)
+    last_unique_timeout_time = format_time_elapsed(self.last_unique_timeout_time).ljust(
+        32
+    )
 
     # Overall results
     uniques_crashes_count = str(self.unique_crashes).ljust(9)
@@ -172,9 +170,7 @@ def exit_message(
     run_time = format_time_elapsed(self.fuzz_start_time)
     uniques_crashes_count = str(self.unique_crashes)
     uniques_timeouts_count = str(self.unique_timeout)
-    total_timeouts = "{total_timeouts}".format(
-        total_timeouts=self.total_timeouts
-    )
+    total_timeouts = "{total_timeouts}".format(total_timeouts=self.total_timeouts)
     total_paths_count = str(len(self.reached_instructions))
     cycles_count = str(self.cycles_count)
     total_executions = str(self.inputs_count)

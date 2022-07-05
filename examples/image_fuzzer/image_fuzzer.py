@@ -1,8 +1,10 @@
-import frelatage 
+import frelatage
 from PIL import Image
+
 
 def fuzz_gif(input_file):
     Image.open(input_file)
+
 
 # Load corpus
 gif_file = frelatage.load_corpus("./gif")

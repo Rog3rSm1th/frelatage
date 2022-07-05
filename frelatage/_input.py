@@ -32,9 +32,7 @@ def init_input_folder(self) -> bool:
         # Files located in the input folder that are used in this stage
         filenames = [
             file_argument.value
-            for file_argument in filter(
-                lambda a: a.file, self.queue.current_arguments()
-            )
+            for file_argument in filter(lambda a: a.file, self.queue.current_arguments())
         ]
         # Copy the useful files into the subdirectory
         for i in range(len(filenames)):
@@ -44,9 +42,7 @@ def init_input_folder(self) -> bool:
             # ./in/<any subfolder>/<filename>
             input_file = os.path.join(start_input_directory, filenames[i])
             # /tmp/frelatage/<thread>/<argument position>/<filename>
-            output_file = os.path.join(
-                argument_directory, os.path.basename(filenames[i])
-            )
+            output_file = os.path.join(argument_directory, os.path.basename(filenames[i]))
             shutil.copyfile(input_file, output_file)
     return True
 

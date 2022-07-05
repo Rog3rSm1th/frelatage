@@ -81,9 +81,7 @@ class Fuzzer(object):
         # List of all avalaibles mutators
         self.mutators = mutators
         # Number of concurrently launched threads
-        self.threads_count = max(
-            min(threads_count, Config.FRELATAGE_MAX_THREADS), 8
-        )
+        self.threads_count = max(min(threads_count, Config.FRELATAGE_MAX_THREADS), 8)
         # List of cycle mutations
         self.cycle: list = []
 
