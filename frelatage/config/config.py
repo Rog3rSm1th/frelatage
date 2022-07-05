@@ -44,11 +44,11 @@ class Config:
 
     # Maximum size of an input variable in bytes
     # Must be in range 4~1000000
-    if not 4 <= int(os.getenv("FRELATAGE_INPUT_MAX_LEN", 4096)) <= math.inf:
+    if not 4 <= int(os.getenv("FRELATAGE_INPUT_MAX_LEN", 1024)) <= math.inf:
         raise FrelatageConfigError(
             "FRELATAGE_INPUT_MAX_LEN must be in range 4~1000000"
         )
-    FRELATAGE_INPUT_MAX_LEN = int(os.getenv("FRELATAGE_INPUT_MAX_LEN", 4096))
+    FRELATAGE_INPUT_MAX_LEN = int(os.getenv("FRELATAGE_INPUT_MAX_LEN", 1024))
 
     # Maximum number of simultaneous threads
     # Must be in range 8~50

@@ -29,6 +29,7 @@ def fuzz(self) -> None:
             if (
                 self.cycles_without_new_path
                 >= Config.FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS
+                and not self.infinite_fuzz
             ):
                 # Next stage
                 self.queue.position += 1

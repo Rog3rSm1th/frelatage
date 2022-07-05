@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 from typing import Type, Any
 from frelatage.mutator.mutator import Mutator
+from pympler.asizeof import asizeof
 
 
 def get_argument_size(argument, file: bool) -> int:
@@ -16,7 +17,7 @@ def get_argument_size(argument, file: bool) -> int:
         size = os.path.getsize(argument)
     else:
         # Variable size in memory
-        size = sys.getsizeof(argument)
+        size = asizeof(argument)
     return size
 
 
@@ -68,8 +69,7 @@ def get_mutation(self, input: Any, file: bool) -> Any:
     # If we mutate the input
     if mutate:
         input_type = type(input) if not file else "file"
-        argument_size = get_argument_size(input, input_type == "file")
-
+        argument_size = get_argument_size(input, input_type == True if input_type == "file" else False)
         valid_mutators = self.valid_mutators(input_type, argument_size)
         # # We use a random mutator among the valid ones
         mutator = random.choice(valid_mutators)
@@ -95,8 +95,7 @@ def get_mutation(self, input: Any, file: bool) -> Any:
             # Mutate keys
             for key in list(mutation.keys()):
                 new_key = self.get_mutation(key, False)
-                mutation[new_key] = mutation[key]
-                del mutation[key]
+                mutation[new_key] = mutation.pop(key)
 
             # Mutate values
             for key in mutation:

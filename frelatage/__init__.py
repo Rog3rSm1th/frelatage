@@ -132,8 +132,8 @@ class Fuzzer(object):
         self.last_unique_timeout_time = None
 
         # Genetic algorithm parameters
-        self.survival_probability = 0.5
-        self.mutation_probability = 0.3
+        self.survival_probability = 0.8
+        self.mutation_probability = 0.2
 
         # Number of Frelatage cycles without finding new paths
         self.cycles_without_new_path = 0

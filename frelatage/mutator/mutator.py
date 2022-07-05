@@ -1,4 +1,3 @@
-import copy
 import random
 from typing import List, Any, Type
 from frelatage.config.config import Config
@@ -102,7 +101,7 @@ class MutatorStringInsertCharacter(Mutator):
     @staticmethod
     def mutate(input: str) -> str:
         if len(input) == 0:
-            return input
+            mutation = chr(Mutator.random_int(256))
         position = Mutator.random_int(len(input))
         character = chr(Mutator.random_int(256))
         mutation = input[0:position] + character + input[position:]
@@ -622,31 +621,22 @@ class MutatorFileInsertDict(Mutator):
             f.write(mutation_bytes)
         return input
 
-
 # Dictionnary mutators
 @register_mutator
-class MutatorDictAddEntryInt(Mutator):
+class MutatorDictAddEntry(Mutator):
     allowed_types = set(["dict"])
     size_effect = ["increase"]
 
     @staticmethod
     def mutate(input: dict) -> dict:
-        mutation = copy.deepcopy(input)
-        integer = random.choice(MagicValues.UINT)
-        mutation[integer] = None
-        return mutation
+        mutation = input
 
-
-@register_mutator
-class MutatorDictAddEntryString(Mutator):
-    allowed_types = set(["dict"])
-    size_effect = ["increase"]
-
-    @staticmethod
-    def mutate(input: dict) -> dict:
-        mutation = input.copy()
-        string = chr(Mutator.random_int(256))
-        mutation[string] = None
+        if random.randint(0,1) == 0:
+            integer = random.choice(MagicValues.UINT)
+            mutation[integer] = None
+        else:
+            string = chr(Mutator.random_int(256))
+            mutation[string] = None
         return mutation
 
 
@@ -659,7 +649,7 @@ class MutatorDictDeleteEntry(Mutator):
     def mutate(input: dict) -> dict:
         if len(input) == 0:
             return input
-        mutation = input.copy()
+        mutation = input
         del mutation[random.choice(list(mutation.keys()))]
         return mutation
 
