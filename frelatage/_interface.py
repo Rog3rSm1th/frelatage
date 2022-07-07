@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from string import Formatter
 from frelatage import __version__, Config
 from frelatage.colors import Colors
+import time
 
 # Refresh the interface 10 times/second
 REFRESH_INTERVAL = 0.1
@@ -244,6 +245,13 @@ def start_interface(self) -> None:
     Display the curse interface
     """
     wrapper(self.init_interface)
-    while True:
+    while self.alive:
         self.refresh_interface()
         time.sleep(REFRESH_INTERVAL)
+
+
+def kill_interface(self) -> None:
+    """
+    Kill the current curses window
+    """
+    curses.endwin()

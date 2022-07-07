@@ -1,3 +1,4 @@
+from datetime import datetime
 from threading import Thread
 from frelatage.config.config import Config
 
@@ -6,6 +7,9 @@ def fuzz(self) -> None:
     """
     Run the fuzzer
     """
+    # Initialize the fuzzer timer
+    self.fuzz_start_time = datetime.now()
+
     # Infinite fuzzing is allowed if we have one input combination
     if self.infinite_fuzz and len(self.queue.arguments) > 1:
         print("Error: infinite fuzzing is only possible with a corpus of size 1")
@@ -41,8 +45,12 @@ def fuzz(self) -> None:
                 # End of the fuzzing process
                 # Exit the program
                 else:
-                    self.exit_message(normal_ending=True)
-                    exit(1)
+                    if self.report:
+                        self.exit_message(normal_ending=True)
+                        exit(1)
+                    self.alive = False
+                    self.kill_interface()
+                    break
             else:
                 parents = self.evaluate_mutations(reports)
     # Exit the program
