@@ -144,6 +144,27 @@ f = frelatage.Fuzzer(MyFunctionFuzz, [[input]])
 f.fuzz()
 ```
 
+#### Fuzz several methods using decorators (experimental)
+
+```python
+import frelatage
+import my_vulnerable_library
+
+input = frelatage.Input(file=True, value="input.txt")
+
+@frelatage.instrument([[input]])
+def MyFunctionFuzz_1(data):
+  my_vulnerable_library.load_file(data)
+
+@frelatage.instrument([[input]])
+def MyFunctionFuzz_1(data):
+  my_vulnerable_library.load_file_but_different(data)
+# And so on
+
+# It will fuzz the instrumented methods on after the other
+f.fuzz_all()
+```
+
 #### Load several files to a corpus at once
 
 If you need to load several files into a corpus at once (useful if you use a large corpus) You can use the built-in function of Frelatage `load_corpus`. This function returns a list of inputs.
