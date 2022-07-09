@@ -146,6 +146,16 @@ class Fuzzer(object):
         self.cycles_without_new_path = 0
         # Corpus entries that are still in the queue
         self.queue = Queue(self.corpus)
+        # Check if the queue has a reasonable size
+        if self.queue.size > Config.FRELATAGE_MAX_STAGES:
+            raise ValueError(
+                "The number of stages is too high for method {method} ({stages_count}), max is ({config_max_stages})".format(
+                    method=self.method.__name__,
+                    stages_count=str(self.queue.size),
+                    config_max_stages=str(Config.FRELATAGE_MAX_STAGES),
+                )
+            )
+
         # Current arguments
         self.arguments = self.queue.current_arguments()
 
