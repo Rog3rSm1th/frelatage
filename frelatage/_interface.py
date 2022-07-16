@@ -246,6 +246,13 @@ def start_interface(self) -> None:
     Display the curse interface
     """
     wrapper(self.init_interface)
-    while True:
+    while self.alive:
         self.refresh_interface()
         time.sleep(REFRESH_INTERVAL)
+
+
+def kill_interface(self) -> None:
+    """
+    Kill the current curses window
+    """
+    curses.endwin()

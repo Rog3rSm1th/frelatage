@@ -167,10 +167,6 @@ class Fuzzer(object):
         # Print or not a report at the end of the fuzzing
         self.report = report
 
-        # Initialize file input folders in /tmp/frelatage (default value)
-        # Can be modified using the FRELATAGE_INPUT_FILE_TMP_DIR env variable
-        self.init_file_inputs()
-
     @staticmethod
     def fuzz_all() -> None:
         """

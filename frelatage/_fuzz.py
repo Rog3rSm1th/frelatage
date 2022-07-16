@@ -10,6 +10,10 @@ def fuzz(self) -> None:
     # Initialize the fuzzer timer
     self.fuzz_start_time = datetime.now()
 
+    # Initialize file input folders in /tmp/frelatage (default value)
+    # Can be modified using the FRELATAGE_INPUT_FILE_TMP_DIR env variable
+    self.init_file_inputs()
+
     # Infinite fuzzing is allowed if we have one input combination
     if self.infinite_fuzz and len(self.queue.arguments) > 1:
         print("Error: infinite fuzzing is only possible with a corpus of size 1")
