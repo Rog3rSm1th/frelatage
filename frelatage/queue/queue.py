@@ -13,6 +13,7 @@ class Queue:
         self.corpus = corpus
         self.arguments = self.generate_arguments()
         self.currents_arguments = self.current_arguments()
+        self.size = len(self.arguments)
 
     def generate_arguments(self):
         """

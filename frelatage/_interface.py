@@ -50,8 +50,10 @@ def init_interface(self, stdscr) -> bool:
     # Hide cursor
     curses.curs_set(0)
     # Colors
-    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
-    stdscr.bkgd(" ", curses.color_pair(1) | curses.A_BOLD)
+    curses.start_color()
+    curses.use_default_colors()
+    for i in range(0, 255):
+        curses.init_pair(i + 1, i, -1)
 
     self.screen = stdscr
     self.screen.clear()
@@ -244,6 +246,13 @@ def start_interface(self) -> None:
     Display the curse interface
     """
     wrapper(self.init_interface)
-    while True:
+    while self.alive:
         self.refresh_interface()
         time.sleep(REFRESH_INTERVAL)
+
+
+def kill_interface(self) -> None:
+    """
+    Kill the current curses window
+    """
+    curses.endwin()

@@ -2,7 +2,6 @@ import os
 import time
 import sys
 import warnings
-from datetime import datetime
 from importlib.metadata import version
 from pathlib import Path
 from typing import Callable
@@ -31,12 +30,16 @@ class Fuzzer(object):
     of these fuzzers and gather them together into a new tool in order to efficiently fuzz python applications.
     """
 
+    # List of all defined harnesses
+    instances: list = []
+
     from ._mutation import valid_mutators, get_mutation, generate_cycle_mutations  # type: ignore
     from ._interface import (  # type: ignore
         init_interface,
         refresh_interface,
         start_interface,
         exit_message,
+        kill_interface,
     )
     from ._evaluate import evaluate_mutations  # type: ignore
     from ._cycle import run_function, run_cycle  # type: ignore
@@ -54,11 +57,17 @@ class Fuzzer(object):
         output_directory: str = "./out",
         silent: bool = False,
         infinite_fuzz: bool = False,
+        report: bool = True,
     ) -> None:
         """
         Initialize the fuzzer
         """
         warnings.filterwarnings("ignore")
+
+        self.__class__.instances.append(self)
+
+        # Status of the fuzzer activity
+        self.alive = True
 
         # Frelatage configuration
         self.config = Config
@@ -124,7 +133,7 @@ class Fuzzer(object):
         self.total_timeouts = 0
 
         # Time statistics
-        self.fuzz_start_time = datetime.now()
+        self.fuzz_start_time = None
         self.last_new_path_time = None
         self.last_unique_crash_time = None
         self.last_unique_timeout_time = None
@@ -137,6 +146,16 @@ class Fuzzer(object):
         self.cycles_without_new_path = 0
         # Corpus entries that are still in the queue
         self.queue = Queue(self.corpus)
+        # Check if the queue has a reasonable size
+        if self.queue.size > Config.FRELATAGE_MAX_STAGES:
+            raise ValueError(
+                "The number of stages is too high for method {method} ({stages_count}), max is ({config_max_stages})".format(
+                    method=self.method.__name__,
+                    stages_count=str(self.queue.size),
+                    config_max_stages=str(Config.FRELATAGE_MAX_STAGES),
+                )
+            )
+
         # Current arguments
         self.arguments = self.queue.current_arguments()
 
@@ -145,6 +164,35 @@ class Fuzzer(object):
         self.executions_per_second = 0
         self.current_second = int(time.time())
 
-        # Initialize file input folders in /tmp/frelatage (default value)
-        # Can be modified using the FRELATAGE_INPUT_FILE_TMP_DIR env variable
-        self.init_file_inputs()
+        # Print or not a report at the end of the fuzzing
+        self.report = report
+
+    @staticmethod
+    def fuzz_all() -> None:
+        """
+        Fuzzing of all instrumented functions
+        """
+        for instance in Fuzzer.instances:
+            instance.fuzz()
+
+
+def instrument(
+    corpus: list,
+    threads_count: int = 8,
+    exceptions_whitelist: tuple = (),
+    exceptions_blacklist: tuple = (),
+    output_directory: str = "./out",
+    silent: bool = False,
+    infinite_fuzz: bool = False,
+) -> Callable:
+    """
+    Set up a fuzzer around a function
+    """
+    decorator_arguments = list(locals().values())
+
+    def _decorate(function: Any) -> None:
+        report = False
+        harness_arguments: List[Any] = [function] + decorator_arguments + [report]
+        f = Fuzzer(*harness_arguments)
+
+    return _decorate

@@ -144,6 +144,27 @@ f = frelatage.Fuzzer(MyFunctionFuzz, [[input]])
 f.fuzz()
 ```
 
+#### Fuzz several methods using decorators (experimental)
+
+```python
+import frelatage
+import my_vulnerable_library
+
+input = frelatage.Input(file=True, value="input.txt")
+
+@frelatage.instrument([[input]])
+def MyFunctionFuzz_1(data):
+  my_vulnerable_library.load_file(data)
+
+@frelatage.instrument([[input]])
+def MyFunctionFuzz_1(data):
+  my_vulnerable_library.load_file_but_different(data)
+# And so on
+
+# It will fuzz the instrumented methods one after the other
+f.fuzz_all()
+```
+
 #### Load several files to a corpus at once
 
 If you need to load several files into a corpus at once (useful if you use a large corpus) You can use the built-in function of Frelatage `load_corpus`. This function returns a list of inputs.
@@ -219,6 +240,7 @@ There are two ways to set up Frelatage:
 | **FRELATAGE_INPUT_FILE_TMP_DIR**   | Temporary folder where input files are stored | absolute path to a folder, e.g. ```/tmp/custom_dir```| ```/tmp/frelatage```|
 | **FRELATAGE_INPUT_MAX_LEN**        | Maximum size of an input variable in bytes | ```4``` - ```infinity``` |  ```4094``` |
 | **FRELATAGE_MAX_THREADS**          | Maximum number of simultaneous threads | ```8``` - ```infinity``` | ```8``` |
+| **FRELATAGE_MAX_STAGES**           | Maximum number of stages for a fuzzed function | ```1``` - ```infinity``` | ```1000000``` |
 | **FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS**      | Number of cycles without new paths found after which we go to the next stage | ```10``` - ```infinity``` | ```5000``` | 
 | **FRELATAGE_INPUT_DIR**           | Directory containing the initial input files. It needs to be a relative path (to the path of the fuzzing file) |relative path to a folder, e.g. ```./in```  | ```./in``` |
 | **FRELATAGE_DICTIONARY_DIR**      | Default directory for dictionaries. It needs to be a relative path (to the path of the fuzzing file) | relative path to a folder, e.g. ```./dict```  | ```./dict``` |  
@@ -232,6 +254,7 @@ export FRELATAGE_TIMEOUT_DELAY=2 &&
 export FRELATAGE_INPUT_FILE_TMP_DIR="/tmp/frelatage" &&
 export FRELATAGE_INPUT_MAX_LEN=4096 &&
 export FRELATAGE_MAX_THREADS=8 &&
+export FRELATAGE_MAX_STAGES=1000000 &&
 export FRELATAGE_MAX_CYCLES_WITHOUT_NEW_PATHS=5000 &&
 export FRELATAGE_INPUT_DIR="./in" &&
 export FRELATAGE_DICTIONARY_DIR="./dict" &&
