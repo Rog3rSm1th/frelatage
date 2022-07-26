@@ -1,0 +1,129 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /OpenAction 5 0 R
+     /Names << /JavaScript << /Names [(js) 5 0 R] >> >>
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Annots [<< /Type /Annot
+                 /Subtype /Screen
+                 /Open true
+                 /P 3 0 R
+                 /AA << /E  5 0 R /X  5 0 R /D  5 0 R /U  5 0 R /Fo 5 0 R
+                        /BI 5 0 R /PO 5 0 R /PC 5 0 R /PV 5 0 R /PI 5 0 R
+                     >>
+                 /Rect [0 0 595 842]
+              >>
+              << /Type /Annot
+                 /Subtype /Link
+                 /Open true
+                 /A 5 0 R
+                 /H /N
+                 /Rect [0 0 595 842]
+              >>]
+     /AA << /O 5 0 R
+            /C 5 0 R
+         >>
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 67 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'loop'    ) Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /JavaScript
+     /JS 6 0 R
+  >>
+endobj
+
+6 0 obj
+(
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+try{
+x="A"; for(;;){x="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+x}
+} catch(e) {
+}}}}}}}}}}}}
+)
+endobj
+
+xref
+0 7
+0000000000 65535 f 
+0000000010 00000 n 
+0000000148 00000 n 
+0000000249 00000 n 
+0000001106 00000 n 
+0000001226 00000 n 
+0000001301 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 7
+  >>
+startxref
+2762
+%%EOF

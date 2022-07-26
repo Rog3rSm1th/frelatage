@@ -1,0 +1,76 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /PageMode /UseAttachments
+     /Names << /EmbeddedFiles << /Names [(lfi.txt) 5 0 R] >> >>
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >>
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 63 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'lfi') Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Filespec
+     /Desc (the embedded file)
+     /F (lfi.txt)
+     /EF << /F 6 0 R >>
+  >>
+endobj
+
+6 0 obj
+  << /Type /EmbeddedFile
+     /Subtype /application#2Fpdf
+     /Params << /ModDate (D:20100809110201)
+                /CreationDate (D:20130113152115-05'00')
+                /Size 7
+             >>
+     /Length 0
+   % /F << /Type /FileSpec /F (lfi.txt) >>
+     /F (lfi.txt)
+  >>
+stream
+endstream
+endobj
+
+xref
+0 7
+0000000000 65535 f 
+0000000010 00000 n 
+0000000164 00000 n 
+0000000265 00000 n 
+0000000436 00000 n 
+0000000551 00000 n 
+0000000666 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 7
+  >>
+startxref
+978
+%%EOF

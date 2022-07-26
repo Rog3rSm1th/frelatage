@@ -1,0 +1,108 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /OpenAction 5 0 R
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Annots [<< /Type /Annot
+                 /Subtype /Screen
+                 /Open true
+                 /P 3 0 R
+                 /AA << /E  5 0 R /X  5 0 R /D  5 0 R /U  5 0 R /Fo 5 0 R
+                        /BI 5 0 R /PO 5 0 R /PC 5 0 R /PV 5 0 R /PI 5 0 R
+                     >>
+                 /Rect [0 0 595 842]
+              >>
+              << /Type /Annot
+                 /Subtype /Link
+                 /Open true
+                 /A 5 0 R
+                 /H /N
+                 /Rect [0 0 595 842]
+              >>]
+     /AA << /O 5 0 R
+            /C 5 0 R
+         >>
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 58 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (GoToE Loop) Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /GoToE
+     /D [0 /Fit]
+     /T 6 0 R
+   % /NewWindow true
+  >>
+endobj
+
+6 0 obj
+  << /R /P
+     /T 7 0 R % reference to object 7
+  >>
+endobj
+
+7 0 obj
+  << /R /P
+     /T 8 0 R % reference to object 8
+  >>
+endobj
+
+8 0 obj
+  << /R /P
+     /T 6 0 R % reference to object 6
+  >>
+endobj
+
+xref
+0 9
+0000000000 65535 f 
+0000000010 00000 n 
+0000000092 00000 n 
+0000000193 00000 n 
+0000001050 00000 n 
+0000001160 00000 n 
+0000001267 00000 n 
+0000001337 00000 n 
+0000001407 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 9
+  >>
+startxref
+1477
+%%EOF

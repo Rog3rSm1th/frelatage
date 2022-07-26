@@ -1,0 +1,98 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /AcroForm << /Fields [6 0 R 7 0 R] >>
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Annots [6 0 R 7 0 R
+              << /Type /Annot
+                 /Subtype /Link
+                 /Open true
+                 /A 5 0 R
+                 /H /N
+                 /Rect [0 0 595 842]
+              >>]
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 71 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'submit-form') Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /SubmitForm
+     /F << /Type /FileSpec /F (E:\\write-test-submit-drive-url.txt) /V true /FS /URL >>
+     /Flags 0 % SubmitFDF=0, SubmitHTML=4, SubmitXML=32, SubmitPDF=256
+  >>
+endobj
+
+6 0 obj
+  << /Type /Annot
+     /Subtype /Widget
+     /FT /Tx /T (x)
+     /DA (/F1 22 Tf 0 g)
+     /Rect [30 710 490 790]
+     /V (Insert text to write to file here)
+  >>
+endobj
+
+7 0 obj
+  << /Type /Annot
+     /Subtype /Widget
+     /FT /Btn /T (y)
+     /Rect [0 0 595 642]
+     /A 5 0 R
+     /Ff 65536 /H /P
+     /MK << /BC [1 1 1] /BG [1 1 1] >>
+  >>
+endobj
+
+xref
+0 8
+0000000000 65535 f 
+0000000010 00000 n 
+0000000112 00000 n 
+0000000213 00000 n 
+0000000698 00000 n 
+0000000818 00000 n 
+0000001048 00000 n 
+0000001211 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 8
+  >>
+startxref
+1392
+%%EOF

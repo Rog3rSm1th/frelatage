@@ -1,0 +1,123 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /AcroForm << /Fields [6 0 R] >>
+     /AA << /WP 5 0 R >>
+     /Names << /EmbeddedFiles << /Names [(data.fdf) 7 0 R] >> >>
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Annots [6 0 R
+              << /Type /Annot
+                 /Subtype /Link
+                 /Open true
+                 /A 5 0 R
+                 /H /N
+                 /Rect [0 0 595 842]
+              >>]
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 77 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'form-modification') Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /ImportData
+     /F 7 0 R
+     % << /Type /FileSpec /EF (data.fdf) /V true /FS /URL >>
+  >>
+endobj
+
+6 0 obj
+  << /Type /Annot
+     /Subtype /Widget
+     /FT /Tx /T (x)
+     /DA (/F1 22 Tf 0 g)
+     /Rect [30 710 290 790]
+     /V (Original form data)
+  >>
+endobj
+
+7 0 obj
+  << /Type /Filespec
+     /Desc (the embedded file)
+     /F (data.fdf)
+     /UF (data.fdf)
+     /EF << /F 8 0 R >>
+  >>
+endobj
+
+8 0 obj
+  << /Type /EmbeddedFile
+     /Subtype /application#2Ffdf
+     /Params << /ModDate (D:20100809110201)
+                /CreationDate (D:20130113152115-05'00')
+                /Size 154
+             >>
+     /Length 154
+  >>
+stream
+%FDF-1.4
+
+1 0 obj
+  << /Type /Catalog
+     /FDF << /Fields [<< /T (x) /V (Modified via ImportAction) >>] >>
+  >>
+endobj
+trailer
+  << /Root 1 0 R >>
+%%EOF
+endstream
+endobj
+
+xref
+0 10
+0000000000 65535 f 
+0000000010 00000 n 
+0000000171 00000 n 
+0000000272 00000 n 
+0000000751 00000 n 
+0000000871 00000 n 
+0000000993 00000 n 
+0000001156 00000 n 
+0000001292 00000 n 
+0000001539 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 10
+  >>
+startxref
+1694
+%%EOF

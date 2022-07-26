@@ -1,0 +1,119 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /Names << /EmbeddedFiles << /Names [(lfi.fdf) 6 0 R] >> >>
+     /AcroForm << /Fields [8 0 R] >>
+     /OpenAction 5 0 R
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources
+      << /Font
+          << /F1
+              << /Type /Font
+                 /Subtype /Type1
+                 /BaseFont /Courier
+              >>
+          >>
+      >>
+     /Annots  [8 0 R
+              << /Type /Annot
+                 /Subtype /Link
+                 /Open true
+                 /A 5 0 R
+                 /H /N
+                 /Rect [0 0 595 500]
+              >>]
+  >>
+endobj
+
+4 0 obj
+  << /Length 63 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'lfi') Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /ImportData
+     /F 6 0 R
+  >>
+endobj
+
+6 0 obj
+  << /Type /Filespec
+     /Desc (the embedded file)
+     /F (lfi.fdf)
+     /EF << /F 7 0 R >>
+  >>
+endobj
+
+7 0 obj
+  << /Type /EmbeddedFile
+     /Subtype /application#2Ffdf
+     /Params << /ModDate (D:20100809110201)
+                /CreationDate (D:20130113152115-05'00')
+                /Size 163
+             >>
+     /Length 163
+  >>
+stream
+%FDF-1.3
+1 0 obj
+  << 
+    /FDF << /Fields [<< /V (John Smith) /T (x) >>] 
+  % /F (05-import-data-embedded.pdf) >> 
+  >> 
+endobj
+trailer
+  << /Root 1 0 R >>
+%%EOF
+endstream
+endobj
+
+8 0 obj
+  << /Type /Annot
+     /Subtype /Widget
+     /FT /Tx /T (x) 
+     /DA (/F1 22 Tf 0 g)
+     /Rect [30 710 290 790]
+     /V (value)
+  >>
+endobj
+
+xref
+0 9
+0000000000 65535 f 
+0000000010 00000 n 
+0000000193 00000 n 
+0000000294 00000 n 
+0000000751 00000 n 
+0000000866 00000 n 
+0000000940 00000 n 
+0000001055 00000 n 
+0000001473 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 9
+  >>
+startxref
+1624
+%%EOF

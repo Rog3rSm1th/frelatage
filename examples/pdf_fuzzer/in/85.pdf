@@ -1,0 +1,52 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >>
+     /Contents [4 0 R 5 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 90 >>
+stream
+  q 0.2 0.4 1 rg 0 0 595 842 re F Q BT /F1 22 Tf 30 800 Td (This is the 4th object) Tj ET
+endstream
+endobj
+
+%5 0 obj << /Length 90 >>
+stream
+  q 1 0.3 0.3 rg 0 0 595 842 re F Q BT /F1 22 Tf 30 800 Td (This is the 5th object) Tj ET
+endstream
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000069 00000 n 
+0000000170 00000 n 
+0000000347 00000 n 
+0000000490 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 6
+  >>
+startxref
+630
+%%EOF

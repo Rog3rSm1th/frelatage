@@ -1,0 +1,96 @@
+%PDF-1.7
+
+1 0 obj
+  << /Type /Catalog
+     /Pages 2 0 R
+     /AcroForm << /Fields [7 0 R] >>
+     /AA << /WP 5 0 R /DP 6 0 R >>
+  >>
+endobj
+
+2 0 obj
+  << /Type /Pages
+     /Kids [3 0 R]
+     /Count 1
+     /MediaBox [0 0 595 842]
+  >>
+endobj
+
+3 0 obj
+  << /Type /Page
+     /Parent 2 0 R
+     /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >>
+     /Annots [7 0 R
+              << /Type /Annot
+                 /Subtype /Link
+                 /Open true
+                 /A 5 0 R
+                 /H /N
+                 /Rect [0 0 595 500]
+              >>]
+     /Contents [4 0 R]
+  >>
+endobj
+
+4 0 obj
+  << /Length 77 >>
+stream
+  BT
+    /F1 22 Tf
+    30 800 Td
+    (Testcase: 'form-modification') Tj
+  ET
+endstream
+endobj
+
+5 0 obj
+  << /Type /Action
+     /S /JavaScript
+     /JS (
+try {
+  var backup = this.getAnnots()[0].contents;
+  this.getAnnots()[0].setProps({contents: "Modified via JavaScript"});
+} catch (e) {}
+)
+  >>
+endobj
+
+6 0 obj
+  << /Type /Action
+     /S /JavaScript
+     /JS (
+try {
+  this.getAnnots()[0].setProps({contents: backup})
+} catch (e) {}
+)
+  >>
+endobj
+
+7 0 obj
+  << /Type /Annot
+     /Subtype /FreeText
+     /FT /Tx /T (x)
+     /BS << /S /S /W 0 >>
+     /Rect [107 620 500 720] /F 4
+     /DA (/Helv 22 Tf 0 g)
+     /Contents (Original form data)
+  >>
+endobj
+
+xref
+0 8
+0000000000 65535 f 
+0000000010 00000 n 
+0000000141 00000 n 
+0000000242 00000 n 
+0000000627 00000 n 
+0000000756 00000 n 
+0000000966 00000 n 
+0000001111 00000 n 
+trailer
+  << /Root 1 0 R
+     /Size 8
+  >>
+startxref
+1317
+%%EOF
