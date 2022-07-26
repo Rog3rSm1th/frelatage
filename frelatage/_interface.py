@@ -52,8 +52,15 @@ def init_interface(self, stdscr) -> bool:
     # Colors
     curses.start_color()
     curses.use_default_colors()
-    for i in range(0, 255):
-        curses.init_pair(i + 1, i, -1)
+
+    # Adapt the colors depending on the terminal type
+    try:
+        # xterm-256color
+        for i in range(0, 255):
+            curses.init_pair(i + 1, i, -1)
+    except:
+        # xterm-color
+        curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
 
     self.screen = stdscr
     self.screen.clear()
