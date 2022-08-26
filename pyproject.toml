@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "frelatage"
-version = "0.1.4"
+version = "0.1.5"
 description = "Frelatage is a coverage-based Python fuzzing library which can be used to fuzz python code."
 authors = ["Rog3rSm1th <r0g3r5@protonmail.com>"]
 license = "MIT"
@@ -9,7 +9,8 @@ homepage = "https://github.com/Rog3rSm1th/Frelatage"
 repository = "https://github.com/Rog3rSm1th/Frelatage"
 keywords = ["frelatage", "fuzzer"]
 include = [
-    "LICENSE"
+    "LICENSE",
+    "scripts/read_report.py"
 ]
 classifiers = [
     "Environment :: Console"
@@ -44,3 +45,6 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.poetry.scripts]
+frelatage-report = "scripts.read_report:main"

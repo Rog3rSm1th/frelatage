@@ -225,10 +225,10 @@ Each coverage increase report is saved in the coverage folder (```./cov``` by de
 
 #### Read a crash report
 
-Inputs passed to a function are serialized using the [pickle](https://docs.python.org/3/library/pickle.html) module before being saved in the ```<report_folder>/input file```. It is therefore necessary to deserialize it to be able to read the contents of the file. This action can be performed with [this script](https://github.com/Rog3rSm1th/Frelatage/blob/main/scripts/read_report.py). 
+Inputs passed to a function are serialized using the [pickle](https://docs.python.org/3/library/pickle.html) module before being saved in the ```<report_folder>/input file```. It is therefore necessary to deserialize it to be able to read the contents of the file. This action can be performed with the ```frelatage-report``` commmand.
 
 ```bash
-./read_report.py input
+frelatage-report input
 ```
   
 ## Configuration
