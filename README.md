@@ -3,11 +3,11 @@
   <br>
   <code>pip3 install frelatage</code></br>
   <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.1.4</a></i></br></br>
-  <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg"></a>
+  <a target="_blank" title="Downloads"><img src="https://static.pepy.tech/badge/frelatage"></a>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
-  <a target="_blank" title="Downloads"><img src="https://static.pepy.tech/badge/frelatage"></a>
-  <a target="_blank" href="https://twitter.com/Rog3rSm1th" title="Twitter"><img src="https://img.shields.io/badge/-@Rog3rSm1th-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/Rog3rSm1th"></a>
+  <a target="_blank" href="https://pypi.org/project/kharma/" title="License: MIT"><img src="https://img.shields.io/pypi/v/frelatage?label=release"></a>
+  <a href="https://twitter.com/intent/follow?screen_name=Rog3rSm1th" title="Follow"><img src="https://img.shields.io/twitter/follow/Rog3rSm1th?label=Rog3rSm1th&style=social"></a>
   <br>
   <span><i>The Python Fuzzer that the world deserves</i></span>
 </p>
@@ -223,7 +223,7 @@ The report directory is in the following form:
 
 Each coverage increase report is saved in the coverage folder (```./cov``` by default), in a folder named : ```coverage_<ID>```, and the report directory is in the same form as the crash reports directories.
 
-#### Read a crash report
+#### Read a report
 
 Inputs passed to a function are serialized using the [pickle](https://docs.python.org/3/library/pickle.html) module before being saved in the ```<report_folder>/input file```. It is therefore necessary to deserialize it to be able to read the contents of the file. This action can be performed with the ```frelatage-report``` commmand.
 
