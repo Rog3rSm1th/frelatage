@@ -2,6 +2,7 @@
 
 # Set up the env variables
 export FRELATAGE_DICTIONARY_ENABLE=1 &&
+export FRELATAGE_SAVE_NEW_COVERAGE=1 &&
 export FRELATAGE_TIMEOUT_DELAY=2 &&
 export FRELATAGE_INPUT_FILE_TMP_DIR="/tmp/frelatage" &&
 export FRELATAGE_INPUT_MAX_LEN=4096 &&

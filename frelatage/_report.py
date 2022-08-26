@@ -33,7 +33,7 @@ def get_report_name(self, report: Report) -> str:
     return report_name
 
 
-def save_report(self, report) -> bool:
+def save_report(self, report: Report, crash: bool = True) -> bool:
     """
     Save a report in the output directory (/out by default).
     The arguments passed to the function and the behavior of the function are stored
@@ -51,9 +51,14 @@ def save_report(self, report) -> bool:
     # The report contains the parameters passed to the function.
     custom_report = {"input": [dict(input) for input in report.input]}
 
-    # /out by default
-    base_directory = self.output_directory
-    report_name = self.get_report_name(report)
+    # ./out by default if it"s a crash report
+    # ./cov by default if it's a coverage increase report
+    base_directory = self.output_directory if crash else self.coverage_directory
+    report_name = (
+        self.get_report_name(report)
+        if crash
+        else "coverage_{}".format(self.unique_coverage_increase)
+    )
 
     report_directory = "{base_directory}/{report_name}".format(
         base_directory=base_directory, report_name=report_name

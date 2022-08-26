@@ -204,9 +204,9 @@ You can find more examples of fuzzers and corpus in the [examples directory](htt
 
 - [Fuzzing Pillow with Frelatage to find bugs and vulnerabilities](https://rog3rsm1th.github.io/posts/fuzzing-python-libraries-frelatage/)
 
-## Reports
+## Crash reports
 
-Each crash is saved in the output folder (```./out``` by default), in a folder named : ```id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>```.
+Each crash report is saved in the output folder (```./out``` by default), in a folder named : ```id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>```.
 
 The report directory is in the following form: 
 ```
@@ -219,12 +219,16 @@ The report directory is in the following form:
     │   ├── ...
 ```
 
+## Coverage increase reports
+
+Each coverage increase report is saved in the coverage folder (```./cov``` by default), in a folder named : ```coverage_<ID>```, and the report directory is in the same form as the crash reports directories.
+
 #### Read a crash report
 
-Inputs passed to a function are serialized using the [pickle](https://docs.python.org/3/library/pickle.html) module before being saved in the ```<report_folder>/input file```. It is therefore necessary to deserialize it to be able to read the contents of the file. This action can be performed with [this script](https://github.com/Rog3rSm1th/Frelatage/blob/main/scripts/read_report.py). 
+Inputs passed to a function are serialized using the [pickle](https://docs.python.org/3/library/pickle.html) module before being saved in the ```<report_folder>/input file```. It is therefore necessary to deserialize it to be able to read the contents of the file. This action can be performed with the ```frelatage-report``` commmand.
 
 ```bash
-./read_report.py input
+frelatage-report input
 ```
   
 ## Configuration
@@ -236,6 +240,7 @@ There are two ways to set up Frelatage:
 | ENV Variable                   | Description | Possible Values | Default Value |
 | -------------------------------| ----------- |--------|-------|
 | **FRELATAGE_DICTIONARY_ENABLE**   | Enable the use of mutations based on dictionary elements| ```1``` to enable, ```0``` otherwise | ```1``` |
+| **FRELATAGE_SAVE_NEW_COVERAGE**   | Save new coverage inputs to reuse them later| ```1``` to enable, ```0``` otherwise | ```1``` |
 | **FRELATAGE_TIMEOUT_DELAY**        | Delay in seconds after which a function will return a TimeoutError | ```1``` - ```infinity``` | ```2``` |
 | **FRELATAGE_INPUT_FILE_TMP_DIR**   | Temporary folder where input files are stored | absolute path to a folder, e.g. ```/tmp/custom_dir```| ```/tmp/frelatage```|
 | **FRELATAGE_INPUT_MAX_LEN**        | Maximum size of an input variable in bytes | ```4``` - ```infinity``` |  ```4094``` |
@@ -250,6 +255,7 @@ A configuration example :
 
 ```bash
 export FRELATAGE_DICTIONARY_ENABLE=1 &&
+export FRELATAGE_SAVE_NEW_COVERAGE=1 &&
 export FRELATAGE_TIMEOUT_DELAY=2 &&
 export FRELATAGE_INPUT_FILE_TMP_DIR="/tmp/frelatage" &&
 export FRELATAGE_INPUT_MAX_LEN=4096 &&
@@ -285,6 +291,8 @@ f = frelatage.Fuzzer(
     exceptions_blacklist=(),
     # Directory where the error reports will be stored
     output_directory="./out",
+    # Directory where the coverage increase reports will be stored
+    coverage_directory="./cov",
     # Enable or disable silent mode
     silent=False,
     # Enable or disable infinite fuzzing
