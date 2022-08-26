@@ -55,6 +55,7 @@ class Fuzzer(object):
         exceptions_whitelist: tuple = (),
         exceptions_blacklist: tuple = (),
         output_directory: str = "./out",
+        coverage_directory: str = "./cov",
         silent: bool = False,
         infinite_fuzz: bool = False,
         report: bool = True,
@@ -104,7 +105,7 @@ class Fuzzer(object):
             exceptions_blacklist=self.exceptions_blacklist,
         )
 
-        # Input and output directories
+        # Input, output and coverage directories
         # The working directory is the same as the fuzz file
         self.input_directory = os.path.join(
             os.path.dirname(os.path.realpath(sys.argv[0])),
@@ -114,6 +115,12 @@ class Fuzzer(object):
             os.path.join(
                 os.path.dirname(os.path.realpath(sys.argv[0])),
                 output_directory,
+            )
+        ).as_posix()
+        self.coverage_directory = Path(
+            os.path.join(
+                os.path.dirname(os.path.realpath(sys.argv[0])),
+                coverage_directory,
             )
         ).as_posix()
 
@@ -128,6 +135,7 @@ class Fuzzer(object):
         self.inputs_count = 0
         self.stage_inputs_count = 0
         self.unique_crashes = 0
+        self.unique_coverage_increase = 0
         self.total_crashes = 0
         self.unique_timeout = 0
         self.total_timeouts = 0

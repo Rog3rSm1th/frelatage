@@ -19,6 +19,13 @@ class Config:
         True if os.getenv("FRELATAGE_DICTIONARY_ENABLE", "1") == "1" else False
     )
 
+    # Save coverage increase reports to reuse them later
+    if os.getenv("FRELATAGE_SAVE_NEW_COVERAGE", "1") not in ("1", "0"):
+        raise FrelatageConfigError("FRELATAGE_SAVE_NEW_COVERAGE must '1' or '0'")
+    FRELATAGE_SAVE_NEW_COVERAGE = (
+        True if os.getenv("FRELATAGE_SAVE_NEW_COVERAGE", "1") == "1" else False
+    )
+
     # Enable the debug mode
     if os.getenv("FRELATAGE_DEBUG_MODE", "1") not in ("1", "0"):
         raise FrelatageConfigError("FRELATAGE_DEBUG_MODE must '1' or '0'")
