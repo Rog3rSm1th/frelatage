@@ -22,6 +22,7 @@ def run_function(self, arguments: list, result: list) -> bool:
         trace,
         arguments,
         trace.error,
+        trace.error_message,
         trace.timeout,
         new_instruction_error,
         trace_instructions_count,

@@ -7,6 +7,7 @@ class Report:
         trace: Any,
         input: list,
         error: bool,
+        error_message: str,
         timeout: bool,
         new_error_instruction: bool,
         reached_instructions_count: int,
@@ -20,6 +21,7 @@ class Report:
         self.trace = trace
         self.input = input
         self.error = error
+        self.error_message = error_message
         self.timeout = timeout
         self.new_error_instruction = new_error_instruction
         self.reached_instructions_count = reached_instructions_count

@@ -38,9 +38,11 @@ def save_report(self, report: Report, crash: bool = True) -> bool:
     Save a report in the output directory (/out by default).
     The arguments passed to the function and the behavior of the function are stored
     in "input", the file inputs are stored in files ranging from 0 to n.
+    The error message is stored in the "message" file.
     The report directory is in the following form:
     ├── out
     │   ├── id:<crash ID>,err:<error type>,err_pos:<error>,err_file:<error file>,err_pos:<err_pos>
+    │       ├── message
     │       ├── input
     │       ├── 0
     │           ├── <inputfile1>
@@ -75,6 +77,13 @@ def save_report(self, report: Report, crash: bool = True) -> bool:
     ) as f:
         # We use pickle to store the report object
         pickle.dump(custom_report, f)
+
+    # Save report error message if it exists in ./<report_directory>/message
+    if crash:
+        with open(
+            "{report_directory}/message".format(report_directory=report_directory), "w+"
+        ) as f:
+            f.write(report.error_message)
 
     # Save input files
     for i in range(len(report.input)):

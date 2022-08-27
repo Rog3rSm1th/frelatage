@@ -12,6 +12,8 @@ class Result:
     error: bool
     # Error type, e.g TypeError, ZeroDivisionError...
     error_type: Optional[str]
+    # Error message
+    error_message: Optional[str]
     # True if an TimeOutError occurred during the execution of a function, false otherwise
     timeout: bool
     # Position of the instruction where the error occured

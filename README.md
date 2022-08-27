@@ -2,7 +2,7 @@
   <img src="https://github.com/Rog3rSm1th/Frelatage/blob/main/doc/frelatage_logo.gif?raw=true" width="200" height="200" style="border-radius:4px"/>
   <br>
   <code>pip3 install frelatage</code></br>
-  <i>Current release : <a href="https://github.com/Rog3rSm1th/Frelatage/releases">0.1.4</a></i></br></br>
+  </br>
   <a target="_blank" title="Downloads"><img src="https://static.pepy.tech/badge/frelatage"></a>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
@@ -212,12 +212,15 @@ The report directory is in the following form:
 ```
     ├── out
     │   ├── id:<crash ID>,err:<error type>,err_file:<error file>,err_pos:<err_pos>
+    │       ├── message
     │       ├── input
     │       ├── 0
     │            ├── <inputfile1>
     │       ├── ...
     │   ├── ...
 ```
+
+Each crash report contains a ```message``` file which contains the error message.
 
 ## Coverage increase reports
 
@@ -228,7 +231,7 @@ Each coverage increase report is saved in the coverage folder (```./cov``` by de
 Inputs passed to a function are serialized using the [pickle](https://docs.python.org/3/library/pickle.html) module before being saved in the ```<report_folder>/input file```. It is therefore necessary to deserialize it to be able to read the contents of the file. This action can be performed with the ```frelatage-report``` commmand.
 
 ```bash
-frelatage-report input
+$ frelatage-report input
 ```
   
 ## Configuration

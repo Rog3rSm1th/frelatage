@@ -56,6 +56,7 @@ class Tracer:
         """
         error = False
         error_type = None
+        error_message = None
         timeout = False
 
         # Initialize the tracer
@@ -70,10 +71,12 @@ class Tracer:
         except self.exceptions_whitelist as e:
             error = True
             error_type = str(e.__class__.__name__)
+            error_message = str(e)
         # Timeout exception
         except TimeoutError as e:
             timeout = True
             error_type = str(e.__class__.__name__)
+            error_message = str(e)
         # Blacklisted exceptions
         except self.exceptions_blacklist:
             pass
@@ -82,6 +85,7 @@ class Tracer:
             if self.exceptions_whitelist == ():
                 error = True
                 error_type = str(e.__class__.__name__)
+                error_message = str(e)
             else:
                 pass
 
@@ -108,6 +112,7 @@ class Tracer:
         result = Result(
             error,
             error_type,
+            error_message,
             timeout,
             error_position,
             reached_instructions,
