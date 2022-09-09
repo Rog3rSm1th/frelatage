@@ -190,6 +190,7 @@ def instrument(
     exceptions_whitelist: tuple = (),
     exceptions_blacklist: tuple = (),
     output_directory: str = "./out",
+    coverage_directory: str = "./cov",
     silent: bool = False,
     infinite_fuzz: bool = False,
 ) -> Callable:

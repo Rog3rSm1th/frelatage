@@ -162,7 +162,7 @@ def MyFunctionFuzz_1(data):
 # And so on
 
 # It will fuzz the instrumented methods one after the other
-f.fuzz_all()
+frelatage.Fuzzer.fuzz_all()
 ```
 
 #### Load several files to a corpus at once
